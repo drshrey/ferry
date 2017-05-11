@@ -1,0 +1,31 @@
+{% extends '../templates/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/accounts.css" />
+{% end %}
+
+{% block sidebar %}
+<div class="main">
+    <div class="ui stackable grid">
+        <div class="row">        
+            <div class="four wide tablet four wide computer column">
+                <a id="account-link" class="text sidebar-link" href="/profile?page=account">Account</a><br/><br/>
+                <a id="orders-link" class="text sidebar-link" href="/profile?page=orders">Orders & Returns</a>
+                <br/><br/>
+                <a id="pay-link" href="/profile?page=pay" class="text sidebar-link">Payment Info</a><br/><br/>
+                <a id="travel-link" class="text sidebar-link" href="/profile?page=travel">Traveller Info</a><br/><br/>
+                <a id="invite-link" href="/profile?page=invite" class="text sidebar-link">Invite</a>                                                
+
+            </div>                 
+            <div class="eleven wide tablet eleven wide computer column" id="maincontent">
+                {% block maincontent %}
+                {% end %}
+            </div>                                  
+        </div>   
+        <div class="row" id="sidebar-bottom">
+            <div class="four wide tablet four wide computer column"></div>        
+        </div>                                               
+    </div>
+
+</div>
+{% end %}

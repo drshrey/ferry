@@ -1,0 +1,58 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"{{APP_NAME}}",
+      "labels":{
+         "app":"{{APP_NAME}}"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "app":"{{APP_NAME}}"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "app":"{{APP_NAME}}"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"{{APP_NAME}}-http",
+                  "image":"gcr.io/kubernetes-project-1295/{{APP_NAME}}:v{{ PRIMARY_IMAGE_VERSION }}",
+                  "ports":[
+                     {
+                        "name":"http-server",
+                        "containerPort":7777
+                     }
+                  ],
+                  "volumeMounts": [
+                     {
+                        "name": "persistent-storage",
+                        "mountPath": "/persistent-storage"
+                     }
+                  ],
+                  "env": [
+                     {
+                        "name": "PERSISTENT_PATH",
+                        "value": "/persistent-storage/"
+                     }
+                  ]
+               }
+            ],
+            "volumes": [
+               {
+                  "name": "persistent-storage",
+                  "gcePersistentDisk": {
+                     "pdName": "{{APP_NAME}}-disk",
+                     "fsType": "ext4"
+                  }
+               }
+            ]
+         }
+      }
+   }
+}

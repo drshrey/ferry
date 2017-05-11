@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>dashboard</title>
+
+    <!-- jQuery + Semantic UI -->
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+<div class="ui raised very padded text container segment">
+
+    <h1>Current user: {{ user }}</h1>
+
+    <p>
+        <i>Welcome to your account.</i>
+    </p>
+    <p>
+        Your name is {{ user }}.
+    </p>
+
+    <form action="/logout" method="get">
+        <input class="ui button" type="submit" value="logout">
+    </form>
+
+</div>
+
+</body>
+</html>

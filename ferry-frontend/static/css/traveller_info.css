@@ -1,0 +1,19 @@
+.info-title {
+	font-size: 18px;
+}
+
+#update {
+	margin-left: 3px;
+}
+
+#sidebar-bottom {
+	height:100px;
+}
+
+.ferry-button{
+	height:50px;
+}
+
+.divider {
+	border-bottom:1px solid #2E315B;
+}

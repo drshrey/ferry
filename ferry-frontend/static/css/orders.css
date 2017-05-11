@@ -1,0 +1,10 @@
+#order-divider{
+	margin-top: 50px;
+	margin-bottom:50px;
+}
+
+.chat-interface {
+	height: 400px;
+	width: 95%;
+	border: 1px solid #2E315B;
+}

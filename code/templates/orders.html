@@ -1,0 +1,44 @@
+{% extends '../templates/accounts_base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/accounts.css" />
+<link rel="stylesheet" href="/css/orders.css" />
+{% end %}
+
+{% block maincontent %}
+
+<div class="page-header text">
+<i> Orders & Returns</i>
+</div>
+<div class="text content">
+
+Today, Ferry doesn't accept returns given
+the complicated nature of our product shipping. That being said,
+ we'll evaluate any issues you have with your traveller or product to make sure you're having the best possible experience.
+</div>
+
+<div class="header-divider" id="order-divider"></div>
+
+<div class="ui stackable grid">
+	{% for order in orders %}
+		<div class="row">
+			<div class="fifteen wide column">
+			{{ order }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="fifteen wide column">
+				<span class="text"> Message Traveller </span>
+			</div>
+		</div>		
+	{% end %}
+</div>
+
+<script>
+
+$("#orders-link").css('borderBottom', '1.5px solid #2E315B')
+
+</script>
+
+{% end %}
+

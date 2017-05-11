@@ -1,0 +1,27 @@
+{% extends '../templates/accounts_base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/accounts.css" />
+<link rel="stylesheet" href="/css/payment.css" />
+{% end %}
+
+{% block maincontent %}
+
+<div class="page-header text">
+<i> Payment Information</i>
+</div>
+<div class="text content" id="pay-filler">
+
+Update your payment information for future orders.
+</div>
+
+<div class="header-divider" id="pay-divider"></div>
+
+<script>
+
+$("#pay-link").css('borderBottom', '1.5px solid #2E315B')
+
+</script>
+
+{% end %}
+

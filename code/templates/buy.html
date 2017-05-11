@@ -1,0 +1,399 @@
+{% extends '../templates/base.html' %}
+
+{% block css %}
+
+<link href="/css/buy.css" rel="stylesheet" type="text/css">
+<link href="/css/homepage.css" rel="stylesheet" type="text/css">
+{% end %}
+
+{% block header %}
+
+
+    <div id="buy-header" style="height: auto; ">
+        <div class="ui stackable grid" style="margin-left: 10px;width: 100%;">    
+        <div class="row">        
+        <div class="three wide tablet two wide computer column"> 
+            <a id="header-logo" href="/" style="margin-left: 25px;">FERRY</a> 
+        </div>
+        {% if user %}
+            <div class="one wide tablet one wide computer column" style="margin-left: 15px;">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>
+
+            <div class="six wide tablet eight wide computer column" style="margin-left: 25px;">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="one wide tablet one wide computer column">
+                <a id="name" class="header-link" href="/profile?page=account"> Hi,{{ user_entry['first_name'] }} </a>
+            </div>
+            <div class="one wide tablet one wide computer column" style="margin-left: 40px;">
+                <a class="header-link" href="/logout"> LOGOUT </a>
+            </div>                                
+        {% else %}
+            <div class="two wide tablet one wide computer column">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>        
+            <div class="six wide tablet nine wide computer column" style="margin-left: 15px;">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="two wide tablet one wide computer column">
+                <a class="header-link" href="/login"> LOGIN</a>
+            </div>
+            <div class="three wide tablet two wide computer column">
+                <a class="header-link" href="/signup"> SIGN UP </a>
+            </div>                           
+        {% end %}
+        </div>
+        <div id="header-divider"></div>                
+        </div>    
+    </div>
+
+
+
+{% end %}
+
+
+
+
+{% block main %}
+<style>
+#header {
+	background-color: white;
+}
+.buypage{
+	color: black;
+	font-family: 'Avenir Next';
+	font-weight: 100;
+	margin: 30px;
+}
+
+.container {
+	width: 98%;
+	height: 700px;
+	padding: 20px;
+	margin: 10px;
+	border: 1px solid black;
+	overflow: auto;
+}
+#cart {
+	border: 1px solid black;
+	width: 400px;
+	padding:10px;
+	height: 200px;
+	display: inline-block;
+	overflow: scroll;
+}
+
+#cartSpace {
+    width: 90%;
+    background-color: #912f40;
+    border: 2px solid white;
+}
+#cartFilled {
+    width: 1%;
+    height: 30px;
+    background-color: white;
+}
+</style>
+<div id="header-top" style="height:220px;">
+	<div class="ui stackable grid" id="motto">
+		<div class="row">
+			<div class="fifteen wide column" class="text" id="item-shipped">
+				I'm looking for an item shipped to
+				<select id="airport">
+					{% for airport in airports %}
+					<option value={{airport['id']}}>{{airport['name']}}  ({{airport['initials']}})
+					{% end %}
+				</select>					
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="eight wide column">
+				<button onClick="match();"> CHANGE AIRPORT </button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="header-top-buy" style="height:39%;">
+	<div class="ui stackable grid" id="motto">
+		<div class="row" style="height:10px;"></div>
+		<div class="row">
+			<div class="fifteen wide column">
+				<div id="message" style="font-size: 18px; color: white; font-family: 'Avenir Next'; character-spacing: 0.06em; text-align: center;"></div>
+				<br/>
+				<div id="cartSpace">
+				    <div id="cartFilled"></div>
+				</div>
+<br/>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="ten wide column text" style="font-size:18px; line-height: 1.4em;">
+				We've matched you with a Traveller! Remember though,
+				they have limited space. As you shop, the bar above
+				will represent the space left in your cart.
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="fifteen wide column" style="text-align: center;">
+				<button style="border: 2px soldid #912f40;" id="checkout-button" onClick="checkout();"> CHECKOUT </button>
+			</div>
+		</div>
+	</div>
+	<br/>
+</div>
+
+<div class="ui stackable grid" style="margin-left: 100px;">
+	<div class="row"></div>	
+	<div class="row">
+		<div class="three wide column">
+			<select id="category-dropdown" class="ui dropdown fluid" style="color: black;">
+				<option value="electronics">Electronics</option>
+				<option value="clothing">Clothing</option>
+			</select>		
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<div class="column text inverse med-big">
+			Featured Products
+		</div>
+	</div>
+
+	<div class="row">
+
+	{% for item in items %}
+	<div class="five wide column" style="margin-bottom: 25px;">	
+		<div class="ui card" href="{{item['href']}}" style="display: inline-block;">
+		    <div class="blurring dimmable image">
+		      <div class="ui inverted dimmer">
+		        <div class="content">
+		          <div class="center">
+		            <div id="{{ item['id'] }}" class="ui button" style="background-color: #912f40; color: white;" data-price="{{item['price']}}" data-size="{{item['size']}}" data-title="{{item['title']}}" data-id="{{ item['id']}}" onclick="addToCart(this.id);" data-cart-add="{{item['id']}}">ADD TO CART</div>
+		          </div>
+		        </div>
+		      </div>
+			    <img src="/{{item['image_path']}}"></img>
+		    </div>
+		</div>	
+	    <div class="item-text">
+	    	<div style="font-size: 23px;"> ${{item['price']}}</div>
+	    	<div style="font-size: 19px; margin-top: 10px; font-weight: 500;">
+	    		{{ item['title'] }}
+	    	</div>
+			<div style="font-size: 16px; line-height: 1.5em; margin-top: 5px; font-weight: 500;"> 
+				Enjoy the latest bullshit movies right on your
+				bullshit television with the American bullshit 
+				stick.
+			</div>		    	
+	    </div>		
+	</div>	
+	{% end %}
+	    		
+	</div>
+	<div class="row" style="height: 100px;"></div>
+</div>
+<script>
+
+var max_size = {{ max_size }}
+
+var CART = {count: 0}
+var BASE_PRICE = 50
+var COMMISSION = 0
+
+
+var DATA_CART = {}
+var PROGRESS_TOTAL = 0
+
+var TOTAL = 50
+
+var trips = {% raw trips %}
+console.log(trips)
+
+$('.image').dimmer({
+  on: 'hover'
+});
+
+
+
+
+$('#category-dropdown')
+  .dropdown({
+  	placeholder: 'CATEGORY',
+  	}); 
+
+
+var elementPosition = $('#header-top-buy').offset();
+
+$(window).scroll(function(){
+        if($(window).scrollTop() > elementPosition.top + 400){
+              $('#header-top-buy').css('position','fixed').css('top','0').css('zIndex', '1');
+
+        } else {
+            $('#header-top-buy').css('position','static');
+        }    
+});
+
+$("#cart-count").html(getCartString())
+$("#shipping_price").html(getShippingString())
+$("#total").html(getTotalString())
+
+function getTotalString(){
+	return `Total: $` + Number(TOTAL).toFixed(2)
+}
+
+function getShippingString(){
+	return `Shipping: $`+BASE_PRICE+` + $` + Number(COMMISSION).toFixed(2) + ` = $` + parseFloat(Number((BASE_PRICE + COMMISSION).toFixed(2)));
+}
+
+function getCartString(){
+	return `Cart: ` + CART.count
+}
+
+function updateCart(title, size, item_id, price){
+
+	if( DATA_CART[item_id] ){
+		DATA_CART[item_id].count += 1
+	} else{
+		DATA_CART[item_id] = {title: title, size: size, item_id: item_id, count: 1, price: price }		
+	}
+	if( PROGRESS_TOTAL == 10 ){
+	$("#message").html()
+		$("#message").html(`Can't add anymore to this order. Submit this order and create another one to add more items.`)
+		return
+	}
+	if( CART[item_id] ){
+		CART[item_id] += 1
+		$("#cart-" + item_id).html(``)
+		$("#cart-" + item_id).html(`<span id="cart-` + item_id +`">` + title +`: ` + CART[item_id] +`</span>`)		
+	} else {
+		CART[item_id] = 1
+		$("#cart").append(`<div id="cart-` + item_id +`"style="margin-bottom: 5px;background-color: lightblue; border: 1px solid black;margin: auto;padding: 5px;">` + title +`: ` + CART[item_id] +`</div>`)		
+	}
+
+	CART.count += 1
+	$("#cart-count").html(getCartString)
+}
+
+function setProgressLabel(){
+	if( PROGRESS_TOTAL <= 3 ){
+		$("#progress_label").html(`Small Order`)
+	} else if( PROGRESS_TOTAL > 3 && PROGRESS_TOTAL <= 7) {
+		$("#progress_label").html(`Medium Order`)
+	} else if( PROGRESS_TOTAL > 7 && PROGRESS_TOTAL <= 10 ){
+		$("#progress_label").html(`Large Order`)
+	} else {
+		return 		
+	}
+}
+
+function updateProgress(action, size){
+	if( PROGRESS_TOTAL == 10 ){
+		return 
+	}
+	console.log('size', size)
+	$('#example5').progress(action, size);
+
+	PROGRESS_TOTAL += size
+	$("#cartFilled").css('width', 10 * PROGRESS_TOTAL * (10 / max_size) + '%')
+
+	setProgressLabel()
+}
+
+function addToCart(id){
+	console.log(id)
+	let item = $('#'+id)
+
+	let title = item.attr('data-title')
+	let size = parseInt(item.attr('data-size'))
+	let price = item.attr('data-price')
+	let item_id = item.attr('data-id')
+
+	if( PROGRESS_TOTAL == 10 ){
+		$("#message").html('Reached max capacity. Checkout and create a new order to continue buying items.')
+		return
+	}
+
+	if( PROGRESS_TOTAL + parseInt(size) > 10 ){
+		$("#message").html(`Add a smaller item.`)	
+		return;
+	}
+
+	if( canIncrease(size + PROGRESS_TOTAL) ) {
+		if( PROGRESS_TOTAL == 10 ){
+			$("#message").html(`Can't add anymore to this order. Submit this order and create another one to add more items.`)
+			return	
+		}
+
+		COMMISSION += parseFloat(price) * .10
+		TOTAL += parseFloat(price) + COMMISSION
+
+
+		updateCart(title, size, item_id, price)
+
+		updateProgress('increment', parseInt(size))
+
+		$("#cart-count").html(``)
+		$("#cart-count").html(getCartString)
+
+
+		$("#shipping_price").html(``)
+		$("#shipping_price").html(getShippingString)	
+
+		$("#total").html(``)
+		$("#total").html(getTotalString)
+	} else {
+		$("#header-top-buy").css('height', '41%');
+		$("#message").html(`There are no trips that can handle a greater size. Please checkout and create a new order to continue buying items.`)
+	}
+}
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function checkout(){
+	post('/checkout', {
+		cart: JSON.stringify(DATA_CART), 
+		total_size: CART['count'],
+		trips: JSON.stringify(trips),
+		commission: COMMISSION,
+		total: TOTAL
+	});
+}
+
+function canIncrease(size){
+	if( size > max_size ){
+		return false
+	} else {
+		return true;
+	}
+}
+
+</script>
+{% end %}

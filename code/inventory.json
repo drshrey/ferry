@@ -1,0 +1,122 @@
+[
+ {
+   "category": "electronics",
+   "title": "All-New Fire TV Stick with Alexa Voice Remote | Streaming Media Player",
+   "price": 39.99,
+   "size": 1,
+   "href": "https://www.amazon.com/All-New-Fire-TV-Stick-With-Alexa-Voice-Remote-Streaming-Media-Player/dp/B00ZV9RDKK/",
+   "file-path": "images/fire-tv-alexa.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "Amazon Fire TV | Streaming Media Player",
+   "price": 89.99,
+   "size": 2,
+   "href": "https://www.amazon.com/Amazon-Fire-TV-Streaming-Media-Player/dp/B00U3FPN4U/ref=zg_bs_13447451_2",
+   "file-path": "images/fire-tv-player.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "Roku Express",
+   "price": 29.00,
+   "size": 1,
+   "href": "https://www.amazon.com/Roku-Express/dp/B01LXJA5JD",
+   "file-path": "images/roku-express.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "Samsung 4K Ultra HD Blu-Ray Player",
+   "price": 217.90,
+   "size": 3,
+   "href": "https://www.amazon.com/Samsung-UBD-K8500-Wi-Fi-Blu-ray-Player",
+   "file-path": "images/samsung-4k.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "Amazon Echo - Black",
+   "price": 179.99,
+   "size": 3,
+   "href": "https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E/",
+   "file-path": "images/echo-black.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "Amazon Echo Dot - Black",
+   "price": 49.99,
+   "size": 1,
+   "href": "https://www.amazon.com/All-New-Echo-Dot-2nd-Generation/dp/B01DFKC2SO/",
+   "file-path": "images/echo-dot-black.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "Kindle Paperwhite - 6",
+   "price": 99.99,
+   "size": 2,
+   "href": "https://www.amazon.com/Amazon-Kindle-Paperwhite-6-Inch-4GB-eReader/dp/B00OQVZDJM",
+   "file-path": "images/kindle-paperwhite-6.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "MacBook Air - 13in - 256GB",
+   "price": 1049.99,
+   "size": 5,
+   "href": "https://www.amazon.com/dp/B01EIUOSRS",
+   "file-path": "images/mba-13.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "iPad Pro - 9.7\" - 32GB (Wi-Fi Space Gray)",
+   "price": 526.49,
+   "size": 3,
+   "href": "https://www.amazon.com/iPad-9-7-inch-Wi-Fi-Space-Model/dp/B01D3NUJEC",
+   "file-path": "images/ipad-pro-grey.jpg"
+ },
+ {
+   "category": "electronics",
+   "title": "iPhone 7 Unlocked Phone 128 GB - US Version (Black)",
+   "price": 815.00,
+   "size": 1,
+   "href": "https://www.amazon.com/Apple-iPhone-Unlocked-Phone-128/dp/B01M1EXQY4",
+   "file-path": "images/iphone-7-black.jpg"
+ },
+ {
+   "category": "home & kitchen",
+   "title": "InstantPot",
+   "price": 99.00,
+   "size": 9,
+   "href": "https://www.amazon.com/Instant-Pot-IP-DUO60-Multi-Functional-Pressure/dp/B00FLYWNYQ/ref=zg_bs_home-garden_1?_encoding=UTF8&psc=1&refRID=3WJM5E032NB7XV45RY83",
+   "file-path": "images/instant-pot.jpg"
+ },
+ {
+   "category": "home & kitchen",
+   "title": "Keurig K-55 ",
+   "price": 91.26,
+   "size": 7,
+   "href": "https://www.amazon.com/Keurig-K55-Single-Programmable-Coffee",
+   "file-path": "images/keurig-k55.jpg"
+ },
+ {
+   "category": "home & kitchen",
+   "title": "Rubbermaid Food Storage Set (60-pieces)",
+   "price": 44.99,
+   "size": 9,
+   "href": "https://www.amazon.com/Rubbermaid-Storage-Container-60-Piece-1880801/dp/B00GDJSY14/",
+   "file-path": "images/rubbermaid-food-storage.jpg"
+ },
+ {
+   "category": "personal care",
+   "title": "Braun Series 7 790cc Cordless Electric Foil Shaver",
+   "price": 184.01,
+   "size": 2,
+   "href": "https://www.amazon.com/Braun-Cordless-Electric-Shaver-Station/dp/B003YJAZZ4/",
+   "file-path": "images/braun-foil-shaver.jpg"
+ },
+ {
+   "category": "personal care",
+   "title": "Phillips Sonicare Healthywhite+",
+   "price": 99.95,
+   "size": 2,
+   "href": "https://www.amazon.com/Philips-Sonicare-HealthyWhite-rechargeable-HX8911/dp/B00YAR86BY",
+   "file-path": "images/sonicare.jpg"
+ }
+]

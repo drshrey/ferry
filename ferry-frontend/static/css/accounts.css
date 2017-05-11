@@ -1,0 +1,74 @@
+.ferry-input {
+	border: 1px solid #2E315B;
+	padding: 8px;
+	font-size: 14px;
+	font-family: 'Avenir Next';
+	margin: 5px;
+	width:100%;
+}
+.ferry-button{
+	background: #2E315B;
+	width: 100%;
+	height: 43px;
+	color: white;
+	font-size: 14px;
+	font-family: 'Avenir Next';
+	font-weight: 200;	
+	cursor:pointer;
+}
+
+.content{
+	margin-top: 30px;
+	width: 90%;
+}
+
+.main {
+	margin-left: 60px;
+}
+
+#header {
+	background-color: white;
+	color: black;
+}
+
+body {
+	background-color: white;
+}
+
+.accounts-input {
+	padding: 8px;
+	padding-left:30px;
+	border: 2px solid #2E315B;
+	outline: none;
+}
+
+#sidebar-bottom {
+	height: 800px;
+}
+
+.sidebar-link {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.sidebar-link:hover{
+	border-bottom: 1.5px solid #2E315B;
+}
+
+
+.page-header {
+	font-size: 37px;
+	font-weight: 500;
+	font-family: 'Avenir Next;
+}
+
+.content {
+	line-height: 1.3em;
+	font-size: 17px;
+	font-weight: 300;
+}
+
+.header-divider {
+	border-bottom: 1px solid #2E315B;
+	width: 90%;
+}

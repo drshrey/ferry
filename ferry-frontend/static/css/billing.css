@@ -1,0 +1,16 @@
+input {
+	width: 100%;
+}
+
+#myProgress {
+    width: 90%;
+    margin-left: 5%;
+    background-color: white;
+    border: 2px solid #912f40;
+}
+#myBar {
+    width: 66%;
+    height: 30px;
+    background-color: #912f40;
+	border: 2px solid #912f40;    
+}

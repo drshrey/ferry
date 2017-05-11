@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ferry Login</title>
+
+    <!-- jQuery + Semantic UI -->
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
+        <link href="css/main.css" rel="stylesheet" type="text/css">
+    <style>
+        #header {
+            background-color: #2E315B;
+            color: white;
+        }
+
+        .header-link {
+            color: white;
+        }
+
+        #header-logo {
+            color: white;
+        }
+
+        #header-divider{
+            border-bottom:1px solid white;
+            margin-top:5px;	
+            width:89%;
+            margin-left:40px;
+        }
+
+        .ferry-button{
+            background: #2E315B;
+            width: 100%;
+            height: 43px;
+            color: white;
+            font-size: 14px;
+            font-family: 'Avenir Next';
+            font-weight: 200;
+            margin: 5px;	
+            cursor:pointer;
+        }        
+  
+        .ferry-input {
+            border: 1px solid #2E315B;
+            padding: 8px;
+            height: 43px;
+            font-size: 14px;
+            font-family: 'Avenir Next';
+            margin: 5px;
+            width:100%;
+            color: #2E315B;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body style="background: #2E315B;">
+
+    <div id="header" style="height: auto; ">
+        <div class="ui stackable grid" style="width: 100%;">    
+        <div class="row">        
+        <div class="three wide tablet two wide computer column"> 
+            <a id="header-logo" href="/" style="margin-left: 29px;">FERRY</a> 
+        </div>
+            <div class="one wide tablet one wide computer column">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>        
+            <div class="seven wide tablet nine wide computer column" style="margin-left: 15px;">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="one wide tablet one wide computer column">
+                <a id="name" class="header-link" href="/login"> LOGIN</a>
+            </div>
+            <div class="three wide tablet two wide computer column" style="margin-left: 15px;">
+                <a class="header-link" href="/signup"> SIGN UP </a>
+            </div>             
+        </div>
+        <div id="header-divider"></div>        
+    </div>
+
+
+
+<div class="ui raised padded text container segment" style="width: 40%; margin-top: 50px; text-align: center;">
+        <span style="text-align: center; color: black; font-size: 28px; font-family: 'Avenir Next';">Login</span
+        Enter your info to access your account.
+        <br/>
+        <br/>
+    <form action="/login" method="post">
+
+        <div class="field">
+            <label>Email</label>
+            <div>
+                <input class="ferry-input" type="email" placeholder="john@gmail.com" name="email" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Password</label>
+            <div>
+                <input class="ferry-input" type="password" name="password" required>
+            </div>
+        </div>
+
+        {% if bad_login %}
+            <span style="color:red; font-size: 15px; font-weight: 500px;">Invalid email or password. Please try again.</span>
+            <br/>
+            <br/>
+        {% end %}
+        <div class="field">
+            <div>
+                <input type="submit" value="LOGIN" class="ferry-button">
+            </div>
+        </div>
+        <br>
+    </form>
+
+    <hr>
+    <span style="color: black; font-family: 'Avenir Next';"> Don't have an account? <a style="color: darkblue; font-family: 'Avenir Next';" href="/signup">Sign up here</a> </span>    
+
+</div>
+
+</body>
+</html>

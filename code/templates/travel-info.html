@@ -1,0 +1,239 @@
+
+<html>
+<head>
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/travel.css" rel="stylesheet" type="text/css">
+
+
+	<title>
+	</title>
+</head>
+
+<body>
+	<!--HEADER-->
+
+
+	<div id="header">
+		<div id="header-top">
+			<a href="/">FERRY</a> 
+			{% if user %}
+			<span><a href="/orders">ORDERS</a> <a href="/travel">TRAVEL</a> <a href="/logout">LOGOUT</a> <a href="/profile">{{ user }}</a>
+			
+			{% else %}
+			<span><a href="/orders">ORDERS</a> <a href="/travel-info">TRAVEL</a> <a href="/signup">SIGNUP</a> <a href="/login">LOGIN</a></span>
+			{% end %}		
+		</div>
+
+        <div class="travel-top">
+                <div class="hero-text" id="travel-hero">
+                    Earn money on every trip <br/> you take. 
+                </div>
+
+                <div class="hero-text" id="travel-subtitle">
+
+                    Headed on vacation and want to make some extra money? We’ll send you a package to take and drop off at your destination airport. Easy as that.
+                </div>
+
+                <div class="nl-submit-wrap">
+                    <button class="nl-submit" style="cursor: pointer;" onclick="window.location.href='/signup?next=travel';" type="submit">Become a traveler</button>
+                </div>
+            </div>
+        
+    </div>
+    
+    
+    
+    
+    <!--END HEADER -->
+    
+    
+    <div class="travel-calc">
+    
+        <div class="travel-calc-left">
+            <h2>  
+              What you could earn traveling to Costa Rica  
+            </h2>
+
+            <h3>
+                It totally depends on when you’re headed there and how much free luggage space you have. That being said, the average traveler is making $73 a trip!
+            </h3>
+
+            <h4>
+                <b>Small</b> - The size of a small travel bag, enough to bring little electronic devices.  
+
+            </h4>
+
+            <h4>
+                <b>Medium</b> - About the size of a backpack, enough for some clothes and shoes.   
+            </h4>
+
+            <h4>
+                <b>Large</b> - You’ve got a whole extra bag for your trip!
+            </h4>
+        </div>
+        <div class="travel-calc-right" >
+            
+            $73 
+            
+        </div>
+
+    
+    </div>
+    
+    <div class="travel-how">
+    
+    
+    <div class="divTable">
+    <div class="divTableBody">
+    <div class="divTableRow">
+    <div class="divTableCell">BOOK</div>
+    <div class="divTableCell">RECEIVE</div>
+    <div class="divTableCell">DROP-OFF</div>
+    </div>
+    <div class="divTableRow">
+    <div class="divTableCell">
+    <p class="p1"><span class="s1">Book your flight and let us know when and where you&rsquo;re headed! We&rsquo;ll take care of matching you with someone in that city who needs something.</span></p>
+    </div>
+    <div class="divTableCell">
+    <p class="p1"><span class="s1">At least a week before your trip, you&rsquo;ll receive a package from Amazon with everything you need to pack. We&rsquo;ll also send you a reminder text to pack your bags!</span></p>
+    </div>
+    <div class="divTableCell">
+    <p class="p1"><span class="s1">Once you land, we&rsquo;ll let you know where to meet to drop-off the package. If there are any flight delays or cancellations, we&rsquo;ll let your match know. </span></p>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+        <div class="travel-how-button"> <button style="cursor: pointer;" onclick="window.location.href='/travel';"> Become a traveler </button></div>
+            
+    
+    </div>
+    
+    
+    
+    
+    
+    
+	<!--FOOTER-->
+
+
+	<div id="footer">
+		<div class="divTable">
+			<div class="divTableBody">
+				<div class="divTableRow">
+					<div class="divTableCell">
+						<select class="footer-dropdown">
+							<option value="english">
+								English
+							</option>
+
+							<option value="spanish">
+								Spanish
+							</option>
+						</select>
+					</div>
+
+
+					<div class="divTableCell">
+						<div class="footer-head">
+							Company
+						</div>
+					</div>
+
+
+					<div class="divTableCell">
+						<div class="footer-head">
+							Legal
+						</div>
+					</div>
+
+
+					<div class="divTableCell">
+						<div class="footer-head">
+							Follow
+						</div>
+					</div>
+				</div>
+
+
+				<div class="divTableRow">
+					<div class="divTableCell">
+						&nbsp;
+					</div>
+
+
+					<div class="divTableCell">
+						About us
+					</div>
+
+
+					<div class="divTableCell">
+						Terms
+					</div>
+
+
+					<div class="divTableCell">
+						&nbsp;Contact us
+					</div>
+				</div>
+
+
+				<div class="divTableRow">
+					<div class="divTableCell">
+						&nbsp;
+					</div>
+
+
+					<div class="divTableCell">
+						Careers
+					</div>
+
+
+					<div class="divTableCell">
+						Privacy Policy&nbsp;
+					</div>
+
+
+					<div class="divTableCell">
+						&nbsp;Blog
+					</div>
+				</div>
+
+
+				<div class="divTableRow">
+					<div class="divTableCell">
+						&nbsp;
+					</div>
+
+
+					<div class="divTableCell" id="bottom-row">
+						FAQ&nbsp;
+					</div>
+
+
+					<div class="divTableCell" id="bottom-row">
+						&nbsp;Partnerships
+					</div>
+
+
+					<div class="divTableCell">
+						<a href="http://www.facebook.com/getferry" target="_blank" title="facebook"><img alt="facebook" border="0" class="social-icons" src="/images/fb-logo.png"></a> <a href="http://www.twitter.com/getferry" target="_blank" title="facebook"><img alt="twitter" border="0" class="social-icons" src="/images/twitter-logo.png"></a> <a href="http://www.instagram.com/getferry" target="_blank" title="facebook"><img alt="instagram" border="0" class="social-icons" src="/images/instagram-logo.png"></a>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+		</div>
+
+
+		<div id="footer-bottom">
+			Ferry
+		</div>
+	</div>
+    
+    
+	<!--END FOOTER-->
+    
+
+</body>
+</html>

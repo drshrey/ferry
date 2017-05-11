@@ -1,0 +1,117 @@
+{% extends '../templates/base.html' %}
+
+{% block css %}
+
+<link rel="stylesheet" href="/css/welcome_back.css">
+
+{% end %}
+
+{% block header %}
+
+
+    <div id="buy-header" style="height: auto; ">
+        <div class="ui stackable grid" style="margin-left: 10px;width: 100%;">    
+        <div class="row">        
+        <div class="three wide tablet two wide computer column"> 
+            <a id="header-logo" href="/" style="margin-left: 25px;">FERRY</a> 
+        </div>
+        {% if user %}
+            <div class="two wide tablet two wide computer column">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>
+
+            <div class="four wide tablet six wide computer column">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="three wide tablet two wide computer column">
+                <a id="name" class="header-link" href="/profile?page=account"> Hi,{{ user_entry['first_name'] }} </a>
+            </div>
+            <div class="one wide tablet one wide computer column">
+                <a class="header-link" href="/logout"> LOGOUT </a>
+            </div>                                
+        {% else %}
+            <div class="two wide tablet two wide computer column">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>        
+            <div class="four wide tablet five wide computer column">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="two wide tablet two wide computer column">
+                <a id="name" class="header-link" href="/login"> LOGIN</a>
+            </div>
+            <div class="two wide tablet two wide computer column">
+                <a class="header-link" href="/signup"> SIGN UP </a>
+            </div>                         
+        {% end %}
+            <div class="four wide tablet three wide computer column">
+                <button id="header-cart" style="border-radius: 25px;width: 130px; height: 50px; position: absolute; bottom: -5px;"><span style="position: absolute; bottom: 10px;"> CART</span> </button>
+            </div>               
+        </div>
+        <div id="header-divider"></div>                
+        </div>    
+    </div>
+
+{% end %}
+
+
+
+
+
+
+{% block main %}
+
+<div id="myProgress">
+    <div id="myBar" style="width:33%;"></div>
+</div>
+<br/>
+
+<div id="message" style="text-align:center; line-height: 1.5em; letter-spacing: 0.04em; margin-bottom: 15px;">
+{{ msg }}
+</div>
+
+<form action="/login_with_checkout" method="post">
+    <div class="ui centered stackable grid">
+        <div class="row">
+            <div class="fifteen wide column" id="almost-there">
+                Welcome back!
+            </div>
+
+            <div class="fifteen wide column" id="enter-email-address">
+                Please enter your password.
+            </div>                
+
+        </div>    
+
+        <div class="row">
+            <div class="six wide column form-field" style="text-align: center;">
+                <input type="email" name="email" placeholder="EMAIL ADDRESS" value="{{email}}" required />
+            </div>    
+        </div>
+        <div class="row">
+            <div class="six wide column form-field" style="margin-top: 15px; text-align: center;">
+                <input id="password" type="password" name="password" placeholder="PASSWORD" required />
+            </div>                
+        </div>
+        <div clas="row">
+            <div class="six wide column form-field" style="margin-top: 15px; text-align: center;">
+                <input type="submit" value="CONTINUE" id="continue" />
+            </div>        
+        </div>
+        <div class="row" style="height: 100px;"></div>
+
+    </div>
+</form>            
+{% end %}
+
+
+
+
+
+
+
+
+
+
+
+
+

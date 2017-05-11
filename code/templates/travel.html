@@ -1,0 +1,418 @@
+{% extends '../templates/base.html' %}
+{% block css %}
+	<link rel="stylesheet" href="/css/accounts.css">
+{% end %}
+{% block main %}
+
+<style>
+	body {
+		font-family: 'Avenir Next';
+	}
+	#modify:hover {
+		text-decoration: underline;
+	}
+	.large-text {
+		font-size: 42px;
+		font-family: 'Avenir Next';
+		color: #2E315B;
+	}
+	.large-text-purple {
+		font-size: 48px;
+		font-family: 'Avenir Next';
+		font-weight: 500;
+		color: #5C546A;
+	}	
+	.ui.input {
+		border: 2px solid white;
+	}
+	#header {
+		background: white;
+	}
+	#header-top{
+		border-bottom: 2px solid #2E315B;
+	}
+	a{
+		color: #2E315B;
+	}
+
+	.trip-text {
+		font-size: 17px;
+	}
+/*	.success {
+		content:url("https://www.iconexperience.com/_img/g_collection_png/standard/128x128/checkbox.png");
+		width: 20px;
+	}
+
+	.failure{
+		content:url("https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678069-sign-error-128.png");
+		width: 20px;
+	}*/
+	
+#confirm:hover {
+	background-color: red;
+}
+
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.trip{
+	color: #2E315B;
+	text-align: center;
+	padding: 10px;
+	height: 300px;
+	max-height: 400px;
+	width: 88%;
+	font-size: 24px;
+	margin-left: 115px;
+	margin-right:auto;
+	border-top: 2px solid #2E315B;
+	font-style: italic;
+	line-height: 1.15em;
+	font-family: 'Avenir Next';
+}
+
+</style>
+
+
+<div id="delete-trip-modal" class="ui basic modal">
+  <div class="ui icon header">
+    Confirm Trip Deletion
+  </div>
+  <div class="content" style="text-align:center;">
+    Are you sure you want to delete your trip to <b><i><span id="delete-trip-modal-destination"></span></i></b>?
+  </div>
+  <div class="actions" style="text-align:center;">
+    <button class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      No
+    </button>
+    <button id="delete-trip-btn-yes" class="ui green ok inverted button" onClick="deleteTrip();">
+      <i class="checkmark icon"></i>
+      Yes
+    </button>
+  </div>
+</div>
+
+<div id="validate-yourself-modal" class="ui small modal">
+  <div class="ui icon header">
+    Please validate yourself.
+  </div>
+  <div class="content" style="text-align:center;">
+   	Thanks for adding a trip! However, in order to complete this action, you must fill out
+   	the required traveller information here. 
+  </div>
+  <div class="actions" style="text-align:center;">
+    <button class="ui green ok inverted button" onClick="window.location.href='/profile?page=travel&validated=False';">
+      <i class="checkmark icon"></i>
+      Take me there!
+    </button>
+  </div>
+</div>
+
+
+<div style="background: white;">
+	<div class="add-trip" style="background: white; margin-left: 7%; margin-right: 10%; margin-bottom: 10px; margin-top: -10px;">
+		<div style="max-width: 95%; width: 600px;">
+			<div style="margin-bottom: 20px;line-height:1.1em; letter-spacing: 0.04em;" class="large-text"><i> Where are you headed? </i></div>		
+			<div style="margin-bottom: 20px;line-height:1.0em; font-size: 20px; letter-spacing: 0.04em; line-height: 1.28em;color: #2E315B; font-family: 'Avenir Next';">
+				Enter your trip details below and we'll make sure to let you know when we've got a package
+				for you to ferry over!
+			</div>	
+		</div>
+	  <br/>
+		<div id="message" style="color: #912f40; font-size: 18px; font-family: 'Avenir Next';"></div>
+	<div style="margin-top: 15px; width: 95%; padding-bottom: 15px; color:#2E315B; font-size: 25px; font-family: 'Avenir Next'; font-weight: 550;">Add a Trip </div>
+		<div class="ui stackable grid" style="margin: 1px; width: 100%;">
+			<div class="row">
+				<div class="five wide tablet four wide computer column">
+					<!-- <label> Enter your Flight Number </label> -->
+					<div style="width: 100%; border: 2px solid #2E315B; color: #2E315B; font-size: 14px;">
+						<input style="padding: 8px; padding-left:30px;outline: none;" id="flight-number" type="text" placeholder="FLIGHT NUMBER"/>
+					</div>				
+				</div>			
+				<div class="six wide tablet five wide computer column">
+
+					<div id="arrival-city-input">
+							<select class="ui fluid dropdown" id="arrival-city">
+							</select>
+
+					</div>									
+				</div>
+				<div class="five wide tablet four wide computer column">
+					<!-- <label> Enter your Arrival Date </label> -->
+					<div style="border: 2px solid #2E315B; font-size: 14px; font-family: 'Avenir Next'; padding:5px;">
+						<input style="padding-left: 40px; padding-top: 4px; padding-bottom:4px;width: 95%; outline: none;" onchange="checkDate();" id="arrival-date" type="date" />
+					</div>				
+				</div>		
+		
+			</div>
+			<div class="row">
+				<div class="zero wide mobile seven wide tablet five wide computer column"></div>
+				<div class="five wide mobile five wide tablet four wide computer column">
+					<!-- <label> Select luggage space </label> -->
+						<select class="ui dropdown fluid" id="size">				
+						</select>					
+				</div>					
+				<div class="four wide mobile four wide tablet four wide computer column">
+					<button id="confirm-flight" onClick="confirmFlight();" class="ui large button purple" style="background: #2E315B; width: 100%; height: 43px; color: white; font-size: 14px; font-family: 'Avenir Next'; font-weight: 200;">CONFIRM</button>				
+				</div>							
+			</div>
+		</div>
+	<br/>	  
+	<br/>
+	<div style=";color:#2E315B; font-size: 25px; font-family: 'Avenir Next'; font-weight: 550;"> <i>Upcoming Trips</i></div>
+	</div><br/>
+	{% if len(trips) == 0 %}
+		<div style="margin-left: auto; margin-right: auto; text-align: center; font-size: 25px; font-family: 'Avenir Next'; color: #2E315B; font-style: italic; margin-top: 20px; margin-bottom: 20px;">
+			No trips created yet!
+		</div>
+	{% else %}
+
+		{% for trip in trips %}
+			<div class="trip" id="trip-{{trip['id']}}" destination="{{trip['destination']['name']}}">
+			<br/>
+			{% if trip['destination_airport_id'] is not None %}
+				<div class="ui grid">
+					<div class="eight wide column" style="text-align: left;">
+						<img style="width: 55px;" src="/images/airplane.svg"></img><br/>
+						<span class="text trip-text" style="font-size: 20px;"> Flight: {{ trip['flight_number'] }} </span><br/>
+						<span class="text trip-text" style="font-size: 20px;"> Arrival: {{ trip['arrival_date'] }} </span><br/><br/>
+						<span class="text trip-text"> Destination: {{ trip['destination']['name']}}  ({{ trip['destination']['initials']}}) </span>
+					</div>
+					<div class="eight wide column" style="text-align: left;">
+						<img src="/images/backpack.svg" width="55px"></img><br/>
+						{% if trip['status'] == 'matched' %}
+							<div class="row" style="border-bottom: 2px solid #2E315B; height: 110px;">
+									<tr>
+										<td> Order #21992 - Amazon Fire Stick </td>
+										<td><button style="margin-left: 30px;background-color:#2E315B; color: white; font-style: italic; text-align: center; border-radius: 30px; font-size:14px; width: 150px; height: 45px; cursor: default;">In Transit</button></td
+									</tr><br/>									
+							</div>
+							<div class="row">
+								<img src="images/profile.jpeg" style="margin-top: 15px; width: 100px; border-radius: 50%;"></img>
+								</div>
+								<span style="position: absolute; left: 140px; bottom: 60px; font-size: 14px; font-family: 'Avenir Next'; font-weight: 550;">
+									Deliver To: Shreyas Jaganmohan<br/>
+									Phone: (609)-770-1844<br/>
+									WhatsApp: sysodaff<br/>
+								</span>
+							</div>
+						{% else %}
+							<div class="row">
+							<span class="text trip-text">  Size: {{ trip['size'] }} </span><br/>
+							<span class="text trip-text"> Status: Currently finding a buyer. </span> <br/><br/>
+
+							<div style=""> 
+								<a class="text" style="cursor: pointer; font-size: 15px;color: red; margin-left: 190px;" onClick="confirmDelete({{trip['id']}});"> 
+								Cancel Trip 
+							</a>
+							</div>							
+							</div>
+						{% end %}
+					</div>				
+
+				</div>				
+			{% else %}
+				<div style="margin-top: 30px; text-align: left;">
+				Arrives:<b> {{ trip['arrival_date']}} </b><br/>				
+				Destination: <b>{{ trip['destination']['name']}} ({{ trip['destination']['initials'] }})</b> <br/>
+				Flight Number: <b>{{ trip['flight_number']}}</b>
+				</div>
+			{% end %}
+			</div>
+
+		{% end %}	  
+	{% end %}
+
+	</div>
+
+</div>	
+<br/><br/><br/>
+<script src="/js/nlform.js"></script>
+<script type="text/javascript">
+
+var user = {% raw jsonuser %}
+
+	$('#arrival-city')
+  .dropdown({
+  	placeholder: 'ARRIVAL AIRPORT'
+  	});
+	
+
+	$('#size')
+  .dropdown({
+  	placeholder: 'LUGGAGE SPACE',
+  	}); 
+
+
+$("#size").append(`
+      	<option value="small">
+	        Small
+	    </option>
+      	<option value="medium">
+	        Medium
+	    </option>
+      	<option value="large">
+	        Large
+	    </option>	    	    
+`)
+
+
+var SELECTED_TRIP = -1
+
+var airports = []
+var content = []
+var validDate = false
+var airport_req = $.get('/airports', function(data){
+	airports = JSON.parse(data)
+	airports.forEach(function(airport){
+		console.log(airport)
+		$("#arrival-city").append(`
+			<option value="` + airport.name + `">
+				` + airport.name + `
+			</option>
+			`)
+		content.push({title: airport.name })
+	})
+	$('#arrival-city-input')
+	  .search({
+	  	source: content
+	  })
+	;
+
+	$('#departure-city-input')
+	  .search({
+	  	source: content
+	  })
+	;	
+
+})
+
+$('.ui.form')
+  .form({
+    fields: {
+      destination_airport: 'empty',
+      departure_date   : 'empty',
+      flight_number : 'empty',
+	  size : 'checked',      
+      terms    : 'checked'
+    }
+  })
+;
+$('.ui.modal')
+  .modal()
+;
+
+function checkDate(){
+	$("#message").html(``)	
+    var UserDate = document.getElementById("arrival-date").value;
+    var ToDate = new Date();
+    ToDate.setDate(ToDate.getDate() + 6)
+	
+	console.log(new Date(UserDate))
+	console.log(ToDate)
+    console.log(new Date(UserDate).getTime() <= ToDate.getTime())
+    if (new Date(UserDate).getTime() <= ToDate.getTime()) {
+          $("#message").html(`Please pick a date atleast 6 days from now.`)
+          $("#date-notif").removeClass('success')
+          $("#date-notif").addClass('failure')
+          validDate = false
+    } else {
+	    $("#date-notif").removeClass('failure')
+	    $("#date-notif").addClass('success')
+	    validDate = true
+    }
+}
+
+function deleteTrip(){
+	console.log('hello there delete trip')
+	$("#delete-trip-btn-yes").addClass('loading')
+
+	if(SELECTED_TRIP > 0){
+		$.get('/travel?delete_trip_id=' + SELECTED_TRIP, function(data){
+			if(data == 'err'){
+				$("#message").html(`Can't delete this trip for some reason. Contact help@ferry.com, and we'll get back to you within 2-3 hours. We apologize about the inconvenience.`)
+			} else {
+				window.location.href = '/travel'
+			}
+			$("#delete-trip-btn-yes").removeClass('loading')
+		})
+	}
+}
+
+function confirmDelete(id){
+	console.log(id)
+	let destination = $("#trip-" + id).attr('destination')
+
+	SELECTED_TRIP = id
+
+	$("#delete-trip-modal-destination").html(destination)
+	$('#delete-trip-modal')
+	  .modal('show')
+	;
+}
+
+function confirmFlight(){
+	$("#message").html(``)
+	$("#confirm-flight").addClass('loading')
+	let airport_names = []
+	airports.forEach(function(airport){
+		airport_names.push(airport['name'])
+	})
+
+	if($("#flight-number").val() == ""){
+		$("#confirm-flight").removeClass('loading')		
+		$("#message").html(`Please enter a valid flight number.`)
+		return		
+	}
+	if(!validDate){
+		$("#confirm-flight").removeClass('loading')		
+		$("#message").html(`Please enter a valid date (atleast 6 days in the future from the current date).`)
+		return
+	}
+	if(!airport_names.includes($("#arrival-city").val())){
+		$("#confirm-flight").removeClass('loading')		
+		$("#message").html(`Please enter a valid destination.`)	
+		return
+	}
+	if($("#size").val() == ""){
+		$("#confirm-flight").removeClass('loading')		
+		$("#message").html(`Please select a valid size.`)	
+		return		
+	}
+
+	if( ! user['validated']){
+		$("#validate-yourself-modal").modal('show')
+	} else {
+		let posting = $.post('/flights',{
+			arrival_city: $("#arrival-city").val(),
+			flight_number: $("#flight-number").val(),
+			arrival_date: $("#arrival-date").val(),
+			size: $("#size").val()
+		})
+
+		posting.done(function(data){
+			$("#confirm-flight").removeClass('loading')
+			if(data == 'err'){
+				$("#message").html(`There's been an error in adding your trip. Contact help@ferry.com if you continue to have problems. You shall have a response within 2 hours.`)
+			} else {
+				window.location.href = '/travel'
+			}
+		})	
+	}
+
+}
+
+setTimeout(function(){
+	$("#arrival-city").addClass("test")
+}, 3000)
+
+</script>
+
+{% end %}

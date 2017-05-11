@@ -1,0 +1,67 @@
+{% extends '../templates/accounts_base.html' %}
+
+
+{% block css %}
+<link rel="stylesheet" href="/css/accounts.css">
+<link rel="stylesheet" href="/css/account.css">
+{% end %}
+
+{% block maincontent %}
+
+<div class="page-header text">
+<i> Account</i>
+</div>
+<div class="text content" id="account-content">
+	Edit your account information
+</div>
+<br/>
+	<div>
+		<!-- <img class="profile-picture" src=""></img> -->
+	</div>
+<br/>
+<form method="POST" action="/update_account">
+	<div class="ui stackable grid">
+		<div class="row" style="margin-top:-40px;">
+			<div class="five wide column">
+				<img style="clip-path: circle(90px at center); width: 210px;" src="/images/profile.jpeg"></img>
+				<div style="position: absolute; top: 235px; left: 25px;">
+				<input type="file" name="photo">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">	
+			<div class="ten wide column">
+				<input name="first_name" class="text ferry-input" type="text" placeholder="First Name" value="{{user_entry['first_name']}}"></input>
+			</div>
+		</div>
+		<div class="row">
+			<div class="ten wide column">
+				<input class="text ferry-input" name="last_name" type="text" placeholder="Last Name" value="{{user_entry['last_name']}}"></input>
+			</div>			
+		</div>
+		<div class="row">
+			<div class="ten wide column">
+				<input class="text ferry-input" name="email" type="email" placeholder="Email" value="{{user_entry['email']}}"></input>
+			</div>			
+		</div>
+		<div class="row">
+			<div class="ten wide column">
+				<input class="text ferry-input" name="password" type="password" placeholder="New Password"></input>
+			</div>			
+		</div>
+		<div class="row">
+			<div class="ten wide column" style="margin-left:5px;">
+				<input type="submit" class="ferry-button" value="SAVE">
+			</div>					
+		</div>				
+	</div>
+</form>
+<script>
+
+$("#account-link").css('borderBottom', '1.5px solid #2E315B')
+</script>
+
+
+{% end %}
+

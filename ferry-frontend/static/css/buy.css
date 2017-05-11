@@ -1,0 +1,91 @@
+#buy-header {
+	background-color: #2E315B;
+	color: #fff;
+	padding-bottom: 70px;
+	padding-left: 50px;
+	padding-top: 50px;
+	height: 340px;
+}
+
+#header-cart {
+	border: 1px solid white;
+}
+
+.header-link {
+	color: white;
+}
+
+#header-logo {
+	color: white;
+}
+.text {
+	color: white;
+	line-height: 1.1em;
+}
+
+.inverse{
+	color: #2E315B;
+}
+
+
+#header-top-buy{
+	width: 100%;
+	background-color: #912f40;
+}
+
+#progress-bar {
+	height: 26%;
+	width: 100%;
+	background-color: #912f40;	
+}
+
+#progress-bar-text{
+	font-size: 23px;
+}
+/*red - 912f40*/
+
+#checkout-button {
+	border-radius: 25px;
+	background-color: white;
+	color: #912f40;
+	border: 2px soldid #912f40;
+	width: 250px;
+	height: 60px;
+}
+
+/*#category-dropdown {
+	border: 2px solid #2E315B;
+	background-color: white;
+	color: #2E315B;
+	padding: 14px 50px 14px 50px;
+	width: 230px;
+	font-family: 'Avenir Next';
+	font-size: 18px;
+	font-weight: 600;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}*/
+
+.med-big{
+	font-size: 25px;
+	letter-spacing: 0.06em;
+	font-weight: 500;
+}
+
+.item-text {
+	color: #912f40;
+	width: 70%;
+	font-family: 'Avenir Next';
+}
+
+#cartSpace {
+    width: 90%;
+    margin-left: 5%;
+    background-color: #912f40;
+    border: 2px solid white;
+}
+#cartFilled {
+    width: 1%;
+    height: 30px;
+    background-color: white;
+}

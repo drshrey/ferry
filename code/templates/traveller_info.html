@@ -1,0 +1,106 @@
+{% extends '../templates/accounts_base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/accounts.css">
+<link rel="stylesheet" href="/css/traveller_info.css">
+{% end %}
+
+
+
+{% block maincontent %}
+
+<div class="text" id="message" style="color: #912f40; margin-bottom: 15px; font-size: 16px;">
+	{{ msg }}
+</div>
+<div class="page-header text">
+<i> Traveller Information</i>
+</div>
+<div class="text content">
+
+Enter or update your traveller payment information in order
+to be a Ferry certified traveller. Shipping information is used to get packages to you and the bank account information below is used to pay you after the completion of any Ferry transaction.
+</div>
+<br/>
+
+<div class="text info-title"> Shipping Information</div>
+<br/>
+	<form id="shipping-form" method="POST" action="/update?information=shipping">
+		<div class="ui stackable grid">
+				<div class="row">
+					<div class="nine wide column">
+						<input class="ferry-input" value="{{user_entry['shipping_address']}}" type="text" name="street_address" placeholder="STREET ADDRESS" required/>		
+					</div>
+					<div class="six wide column">
+						<input class="ferry-input" type="text" name="floor_apt" value="{{user_entry['apt_num']}}" placeholder="FLOOR/APT" />			
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="eight wide column">
+						<input class="ferry-input" type="text" value="{{user_entry['city']}}" name="city" placeholder="CITY" required/>			
+					</div>
+					<div class="three wide column">
+						<input class="ferry-input" type="dropdown" value="{{user_entry['state']}}" name="state" placeholder="STATE" required/>						
+					</div>
+					<div class="four wide computer column">
+						<input class="ferry-input" type="text" name="zipcode" value="{{user_entry['zip_code']}}" placeholder="ZIP CODE" required/>			
+					</div>			
+				</div>
+
+				<div class="row">
+					<div class="nine wide computer column" type="text">
+						<input name="country" class="ferry-input" value="United States of America" disabled/>
+					</div>
+					<div class="six wide computer column" type="text">	
+						<span class="text"><i>Ferry only accepts travellers coming from
+					the United States.</i></span>
+					</div>			
+				</div>
+
+				<div class="row">
+					<div class="fifteen wide column">
+					{% if validated %}
+						<input type="submit" class="ferry-button" id="update" value="UPDATE" />
+					{% else %}
+						<div class="divider"></div>
+					{% end %}
+					</div>
+				</div>
+	{% if validated %}					
+	</form>
+	{% end %}
+</div>
+<br/>
+<div class="text info-title"> Banking Information</div>
+<br/>
+{% if validated %}
+<form id="banking-form" action="/update?information=banking" method="POST">
+{% end %}
+	<div class="ui stackable grid">
+		<div class="row">
+			<div class="eight wide column">
+				<input value="{{user_entry['account_number']}}" class="ferry-input" name="account_number" type="text" placeholder="ACCOUNT #" required/>			
+			</div>
+			<div class="seven wide column">
+				<input value="{{user_entry['routing_number']}}" class="ferry-input" name="routing_number" type="text" placeholder="ROUTING #" required/>			
+			</div>			
+		</div>
+		<div class="row">
+			<div class="fifteen wide column">
+			{% if validated %}
+				<input type="submit" class="ferry-button" id="update" value="UPDATE" />
+			{% else %}
+				<input type="submit" class="ferry-button" id="update" value="SUBMIT" />		
+			{% end %}
+			</div>
+		</div>		
+	</div>
+
+	</form>
+
+<script>
+	$("#travel-link").css('borderBottom', '1.5px solid #2E315B')
+</script>
+
+{% end %}
+

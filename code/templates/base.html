@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+   <link href="/css/form.css" rel="stylesheet" type="text/css">
+   <link href="/css/semantic/semantic.min.css" rel="stylesheet" type="text/css">
+    {% block css %}
+    {% end %}
+   <script src="/js/jquery.min.js"></script>
+    <script src="/css/semantic/semantic.min.js"></script>
+    <script src="js/tabs.js">
+    </script>
+    <script src="js/nlform.js">
+    </script>
+    <script src="js/modernizr.custom.js">
+    </script>
+    {% block scripts %}
+    {% end %}
+
+    <style>
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    #name:hover{
+        border-bottom: 1px solid black;
+        highlight: none;
+    }
+    </style>
+</head>
+
+<body>
+    <!--HEADER-->
+
+    {% block header %}
+    <div id="header" style="height: auto; ">
+        <div class="ui stackable grid" style="width: 100%;">    
+        <div class="row">        
+        <div class="three wide tablet two wide computer column"> 
+            <a id="header-logo" href="/" style="margin-left: 29px;">FERRY</a> 
+        </div>
+        {% if user %}
+            <div class="one wide tablet one wide computer column" style="margin-left: 15px;">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>
+
+            <div class="six wide tablet eight wide computer column" style="margin-left: 25px;">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="one wide tablet one wide computer column">
+                <a id="name" class="header-link" href="/profile?page=account"> Hi,{{ user_entry['first_name'] }} </a>
+            </div>
+            <div class="one wide tablet one wide computer column" style="margin-left: 40px;">
+                <a class="header-link" href="/logout"> LOGOUT </a>
+            </div>                        
+        {% else %}
+            <div class="two wide tablet one wide computer column">
+                <a class="header-link" href="/orders">ORDERS</a>
+            </div>        
+            <div class="six wide tablet nine wide computer column" style="margin-left: 15px;">
+                <a class="header-link" href="/travel">TRAVEL</a>
+            </div>
+            <div class="two wide tablet one wide computer column">
+                <a class="header-link" href="/login"> LOGIN</a>
+            </div>
+            <div class="three wide tablet two wide computer column">
+                <a class="header-link" href="/signup"> SIGN UP </a>
+            </div>             
+        {% end %}
+            </div>
+        <div id="header-divider"></div>                
+        </div>    
+    </div>
+    {% end %}
+
+        {% block sidebar %}
+        {% end %}
+        {% block main %}
+
+        {% end %}
+    
+    
+    <!--FOOTER-->
+
+{% block footer %}
+    <div id="footer" style="height:400px;">
+        <div class="divTable">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        <select class="footer-dropdown">
+                            <option value="english">
+                                English
+                            </option>
+
+                            <option value="spanish">
+                                Spanish
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div class="divTableCell">
+                        <div class="footer-head">
+                            Company
+                        </div>
+                    </div>
+
+
+                    <div class="divTableCell">
+                        <div class="footer-head">
+                            Legal
+                        </div>
+                    </div>
+
+
+                    <div class="divTableCell">
+                        <div class="footer-head">
+                            Follow
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        &nbsp;
+                    </div>
+
+
+                    <div class="divTableCell">
+                        About us
+                    </div>
+
+
+                    <div class="divTableCell">
+                        Terms
+                    </div>
+
+
+                    <div class="divTableCell">
+                        &nbsp;Contact us
+                    </div>
+                </div>
+
+
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        &nbsp;
+                    </div>
+
+
+                    <div class="divTableCell">
+                        Careers
+                    </div>
+
+
+                    <div class="divTableCell">
+                        Privacy Policy&nbsp;
+                    </div>
+
+
+                    <div class="divTableCell">
+                        &nbsp;Blog
+                    </div>
+                </div>
+
+
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        &nbsp;
+                    </div>
+
+
+                    <div class="divTableCell" id="bottom-row">
+                        FAQ&nbsp;
+                    </div>
+
+
+                    <div class="divTableCell" id="bottom-row">
+                        &nbsp;Partnerships
+                    </div>
+
+
+                    <div class="divTableCell">
+                        <a href="http://www.facebook.com/getferry" target="_blank" title="facebook"><img alt="facebook" border="0" class="social-icons" src="/images/fb-logo.png"></a> <a href="http://www.twitter.com/getferry" target="_blank" title="facebook"><img alt="twitter" border="0" class="social-icons" src="/images/twitter-logo.png"></a> <a href="http://www.instagram.com/getferry" target="_blank" title="facebook"><img alt="instagram" border="0" class="social-icons" src="/images/instagram-logo.png"></a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+
+
+        <div id="footer-bottom" style="padding-bottom:10px;">
+            Ferry
+        </div>
+    </div>
+    
+    
+    <!--END FOOTER-->    
+    {% end %}
+    
+    
+    <!--END JS FORM-->
+
+</body>
+</html>

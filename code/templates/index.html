@@ -1,0 +1,137 @@
+{% extends '../templates/base.html' %}
+
+
+{% block css %}
+   <link href="/css/homepage.css" rel="stylesheet" type="text/css">
+{% end %}
+
+
+{% block main %}
+<div id="header-top">
+	<div class="ui stackable grid" id="motto">
+		<div class="row">
+			<div class="fifteen wide column">
+				<div class="text title">
+					Ferry connects you with reliable travellers headed your way. <br/>
+					Get what you need, where you are.
+				</div>		
+			</div>
+		</div>
+		<div class="row"></div>
+		<div class="row">
+			<div class="sixteen wide column" class="text" id="item-shipped">
+				I'm looking for an item shipped to
+				<select id="airport">
+					{% for airport in airports %}
+					<option value={{airport['id']}}>{{airport['name']}}  ({{airport['initials']}})
+					{% end %}
+				</select>					
+			</div>
+		</div>
+				
+		<div class="row"></div>
+		
+		<div class="row">
+			<div class="eight wide column">
+				<button onClick="match();"> MATCH ME WITH A TRAVELLER </button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="how-it-works">
+<br/><br/>
+	<div class="ui stackable grid">
+		<div class="row" style="height:35px;"></div>
+		<div class="row">
+			<div class="column inverse text" id="how-it-works-header">
+			HOW IT WORKS
+			</div>
+		</div>
+		<div class="row"></div>
+		<div class="row">
+			<div class="thirteen wide column inverse text big">
+				Ferry uses the infrastructure of the human network to allow international delivery to underserved markets.	
+			</div>
+		</div>	
+		<div class="row"></div>
+		<div class="row">
+			<div class="column inverse text verb">
+				Match
+			</div>
+		</div>
+		<div class="row">
+			<div class="seven wide column inverse text paragraph">
+				In some parts of the world it's impossible
+				to buy anything online. We match you with someone headed your way to deliver select items from Amazon with more retailers soon to come.
+			</div>
+		</div>
+
+		<div class="row"></div>
+		<div class="row">
+			<div class="column inverse text verb">
+				Fly
+			</div>
+		</div>
+		<div class="row">
+			<div class="seven wide column inverse text paragraph">
+				Ferry connects travellers to folks in
+				countries that are underserved by
+				traditional ecommerce companies and
+				shipping networks. Every traveller and every package is verified and insured.
+			</div>
+		</div>
+
+		<div class="row"></div>
+		<div class="row">
+			<div class="column inverse text verb">
+				Meet
+			</div>
+		</div>
+		<div class="row">
+			<div class="seven wide column inverse text paragraph">
+				Meet your match at a pre-determined location
+				to receive your package. Our goal is to provide
+				end-to-end delivery services by the end of 2017.
+			</div>
+		</div>						
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+
+function post(path, params, method) {
+	method = method || "post"; // Set method to post by default if not specified.
+	// The rest of this code assumes you are not using a library.
+	// It can be made less wordy if you use one.
+	var form = document.createElement("form");
+	form.setAttribute("method", method);
+	form.setAttribute("action", path);
+	for(var key in params) {
+		if(params.hasOwnProperty(key)) {
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", key);
+		hiddenField.setAttribute("value", params[key]);
+		form.appendChild(hiddenField);
+		}
+	}
+
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function match(){
+	console.log('match')
+	var airport = $("#airport").val()
+
+	console.log(airport)
+	post('/find', { location: airport })
+}
+
+</script>
+
+
+{% end %}

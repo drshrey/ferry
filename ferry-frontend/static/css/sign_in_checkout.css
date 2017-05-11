@@ -1,0 +1,79 @@
+#header {
+	background-color: white;
+	color: black;
+}
+
+#header-divider{
+	width:89%;
+	margin-left:40px;
+}
+
+#buy-header {
+	padding-bottom: 70px;
+	padding-left: 50px;
+	padding-top: 50px;
+	height: 340px;
+}
+
+#header-cart {
+	border: 1px solid #2E315B;
+	background-color: white;
+	color: #2E315B;
+	background-image: url("/images/backpack-small-svg.svg");
+	background-repeat: no-repeat;
+	background-position: 10% 10%;	
+}
+
+#almost-there {
+	font-size: 40px;
+	text-align: center;
+	margin: 20px;
+	font-style: italic;
+	font-family: 'Avenir Next';
+	font-weight: 500;
+	color: #2E315B;
+	letter-spacing: 0.04em;
+}
+
+#enter-email-address {
+	font-size: 20px;
+	letter-spacing: 0.04em;
+	font-family: 'Avenir Next';	
+	text-align: center;
+	margin: 20px;
+	color: #2E315B;
+}
+
+.form-field {
+	text-align: center;
+	margin: 20px;
+}
+
+input {
+	width: 440px;
+	height: 50px;
+	padding: 10px 20px 10px 20px;
+	font-family: 'Avenir Next';
+	letter-spacing: 0.04em;
+	border: 1px solid #2E315B;
+	border-radius: 4px;
+	font-size: 15px;
+}
+
+#continue {
+	color: white;
+	background-color: #2E315B;
+}
+
+#myProgress {
+    width: 90%;
+    margin-left: 5%;
+    background-color: white;
+    border: 2px solid #912f40;
+}
+#myBar {
+    width: 33%;
+    height: 30px;
+    background-color: #912f40;
+    border: 2px solid #912f40;    
+}

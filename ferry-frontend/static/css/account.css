@@ -1,0 +1,43 @@
+#account-content {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.profile-picture {
+	width: 200px;
+}
+
+#upload-photo {
+	text-decoration: none;
+	background: none;
+	font-style: italic;
+	color: #2E315B;
+	padding: 0px;
+	font-size: 18px;
+}
+
+#save-button {
+	background-color: #2E315B;
+	color: white;
+	font-family: 'Avenir Next';
+	width: 100%;
+	font-size: 18px;
+}
+
+.profile-picture-input {
+	width: 100%;
+	border: 2px solid #2E315B;
+	color: #2E315B;
+	font-size: 14px;
+	padding: 8px;
+	outline: none;	
+	padding-left:30px;
+}
+
+#sidebar-bottom{
+	height:50px;
+}
+
+.ferry-input {
+	height:100%;
+}

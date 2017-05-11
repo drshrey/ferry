@@ -1,0 +1,97 @@
+body{
+    color: #2e315b;
+}
+
+#travel-hero{
+    font-size: 40px;
+    padding-top: 40px;
+    line-height: 1;
+}
+
+#travel-subtitle {
+    
+    font-size: 16px;
+    width: 440px;
+    height: auto;
+    font-style: normal;
+    font-weight: 300;
+    padding: 0;
+}
+
+.travel-top{
+    padding: 0 0 0 50;
+}
+
+.travel-calc {
+    height: 290px;
+    padding: 50 100 50 100;
+}
+
+.travel-how {
+    padding: 50 100 50 100;
+    font-size: 16px;
+    color: #2e315b;
+    font-weight: 400;
+}
+
+.p1 {
+    font-size: 16px;
+    margin-right: 40px
+
+}
+
+.travel-calc-left{
+    float: left;
+    width: 80%;
+}
+
+.travel-calc-right{
+    border: solid 5px #912F40;
+    color: #912F40;
+    padding: 30 30 30 25;
+    font-weight: 500;
+    float: right;
+    text-align: center;
+    font-size: 55px;
+    margin-top: 65px;
+    border-radius: 3px;
+    margin-right: 50px;
+}
+
+h2{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+h3{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+h4{
+    font-size: 16px;
+    font-weight: 300;  
+    margin-bottom: -10px;
+}
+
+.travel-how-button{
+        text-align: center;
+        padding-top: 50px;
+
+}
+
+.travel-how-button button{
+    height: 50px;
+    width: 230px;
+    background-color: #fff;
+    border: solid 3px #2e315b;
+    color: #2e315b;
+    font-size: 13px;
+}
+
+.travel-how-button button:hover{
+    background-color: #2e315b;
+    color: #fff;
+}
+

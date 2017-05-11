@@ -1,0 +1,54 @@
+{% extends '../templates/base.html' %}
+
+{% block main %}
+<div style="text-align: center; padding: 20px; color: white;height: 100%; background: #2E315B;">
+<br/>
+	<div id="email-input-stuff">
+		<p style="font-size: 30px; margin: 5px;"> No trips found! </p>
+
+		{% if msg %}
+			<div style="font-size: 16px;"> {{ msg }} </div>
+		{% else %}
+		<p style="font-size: 20px; margin: 5px;"> Enter your email please to get an update when a traveller is headed your way! </p>	
+		<br/>
+		<div class="ui input large">
+			<input id="request-email" type="email" style="text-transform: none; width: 370px; font-size: 17px; padding: 10px;border: 2px solid black;" placeholder="john@gmail.com" />
+		</div>
+		<br/>
+		<button id="submit" style="margin-top: 10px;" class="ui large button inverted green">Submit</button>
+		{% end %}
+	</div>
+</div>
+
+<div id="location" style="display: none; visibility: hidden;">
+{{ location }}
+</div>
+
+
+<script>
+
+$("#submit").click(function(){
+	$("#submit").addClass('loading')
+	let email = $("#request-email").val()
+	let location = $("#location").text()
+
+
+	var posting = $.post('/order_requests',{
+		email: email,
+		destination: location
+	})
+
+	posting.done(function(data){
+		$("#submit").removeClass("loading")
+		$("#email-input-stuff").html(``)
+		$("#email-input-stuff").html(data)
+		$("#email-input-stuff").css('fontSize', '20px')
+		$("#email-input-stuff").css('color', 'white')
+	})
+
+
+})
+</script>
+
+
+{% end %}
