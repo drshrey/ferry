@@ -1,0 +1,24 @@
+.SmallText {
+	character-spacing: 0.04em;
+	font-family: 'Avenir Next';
+	font-weight: 600;
+	font-size: 33px;
+}
+
+@media (min-width: 300px) {
+	.SmallText {
+		font-size: 18px;
+	}
+}
+
+@media (min-width: 500px) {
+	.SmallText {
+		font-size: 23px;
+	}
+}
+
+@media (min-width: 1000px) {
+	.SmallText {
+		font-size: 33px;
+	}
+}

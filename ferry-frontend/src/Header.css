@@ -1,3 +1,78 @@
 .Header {
-    border: 1px solid white;
+    color: black;
+    text-align: left;
+    height: 70px;
+    margin-top: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+@media (min-width: 300px){
+	.divider {
+		width: 53%;
+		display: inline-block;
+	}
+	.Header {
+	    color: black;
+	    text-align: left;
+	    height: 50px;
+	    margin-top: 5px;
+	}		
+}
+
+@media (min-width: 500px){
+	.divider {
+		width: 52%;
+		display: inline-block;
+	}
+	.Header {
+	    color: black;
+	    text-align: left;
+	    height: 42px;
+	    margin-top: 5px;
+	}		
+}
+
+@media (min-width: 650px){
+	.divider {
+		width: 65%;
+		display: inline-block;
+	}
+	.Header {
+	    color: black;
+	    text-align: left;
+	    height: 50px;
+	    margin-top: 5px;
+	}	
+}
+
+@media (min-width: 800px){
+	.divider {
+		width: 70%;
+		display: inline-block;
+	}
+	.Header {
+	    color: black;
+	    text-align: left;
+	    height: 50px;
+	    margin-top: 5px;
+	}		
+}
+
+@media (min-width: 1000px){
+	.Header {
+	    color: black;
+	    text-align: left;
+	    height: 70px;
+	    margin-top: 5px;
+	}		
+}
+
+@media (min-width: 1200px){
+	.divider {
+		width: 80%;
+		display: inline-block;
+	}	
 }

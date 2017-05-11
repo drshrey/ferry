@@ -1,0 +1,29 @@
+
+
+@media (min-width: 300px) {
+	.BigText {
+		font-family: 'Avenir Next';
+		font-weight: 600;
+		character-spacing: 0.04em;
+		font-size: 30px;
+	}	
+}
+
+@media (min-width: 500px){
+	.BigText {
+		font-family: 'Avenir Next';
+		font-weight: 600;
+		character-spacing: 0.04em;
+		font-size: 28px;
+	}	
+}
+
+
+@media (min-width: 1000px){
+	.BigText {
+		font-family: 'Avenir Next';
+		font-weight: 600;
+		character-spacing: 0.04em;
+		font-size: 45px;
+	}	
+}
