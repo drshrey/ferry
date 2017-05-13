@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './BigText.css';
+import '../BigText/BigText.css';
 import './BigLink.css';
 
 class BigLink extends Component {

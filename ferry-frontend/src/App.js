@@ -6,11 +6,10 @@ import houseLogo from '../static/images/backpack.png';
 import '../static/css/homepage.css';
 import './App.css';
 
-import Header from './Header.js';
-import BigText from './BigText.js';
-import SmallText from './SmallText.js';
-import Line from './Line.js';
-import LogoLink from './LogoLink.js';
+import Header from './Header/Header.js';
+import BigText from './BigText/BigText.js';
+import SmallText from './SmallText/SmallText.js';
+import LogoLink from './LogoLink/LogoLink.js';
 
 class App extends Component {
   render() {
@@ -18,7 +17,6 @@ class App extends Component {
       <div className="App">
       	<div className="main">
         	<Header />
-        	<Line />        	
         	<br/>
         	<br/>
         	<BigText text="FERRY CONNECTS YOU WITH RELIABLE TRAVELLERS HEADED TO COSTA RICA." />

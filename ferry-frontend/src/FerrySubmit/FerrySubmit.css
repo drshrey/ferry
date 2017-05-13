@@ -1,0 +1,15 @@
+.FerrySubmit {
+    border: 2px solid black;
+    background: white;
+    font-family: 'Avenir Next';
+    font-size: 20px;
+    padding: 8px;
+    margin: 5px;
+    width: 97%;
+    cursor: pointer;
+}
+
+.FerrySubmit:hover{
+    background: black;
+    color: white;
+}

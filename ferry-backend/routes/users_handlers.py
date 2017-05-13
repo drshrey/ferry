@@ -10,6 +10,7 @@ from tools import crypto
 from routes.base import BaseHandler
 
 class AllUsersHandler(BaseHandler):
+
     
     @gen.coroutine
     def get(self):
@@ -28,6 +29,7 @@ class AllUsersHandler(BaseHandler):
     
     @gen.coroutine
     def post(self):
+        import pdb;pdb.set_trace()
         body = json.loads(self.request.body.decode('utf-8'))
         email = body.get('email')
         password = body.get('password')

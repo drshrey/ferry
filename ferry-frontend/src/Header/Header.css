@@ -11,7 +11,7 @@ a {
 
 @media (min-width: 300px){
 	.divider {
-		width: 53%;
+		width: 23%;
 		display: inline-block;
 	}
 	.Header {
@@ -24,7 +24,7 @@ a {
 
 @media (min-width: 500px){
 	.divider {
-		width: 52%;
+		width: 29%;
 		display: inline-block;
 	}
 	.Header {
@@ -35,9 +35,17 @@ a {
 	}		
 }
 
+@media (min-width: 600px){
+	.divider {
+		width: 45%;
+		display: inline-block;
+	}
+}
+
+
 @media (min-width: 650px){
 	.divider {
-		width: 65%;
+		width: 51%;
 		display: inline-block;
 	}
 	.Header {
@@ -50,7 +58,7 @@ a {
 
 @media (min-width: 800px){
 	.divider {
-		width: 70%;
+		width: 61%;
 		display: inline-block;
 	}
 	.Header {
@@ -69,10 +77,17 @@ a {
 	    margin-top: 5px;
 	}		
 }
-
 @media (min-width: 1200px){
 	.divider {
-		width: 80%;
+		width: 70%;
+		display: inline-block;
+	}	
+}
+
+
+@media (min-width: 1400px){
+	.divider {
+		width: 73%;
 		display: inline-block;
 	}	
 }
