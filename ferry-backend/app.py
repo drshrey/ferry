@@ -14,6 +14,7 @@ import psycopg2
 import momoko
 
 from routes.trips_handlers import trips_handlers
+from routes.users_handlers import users_handlers
 
 app_config = setup.tornado_app_config_setup()
 
@@ -29,6 +30,7 @@ if (PERSISTENT_PATH, COOKIE_SECRET, PORT, SETTINGS) is not None:
     application = tornado.web.Application(
         [
             *trips_handlers,
+            *users_handlers,
             
             ## STATIC HANDLERS ##
             (r'/static/(.+)', tornado.web.StaticFileHandler, {'path': './static/'}),
@@ -44,17 +46,17 @@ if __name__ == '__main__':
     if application is not None:
         ioloop = IOLoop.instance()
 
-        # application.db = momoko.Pool(
-        #     dsn=os.environ['DB_FQDN'],
-        #     size=1,
-        #     ioloop=ioloop,
-        # )
+        application.db = momoko.Pool(
+            dsn=os.environ['DB_FQDN'],
+            size=1,
+            ioloop=ioloop,
+        )
 
-        # # this is a one way to run ioloop in sync
-        # future = application.db.connect()
-        # ioloop.add_future(future, lambda f: ioloop.stop())
-        # ioloop.start()
-        # future.result()  # raises exception on connection error
+        # this is a one way to run ioloop in sync
+        future = application.db.connect()
+        ioloop.add_future(future, lambda f: ioloop.stop())
+        ioloop.start()
+        future.result()  # raises exception on connection error
 
         server = tornado.httpserver.HTTPServer(application, max_buffer_size=10485760000)         
         server.listen(PORT)

@@ -37,10 +37,10 @@ SET default_with_oids = false;
 
 -- the schema
 
-CREATE USER shreyas;
-ALTER USER shreyas PASSWORD '';
+CREATE USER drshrey;
+ALTER USER drshrey PASSWORD '';
 CREATE DATABASE ferrydb;
-GRANT ALL PRIVILEGES ON DATABASE ferrydb TO shreyas;
+GRANT ALL PRIVILEGES ON DATABASE ferrydb TO drshrey;
 \c ferrydb;
 
 
@@ -109,14 +109,14 @@ create table cities (
     country text not null
 );
 
-ALTER TABLE users OWNER TO shreyas;
-alter table travellers owner to shreyas;
-alter table buyers owner to shreyas;
-ALTER TABLE trips OWNER to shreyas;
-alter table orders owner to shreyas;
-alter table matches owner to shreyas;
-alter table items owner to shreyas;
-alter table cities owner to shreyas;
+ALTER TABLE users OWNER TO drshrey;
+alter table travellers owner to drshrey;
+alter table buyers owner to drshrey;
+ALTER TABLE trips OWNER to drshrey;
+alter table orders owner to drshrey;
+alter table matches owner to drshrey;
+alter table items owner to drshrey;
+alter table cities owner to drshrey;
 
 
 insert into items (title, price, filepath, url, status)
