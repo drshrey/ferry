@@ -15,6 +15,7 @@ import momoko
 
 from routes.trips_handlers import trips_handlers
 from routes.users_handlers import users_handlers
+from routes.auth_handlers import auth_handlers
 
 app_config = setup.tornado_app_config_setup()
 

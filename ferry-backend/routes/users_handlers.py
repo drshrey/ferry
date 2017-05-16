@@ -56,6 +56,7 @@ class AllUsersHandler(BaseHandler):
                 }
             )
             user = yield self.serialize_user(cursor.fetchone())
+
             self.write(json.dumps(user))
             self.set_status(200)
             self.finish()

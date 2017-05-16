@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './Header.css';
 import BigLink from '../BigLink/BigLink.js';
 import SmallLink from '../SmallLink/SmallLink.js';
 import Line from '../Line/Line.js';
 
+
 class Header extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      loggedIn: false
-    }
-    if(this.props.loggedIn){
-      this.setState({ loggedIn: this.props.loggedIn })
-    }
   }
   render() {
-    var output = undefined
-    if(this.state.loggedIn){
-      output = (
+    if(this.props.userInformation.email){
+      return (
           <div>
 
             <div className="Header">       
             <BigLink href="/" text="Ferry" />
-            <div className="divider"></div>
+            <div className="auth divider"></div>
+            Hi, <SmallLink href="/profile" text={this.props.userInformation.email} />
             <SmallLink href="/shop" text="SHOP" />
             <SmallLink href="/travel" text="TRAVEL" />
             </div>
@@ -32,7 +28,7 @@ class Header extends Component {
           </div>
       )
     } else {
-      output = (
+      return (
           <div>
 
             <div className="Header">       
@@ -46,8 +42,13 @@ class Header extends Component {
           </div>        
       )
     }
-    return output;
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return { userInformation: state.userInformation }
+}
+
+
+
+export default connect(mapStateToProps)(Header);

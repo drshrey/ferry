@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+import addUserInformation from '../actions';
+
 import './Login.css';
 import FerryInput from '../FerryInput/FerryInput.js';
 import Header from '../Header/Header.js';
@@ -48,7 +51,7 @@ class Login extends Component {
     }
 
     if(!this.state.hasUsernameError && !this.state.hasPasswordError){
-        fetch('http://localhost:8888/users', {
+        fetch('http://localhost:8888/login', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -56,11 +59,20 @@ class Login extends Component {
           },
           body: JSON.stringify({
             email: this.state.username,
-            password: this.state.password,
-            first_name: this.state.firstName,
-            last_name: this.state.lastName
+            password: this.state.password
           })
-        })        
+        })
+        .then(function(response){
+          if( response.status >= 400 && response.status <= 500 ){
+            self.setState({ errorState: true })
+          }
+          if( response.status >= 200 && response.status < 300 ){
+            response.json().then(json =>{
+              self.props.loginUser(json)
+            })
+            self.props.router.push('/dashboard')
+          }
+        })                
       }
   }
 
@@ -94,7 +106,7 @@ class Login extends Component {
             <form onSubmit={this.handleSubmit.bind(this)}>
             <SmallText text="Login to ferry." />
               {usernameError}
-              <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER USERNAME" />
+              <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER EMAIL" />
               {passwordError}
               <FerryInput onChange={this.handlePassword.bind(this) } type="password" placeholder="ENTER PASSWORD" />
               <FerrySubmit onClick={this.handleSubmit.bind(this) } text="Login" />
@@ -105,5 +117,11 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (userInfo) => {
+      dispatch(addUserInformation(userInfo))
+    }
+  }
+}
+export default connect(null, mapDispatchToProps)(Login);

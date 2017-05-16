@@ -14,6 +14,10 @@ a {
 		width: 23%;
 		display: inline-block;
 	}
+	.auth.divider {
+		width: 18%;
+		display: inline-block;
+	}	
 	.Header {
 	    color: black;
 	    text-align: left;
@@ -86,6 +90,10 @@ a {
 
 
 @media (min-width: 1400px){
+	.auth.divier {
+		width: 60%;
+		display: inline-block;
+	}
 	.divider {
 		width: 73%;
 		display: inline-block;

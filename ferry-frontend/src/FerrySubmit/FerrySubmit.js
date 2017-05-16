@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import './FerrySubmit.css';
 import '../index.css';
@@ -11,6 +11,10 @@ class FerrySubmit extends Component {
       </div>
     );
   }
+}
+
+FerrySubmit.propTypes = {
+  onClick: PropTypes.func.isRequired
 }
 
 export default FerrySubmit;

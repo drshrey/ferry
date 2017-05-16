@@ -11,7 +11,7 @@ class Travel extends Component {
     return (
       <div className="Travel">
           <div className="main">
-              <Header loggedIn={true} />
+              <Header />
               <br/>
               <BigText text="Travel" />
           </div>

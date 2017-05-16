@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import './FerryInput.css';
 
@@ -10,6 +10,12 @@ class FerryInput extends Component {
       </div>
     );
   }
+}
+
+FerryInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string
 }
 
 export default FerryInput;

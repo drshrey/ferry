@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 
+/* redux related imports */
+import { connect } from 'react-redux';
+
+/* component related imports */
 import './SignUp.css';
 import FerryInput from '../FerryInput/FerryInput.js';
 import Header from '../Header/Header.js';
 import SmallText from '../SmallText/SmallText.js';
 import FerrySubmit from '../FerrySubmit/FerrySubmit.js';
+import { addUserInformation } from '../actions';
 
 import Error from '../Error/Error.js'
 
 import '../index.css';
+
 
 class SignUp extends Component {
   
@@ -42,6 +48,10 @@ class SignUp extends Component {
     this.setState({ password: e.target.value })
   }
 
+  sendUserInformation(userInformation){
+
+  }
+
   handleSubmit(e){
     // check if all fields are there
     // if not, send appropriate form errors
@@ -70,6 +80,7 @@ class SignUp extends Component {
 
     if(!this.state.hasFirstNameError && !this.state.hasLastNameError
       && !this.state.hasUsernameError && !this.state.hasPasswordError){
+        var self = this;
         fetch('http://localhost:8888/users', {
           method: 'POST',
           headers: {
@@ -81,7 +92,22 @@ class SignUp extends Component {
             password: this.state.password,
             first_name: this.state.firstName,
             last_name: this.state.lastName
-          })
+          })  
+        })
+        .then(function(response){
+          if( response.status >= 400 && response.status <= 500 ){
+            console.log(response)
+            self.setState({ errorState: true })
+          }
+          if( response.status >= 200 && response.status < 300 ){
+            console.log(self.props)
+            console.log(response)
+            response.json().then(json =>{
+              console.log(json)
+              self.props.loginUser(json)
+            })
+            self.props.router.push('/dashboard')
+          }
         })        
       }
   }
@@ -120,7 +146,7 @@ class SignUp extends Component {
               {lastNameError}
               <FerryInput onChange={this.handleLastName.bind(this) } type="text" placeholder="ENTER LAST NAME" />
               {usernameError}
-              <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER USERNAME" />
+              <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER EMAIL" />
               {passwordError}
               <FerryInput onChange={this.handlePassword.bind(this) } type="password" placeholder="ENTER PASSWORD" />
               <FerrySubmit onClick={this.handleSubmit.bind(this) } text="Sign Up" />
@@ -132,4 +158,14 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (userInfo) => {
+      console.log(userInfo)
+      dispatch(addUserInformation(userInfo))
+    }
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(SignUp);

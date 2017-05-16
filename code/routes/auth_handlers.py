@@ -1,5 +1,5 @@
 from tornado import gen
-
+import json
 from routes import datastore
 from routes.base import BaseHandler
 
@@ -48,24 +48,34 @@ class LogoutHandler(AuthenticatedHandler):
 
 
 class LoginHandler(AuthenticatedHandler):
-    def get(self):
-        self.render(
-            '../templates/login.html',
-            bad_login=False
-        )
 
     @gen.coroutine
     def post(self):
         email = self.get_body_argument('email')
         password = self.get_body_argument('password')
-        login = yield self.login(email, password)
-        if login:
-            self.redirect('/')
-        else:
-            self.render(
-                '../templates/login.html',
-                bad_login=True,
+
+        try:
+            cursor = yield self.db.execute(
+                '''
+                select * from users where email=%(email)s;
+                ''',{
+                    'email': email,
+                }
             )
+            user = yield self.serialize_user(cursor.fetchone())
+
+            if not user:
+                self.set_status(400)
+                self.finish()
+            else:
+                import pdb; pdb.set_trace()
+                if crypto.hash(password, email, user.get('salt')) == user.get('hash'):
+                    self.write(json.dumps(user))
+                    self.set_status(200)
+                    self.finish()            
+                else:
+                    self.set_status(400)
+                    self.finish()
 
 class SignupHandler(AuthenticatedHandler):
     def get(self):
