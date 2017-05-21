@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 /* component related imports */
+import { Button } from 'reactstrap';
 import './SignUp.css';
 import FerryInput from '../FerryInput/FerryInput.js';
 import Header from '../Header/Header.js';
@@ -56,30 +57,35 @@ class SignUp extends Component {
     // check if all fields are there
     // if not, send appropriate form errors
     e.preventDefault()
+    var error = false
     console.log('hello there')
     if(this.state.firstName == ''){
       this.setState({ hasFirstNameError: true })
+      error = true
     } else {
       this.setState({ hasFirstNameError: false })
     }
     if(this.state.lastName == ''){
       this.setState({ hasLastNameError: true })
+      error = true
     } else {
       this.setState({ hasLastNameError: false })
     }
     if(this.state.username == ''){
       this.setState({ hasUsernameError: true })
+      error = true
     } else {
       this.setState({ hasUsernameError: false })
     }
     if(this.state.password == ''){
       this.setState({ hasPasswordError: true })
+      error = true
     } else {
       this.setState({ hasPasswordError: false })
     }
-
-    if(!this.state.hasFirstNameError && !this.state.hasLastNameError
-      && !this.state.hasUsernameError && !this.state.hasPasswordError){
+    
+    
+    if(!error){
         var self = this;
         fetch('http://localhost:8888/users', {
           method: 'POST',
@@ -97,11 +103,12 @@ class SignUp extends Component {
         .then(function(response){
           if( response.status >= 400 && response.status <= 500 ){
             console.log(response)
+            response.text().then(text =>{
+              self.setState({ errMsg: text })
+            })
             self.setState({ errorState: true })
           }
           if( response.status >= 200 && response.status < 300 ){
-            console.log(self.props)
-            console.log(response)
             response.json().then(json =>{
               console.log(json)
               self.props.loginUser(json)
@@ -127,7 +134,7 @@ class SignUp extends Component {
     }
 
     if(this.state.hasUsernameError){
-      usernameError = <Error msg="Username is a required field." />
+      usernameError = <Error msg="Email is a required field." />
     }
 
     if(this.state.hasPasswordError){
@@ -140,17 +147,18 @@ class SignUp extends Component {
           <Header />
           <div className="signup-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
-              <SmallText text="Sign Up to join Ferry." />
-              {firstNameError}
+              <h4>Member sign up</h4>
               <FerryInput onChange={this.handleFirstName.bind(this) } type="text" placeholder="ENTER FIRST NAME" />
-              {lastNameError}
+              {firstNameError}              
               <FerryInput onChange={this.handleLastName.bind(this) } type="text" placeholder="ENTER LAST NAME" />
-              {usernameError}
+              {lastNameError}              
               <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER EMAIL" />
-              {passwordError}
+              {usernameError}
               <FerryInput onChange={this.handlePassword.bind(this) } type="password" placeholder="ENTER PASSWORD" />
-              <FerrySubmit onClick={this.handleSubmit.bind(this) } text="Sign Up" />
+              {passwordError}              
+              <Button color="success" className="signup-btn" onClick={this.handleSubmit.bind(this) }>Sign Up</Button>
             </form>
+            <Error msg={ this.state.errMsg } />          
           </div>
         </div>
       </div>
@@ -161,7 +169,6 @@ class SignUp extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (userInfo) => {
-      console.log(userInfo)
       dispatch(addUserInformation(userInfo))
     }
   }

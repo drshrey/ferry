@@ -7,7 +7,7 @@ class SmallLink extends Component {
   render() {
     return (
       <div className="SmallLink">
-        <Link to={this.props.href}> {this.props.text} </Link>
+        <Link className={this.props.className} onClick={this.props.onClick} to={this.props.href}> {this.props.text} </Link>
       </div>
     );
   }

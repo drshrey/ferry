@@ -1,0 +1,51 @@
+.UploadImage {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.Image {
+    border: 2px solid black;
+    width: 200px;
+    min-height: 100px;
+    background-color: lightgray;
+    border-radius: 4px;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid black;
+    width: 200px;
+}
+
+.btn-success {
+    background: #5cb85c;
+}
+
+.btn-file.btn-success:hover{
+    background: darkgreen;
+}
+
+.btn-file:hover{
+    background: lightgray;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.ActualImage {
+    width: 100%;
+}

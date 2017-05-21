@@ -1,101 +1,12 @@
-.Header {
-    color: black;
-    text-align: left;
-    height: 70px;
-    margin-top: 5px;
-}
-
 a {
 	text-decoration: none;
 }
 
-@media (min-width: 300px){
-	.divider {
-		width: 23%;
-		display: inline-block;
-	}
-	.auth.divider {
-		width: 18%;
-		display: inline-block;
-	}	
-	.Header {
-	    color: black;
-	    text-align: left;
-	    height: 50px;
-	    margin-top: 5px;
-	}		
+.BigLink {
+	margin-right: 15px;
 }
 
-@media (min-width: 500px){
-	.divider {
-		width: 29%;
-		display: inline-block;
-	}
-	.Header {
-	    color: black;
-	    text-align: left;
-	    height: 42px;
-	    margin-top: 5px;
-	}		
-}
-
-@media (min-width: 600px){
-	.divider {
-		width: 45%;
-		display: inline-block;
-	}
-}
-
-
-@media (min-width: 650px){
-	.divider {
-		width: 51%;
-		display: inline-block;
-	}
-	.Header {
-	    color: black;
-	    text-align: left;
-	    height: 50px;
-	    margin-top: 5px;
-	}	
-}
-
-@media (min-width: 800px){
-	.divider {
-		width: 61%;
-		display: inline-block;
-	}
-	.Header {
-	    color: black;
-	    text-align: left;
-	    height: 50px;
-	    margin-top: 5px;
-	}		
-}
-
-@media (min-width: 1000px){
-	.Header {
-	    color: black;
-	    text-align: left;
-	    height: 70px;
-	    margin-top: 5px;
-	}		
-}
-@media (min-width: 1200px){
-	.divider {
-		width: 70%;
-		display: inline-block;
-	}	
-}
-
-
-@media (min-width: 1400px){
-	.auth.divier {
-		width: 60%;
-		display: inline-block;
-	}
-	.divider {
-		width: 73%;
-		display: inline-block;
-	}	
+.HeaderImage {
+	height: 30px;
+	border-radius: 4px;
 }

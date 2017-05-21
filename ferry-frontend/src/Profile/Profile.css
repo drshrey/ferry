@@ -1,0 +1,37 @@
+.ProfilePage {
+    display: inline-block;
+    margin-left: 240px;
+}
+
+.ProfileForm {
+    display: inline-block;
+    margin-left: 9px;
+}
+
+.ProfilePicture{
+    margin-bottom: 30px;
+}
+
+.name-input {
+    display: inline-block;
+}
+
+.FerryInput {
+    width: 270px;
+}
+
+
+.Profile{
+    margin-bottom: 100px;
+}
+
+.update-account {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.Error.updateAccount {
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 320px;
+}

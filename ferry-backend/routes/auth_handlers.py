@@ -25,8 +25,9 @@ class LogoutHandler(AuthenticatedHandler):
 class LoginHandler(AuthenticatedHandler):
     @gen.coroutine
     def post(self):
-        email = self.get_body_argument('email')
-        password = self.get_body_argument('password')
+        body = json.loads(self.request.body.decode('utf-8'))        
+        email = body.get('email')
+        password = body.get('password')
 
         try:
             cursor = yield self.db.execute(
@@ -36,24 +37,27 @@ class LoginHandler(AuthenticatedHandler):
                     'email': email,
                 }
             )
-            user = yield self.serialize_user(cursor.fetchone())
+            user = cursor.fetchone()
 
             if not user:
+                self.write('Invalid username/ password.')
                 self.set_status(400)
                 self.finish()
             else:
+                user = yield self.serialize_user(user)
                 if crypto.hash(password, email, user.get('salt')) == user.get('hash'):
                     self.write(json.dumps(user))
                     self.set_status(200)
                     self.finish()            
                 else:
+                    self.write('Invalid username/ password.')
                     self.set_status(400)
                     self.finish()
-        except Excpetion as e:
+        except Exception as e:
             print(e)
+            self.write(e.__str__())            
             self.set_status(500)
             self.finish()
-            self.write(e.__str__())
 
 
 auth_handlers = [

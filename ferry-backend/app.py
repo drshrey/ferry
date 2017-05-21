@@ -32,6 +32,7 @@ if (PERSISTENT_PATH, COOKIE_SECRET, PORT, SETTINGS) is not None:
         [
             *trips_handlers,
             *users_handlers,
+            *auth_handlers,
             
             ## STATIC HANDLERS ##
             (r'/static/(.+)', tornado.web.StaticFileHandler, {'path': './static/'}),

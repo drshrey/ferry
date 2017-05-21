@@ -7,7 +7,7 @@ class BaseHandler(tornado.web.RequestHandler):
         print("setting headers!!!")
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "Content-Type, x-requested-with")
-        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        self.set_header('Access-Control-Allow-Methods', 'PUT, DELETE, POST, GET, OPTIONS')
     
     def options(self):
         self.set_status(204)
@@ -44,6 +44,12 @@ class BaseHandler(tornado.web.RequestHandler):
             })
             buyer = yield self.serialize_buyer(cursor.fetchone())
 
+        
+        profile_picture = user[8]
+        if user[8] is not None:
+            import base64
+            profile_picture = base64.b64encode(open(user[8], "rb").read()).decode('utf-8')
+
         return {
             'id': user[0],
             'email': user[1],
@@ -51,6 +57,7 @@ class BaseHandler(tornado.web.RequestHandler):
             'hash': user[3],
             'first_name': user[4],
             'last_name': user[5],
+            'profile_picture_url': profile_picture,            
             'traveller': traveller,
             'buyer': buyer
         }

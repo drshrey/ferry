@@ -4,11 +4,21 @@ import './FerryInput.css';
 
 class FerryInput extends Component {
   render() {
-    return (
-      <div>
-          <input onChange={this.props.onChange} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} />
-      </div>
-    );
+    if(this.props.label){
+      return (
+        <div>
+            <b>{this.props.label}</b>        <br/>
+            <input onChange={this.props.onChange} value={this.props.value} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} required={this.props.required} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+            <input onChange={this.props.onChange} value={this.props.value} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} required={this.props.required} />
+        </div>
+      );      
+    }
+
   }
 }
 

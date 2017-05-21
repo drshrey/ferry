@@ -7,13 +7,14 @@ class LogoLink extends Component {
     return (
       <div className="LogoLink">
       	<a href={this.props.href}>
-      	<img src={this.props.source}></img>
+      	<img className="LogoImage" src={this.props.source}></img><br/>
+      	{this.props.text}        
       	</a>
       	<br/>
-      	{this.props.text}
       </div>
     );
   }
 }
 
 export default LogoLink;
+

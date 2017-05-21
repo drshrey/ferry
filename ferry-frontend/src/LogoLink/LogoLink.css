@@ -6,9 +6,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		font-size: 16px;
-		character-spacing: 0.10em;
 		font-family: 'Avenir Next';
-		font-weight: 600;
 	}
 
 }
@@ -21,9 +19,11 @@
 		margin-bottom: 70px;
 		margin-right: auto;
 		font-size: 16px;
-		character-spacing: 0.10em;
 		font-family: 'Avenir Next';
-		font-weight: 600;
 	}
 
+}
+
+.LogoImage {
+	width: 150px;
 }

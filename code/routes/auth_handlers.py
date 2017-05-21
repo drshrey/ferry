@@ -54,30 +54,30 @@ class LoginHandler(AuthenticatedHandler):
         email = self.get_body_argument('email')
         password = self.get_body_argument('password')
 
-        try:
-            cursor = yield self.db.execute(
-                '''
-                select * from users where email=%(email)s;
-                ''',{
-                    'email': email,
-                }
-            )
-            user = yield self.serialize_user(cursor.fetchone())
+        cursor = yield self.db.execute(
+            '''
+            select * from users where email=%(email)s;
+            ''',{
+                'email': email,
+            }
+        )
+        user = yield self.serialize_user(cursor.fetchone())
 
-            if not user:
+        if not user:
+            self.set_status(400)
+            self.finish()
+        else:
+            if crypto.hash(password, email, user.get('salt')) == user.get('hash'):
+                self.write(json.dumps(user))
+                self.set_status(200)
+                self.finish()            
+            else:
                 self.set_status(400)
                 self.finish()
-            else:
-                import pdb; pdb.set_trace()
-                if crypto.hash(password, email, user.get('salt')) == user.get('hash'):
-                    self.write(json.dumps(user))
-                    self.set_status(200)
-                    self.finish()            
-                else:
-                    self.set_status(400)
-                    self.finish()
+
 
 class SignupHandler(AuthenticatedHandler):
+    @gen.coroutine
     def get(self):
         self.render(
             '../templates/signup.html',

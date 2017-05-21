@@ -8,7 +8,7 @@ class BigLink extends Component {
   render() {
     return (
       <div className="BigText BigLink">
-        <Link href={this.props.href}> {this.props.text} </Link>
+        <Link to={this.props.href}> {this.props.text} </Link>
       </div>
     );
   }

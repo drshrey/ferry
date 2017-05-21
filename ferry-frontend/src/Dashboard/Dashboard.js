@@ -11,10 +11,6 @@ import '../index.css';
 class Dashboard extends Component {
   constructor(props){
     super(props)
-    console.log(this.props)
-    if(!this.props.userInformation.email){
-      this.props.router.push('/login')
-    }
   }
   render() {
     return (

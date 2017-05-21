@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import addUserInformation from '../actions';
+import { addUserInformation } from '../actions';
 
+import { Button } from 'reactstrap';
 import './Login.css';
 import FerryInput from '../FerryInput/FerryInput.js';
 import Header from '../Header/Header.js';
@@ -10,8 +11,6 @@ import SmallText from '../SmallText/SmallText.js';
 import FerrySubmit from '../FerrySubmit/FerrySubmit.js';
 
 import Error from '../Error/Error.js'
-
-import '../index.css';
 
 class Login extends Component {
   
@@ -21,7 +20,8 @@ class Login extends Component {
       username: '',
       password: '',
       hasUsernameError: false,
-      hasPasswordError: false
+      hasPasswordError: false,
+      errMsg: ''
     }
   }
   
@@ -37,17 +37,23 @@ class Login extends Component {
     // check if all fields are there
     // if not, send appropriate form errors
     e.preventDefault()
-    console.log('hello there')
+    var self = this;    
 
+    let error = false
     if(this.state.username == ''){
       this.setState({ hasUsernameError: true })
+      error = true
     } else {
       this.setState({ hasUsernameError: false })
     }
     if(this.state.password == ''){
       this.setState({ hasPasswordError: true })
+      error = true
     } else {
       this.setState({ hasPasswordError: false })
+    }
+    if( error ){
+      return
     }
 
     if(!this.state.hasUsernameError && !this.state.hasPasswordError){
@@ -63,7 +69,11 @@ class Login extends Component {
           })
         })
         .then(function(response){
+          console.log(response)
           if( response.status >= 400 && response.status <= 500 ){
+            response.text().then(res =>{
+              self.setState({ errMsg: res})
+            })
             self.setState({ errorState: true })
           }
           if( response.status >= 200 && response.status < 300 ){
@@ -72,7 +82,7 @@ class Login extends Component {
             })
             self.props.router.push('/dashboard')
           }
-        })                
+        })              
       }
   }
 
@@ -96,7 +106,8 @@ class Login extends Component {
 
     if(this.state.hasPasswordError){
       passwordError = <Error msg="Password is a required field." />
-    }            
+    }           
+
 
     return (
       <div className="Login">
@@ -104,13 +115,14 @@ class Login extends Component {
           <Header />
           <div className="login-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
-            <SmallText text="Login to ferry." />
-              {usernameError}
-              <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER EMAIL" />
-              {passwordError}
-              <FerryInput onChange={this.handlePassword.bind(this) } type="password" placeholder="ENTER PASSWORD" />
-              <FerrySubmit onClick={this.handleSubmit.bind(this) } text="Login" />
+            <h4> Member Login </h4>
+              <FerryInput onChange={this.handleUsername.bind(this) } type="email" required={true} placeholder="ENTER EMAIL" />
+              {usernameError}              
+              <FerryInput onChange={this.handlePassword.bind(this) } type="password" required={true} placeholder="ENTER PASSWORD" />
+              {passwordError}              
+              <Button className="login-btn" color="success" onClick={this.handleSubmit.bind(this) }>Login</Button>
             </form>
+            <Error msg={this.state.errMsg} />
           </div>
         </div>
       </div>

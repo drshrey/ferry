@@ -4,4 +4,24 @@
     margin: -70px 0 0 -170px;
     top: 36%;
     left: 50%;
+    border: 1px solid black;
+    background: lightgoldenrodyellow;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 6px;
+}
+
+.main {
+    background: white;
+}
+
+.FerryInput {
+    text-align: center;
+}
+
+.login-btn {
+    margin-top: 5px;
+    width: 90%;
 }

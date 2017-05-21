@@ -56,7 +56,8 @@ create table users (
     first_name text not null,
     last_name text not null,
     traveller_id integer,
-    buyer_id integer
+    buyer_id integer,
+    profile_picture_url text
 );
 
 create table travellers (

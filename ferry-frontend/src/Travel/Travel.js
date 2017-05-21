@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import BigText from '../BigText/BigText.js';
 import Header from '../Header/Header.js';
-import './Travel.css';
 
 import '../index.css';
+import './Travel.css';
 
 class Travel extends Component {
   render() {

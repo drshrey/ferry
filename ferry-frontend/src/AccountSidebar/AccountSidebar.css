@@ -1,0 +1,12 @@
+.AccountSidebar {
+    display: inline-block;
+    margin-right: 80px;
+    position: absolute;
+    top: 120px;
+}
+
+@media (max-width: 600px) {
+  .AccountSidebar {
+    top: 215px;
+  }
+}
