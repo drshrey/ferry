@@ -39,8 +39,6 @@ class Header extends Component {
   }  
 
   render() {
-    console.log("HEADER")
-    console.log(this.props)
     if(this.props.userInformation.email){
       let profile = "Profile"
       if(this.props.userInformation.profile_picture_url){
@@ -61,23 +59,22 @@ class Header extends Component {
                     <NavItem>
                       <SmallLink href="/travel" text="Travel" />            
                     </NavItem>
-                    <NavItem>   
-                    <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown.bind(this)}>
-                      <DropdownToggle caret>
-                        { profile }
-                      </DropdownToggle>
-                      <DropdownMenu>
-                        <DropdownItem header>Signed in as {this.props.userInformation.first_name}</DropdownItem>
-                        <DropdownItem><Link to="/account">Account</Link></DropdownItem>
-                        <DropdownItem><Link to="/account/orders">Orders & Returns</Link></DropdownItem>
-                        <DropdownItem><Link to="/account/payment">Payment Settings</Link></DropdownItem>
-                        <DropdownItem><Link to="/account/travel">Traveller Settings</Link></DropdownItem>
-                        <DropdownItem><Link to="/account/invite">Invite</Link></DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>                                         
-                    </NavItem>
-                    <NavItem>
-                      <SmallLink href="#" onClick={this.logout.bind(this)} text="Logout" />
+                    <NavItem className="dropdown-nav">   
+                      <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown.bind(this)}>
+                        <DropdownToggle className="toggle" caret>
+                          { profile }
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem header>Signed in as {this.props.userInformation.first_name}</DropdownItem>
+                          <DropdownItem divider></DropdownItem>
+                          <DropdownItem><Link to="/account">Your Account</Link></DropdownItem>
+                          <DropdownItem><Link to="/account/orders">View Orders</Link></DropdownItem>
+                          <DropdownItem><Link to="/account/payment">Change Payment</Link></DropdownItem>
+                          <DropdownItem><Link to="/account/travel">Traveller Settings</Link></DropdownItem>
+                          <DropdownItem><Link to="/account/invite">Invite</Link></DropdownItem>
+                          <DropdownItem><a onClick={this.logout.bind(this)}>Logout</a></DropdownItem>                       
+                        </DropdownMenu>
+                      </Dropdown>                                         
                     </NavItem>
                   </Nav>
                 </Collapse>                

@@ -13,7 +13,7 @@ export default function (ComposedComponent) {
     componentWillMount() {
       if (!this.props.userInformation.email) {
         this.context.router.push('/');
-      }
+    }
     }
 
     componentWillUpdate(nextProps) {

@@ -21,11 +21,9 @@ class AccountOrders extends Component {
               <AccountSidebar highlight="orders" />
              <div className="Content">
                 <BigText text="Orders & Returns" />
-                <CardDeck>
                     <OrderListView />
                     <OrderListView />
                     <OrderListView />
-                </CardDeck>
             </div>
           </div>
       </div>

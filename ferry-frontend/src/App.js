@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import airplaneLogo from '../static/airplane.png';
 import houseLogo from '../static/backpack.png';
@@ -12,12 +13,19 @@ import SmallText from './SmallText/SmallText.js';
 import LogoLink from './LogoLink/LogoLink.js';
 
 class App extends Component {
+	
+	constructor(props){
+		super(props)
+	}
 
 	componentDidMount(){
 		document.title = "Ferry Homepage"
 	}
 	
   render() {
+		if(this.props.userInformation.email){
+			this.props.router.push('/dashboard')	
+		}
     return (
       <div className="App">
       	<div className="main">
@@ -37,4 +45,9 @@ class App extends Component {
   }
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return { userInformation: state.userInformation }
+}
+export default connect(mapStateToProps)(App);
+

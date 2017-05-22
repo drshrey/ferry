@@ -4,7 +4,7 @@
 }
 .Image {
     border: 2px solid black;
-    width: 200px;
+    width: 270px;
     min-height: 100px;
     background-color: lightgray;
     border-radius: 4px;
@@ -14,7 +14,7 @@
 .btn-file {
     position: relative;
     overflow: hidden;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     width: 200px;
 }
 
@@ -28,6 +28,7 @@
 
 .btn-file:hover{
     background: lightgray;
+    border: 1px solid darkgray;
 }
 
 .btn-file input[type=file] {

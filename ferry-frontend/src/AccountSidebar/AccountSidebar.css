@@ -10,3 +10,12 @@
     top: 215px;
   }
 }
+
+.profile-sidebar-link {
+    border-bottom: 1px solid black;
+}
+
+a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid black;
+}

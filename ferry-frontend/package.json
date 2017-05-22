@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "classnames": "^2.2.5",
     "express": "^4.15.2",
     "history": "^4.6.1",
     "morgan": "^1.8.1",
@@ -12,6 +13,7 @@
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
+    "react-plaid-link": "^0.1.7",
     "react-redux": "^5.0.4",
     "react-router": "^3.0.5",
     "react-router-redux": "^4.0.8",

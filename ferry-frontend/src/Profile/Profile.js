@@ -133,7 +133,7 @@ class Profile extends Component {
               <AccountSidebar highlight="profile" />
              <div className="Content">
                 <Row>
-                    <Col xs="9" sm="9">
+                    <Col xs="8" sm="8">
                         <BigText text="My Account" />
                         <h5>{this.props.userInformation.first_name + ' ' + this.props.userInformation.last_name}</h5>
                         <br/>

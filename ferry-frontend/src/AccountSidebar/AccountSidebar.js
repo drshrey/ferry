@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import SmallLink from '../SmallLink/SmallLink';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
+import classNames from 'classnames';
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 import '../BigText/BigText.css';
@@ -14,24 +16,30 @@ class AccountSidebar extends Component {
   }
 
   render() {
-    
+    console.log(this.state)
+    let profileClass = classNames({ 'profile-sidebar-link': location.pathname == '/account'});
+    let ordersClass = classNames({'profile-sidebar-link': location.pathname == '/account/orders'});
+    let paymentClass = classNames({'profile-sidebar-link': location.pathname == '/account/payment'});
+    let travelClass = classNames({'profile-sidebar-link': location.pathname == '/account/travel'});
+    let inviteClass = classNames({'profile-sidebar-link': location.pathname == '/account/invite'});
+
     return (
       <div className="AccountSidebar">
         <Nav vertical>
           <NavItem>
-            <SmallLink className="account-sidebar-link" text="Account" href="/account" />
+            <SmallLink className={profileClass} text="Account" href="/account" />
+          </NavItem>
+          <NavItem> 
+            <SmallLink className={ordersClass} text="Orders & Returns" href="/account/orders" />
           </NavItem>
           <NavItem>
-            <SmallLink className="orders-sidebar-link" text="Orders & Returns" href="/account/orders" />
+            <SmallLink className={paymentClass} text="Payment Settings" href="/account/payment" />
           </NavItem>
           <NavItem>
-            <SmallLink className="payment-sidebar-link" text="Payment Settings" href="/account/payment" />
+            <SmallLink className={travelClass} text="Traveller Settings" href="/account/travel" />
           </NavItem>
           <NavItem>
-            <SmallLink className="travel-sidebar-link" text="Traveller Settings" href="/account/travel" />
-          </NavItem>
-          <NavItem>
-              <SmallLink className="invite-sidebar-link" text="Invite" href="/account/invite" />
+              <SmallLink className={inviteClass} text="Invite" href="/account/invite" />
           </NavItem>
         </Nav>          
       </div>
