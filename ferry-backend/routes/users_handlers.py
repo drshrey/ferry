@@ -33,6 +33,7 @@ class AllUsersHandler(BaseHandler):
         last_name = body.get('last_name')
         email = body.get('email')
         user_id = body.get('id')
+
         try:
             cursor = yield self.db.execute(
                 '''

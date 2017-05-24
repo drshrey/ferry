@@ -24,11 +24,11 @@ class FinishLine extends Component {
               <br/>
                 <h4> Thanks for filling this out!
                 </h4>                  
-                <h5>We're going to send you a confirmation email (once you submit). 
+                <p>We're going to send you a confirmation email (once you submit). 
                     You can then start adding trips, and start receiving payments for your trip transactions.
                     Have fun and if you ever have any questions, you can always send us an email
                     at support@getferry.com.
-                </h5>
+                </p>
                 <FormText> You can read the Terms and Conditions <a href="#">here</a>. </FormText>
                 <br/>
                 

@@ -11,6 +11,7 @@ import Header from './Header/Header.js';
 import BigText from './BigText/BigText.js';
 import SmallText from './SmallText/SmallText.js';
 import LogoLink from './LogoLink/LogoLink.js';
+import Footer from './Footer/Footer.js';
 
 class App extends Component {
 	
@@ -39,7 +40,8 @@ class App extends Component {
 	        	<LogoLink href="/travel" source={airplaneLogo} text="I'm a traveller looking to make money on my next trip." />
 	        	<LogoLink href="/shop" source={houseLogo} text="I'm a shopper wanting to buy things I can't get locally." />
         	</div>
-        </div>
+				</div>
+				<Footer />				
       </div>
     );
   }

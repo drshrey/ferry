@@ -15,6 +15,7 @@ import { addUserInformation } from '../actions';
 import Error from '../Error/Error.js'
 
 import '../index.css';
+import './SignUp.css';
 
 
 class SignUp extends Component {
@@ -144,7 +145,6 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <div className="main">
-          <Header />
           <div className="signup-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
               <h4>Member sign up</h4>

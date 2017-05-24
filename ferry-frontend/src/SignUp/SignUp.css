@@ -1,4 +1,5 @@
-.SignUp {
+body.SignUp {
+    background: #0275d8;    
 }
 
 .signup-info {
@@ -8,12 +9,12 @@
     top: 36%;
     left: 50%;
     border: 1px solid black;
-    background: lightgoldenrodyellow;
+    background: white;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 50px;
     padding-bottom: 50px;
-    border-radius: 6px;
+    box-shadow: 1px 1px 1px black;
 }
 
 .signup-btn {

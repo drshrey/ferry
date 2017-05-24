@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import BigText from '../BigText/BigText';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 
 import MemberOfUSA from './MemberOfUSA';
@@ -122,6 +123,7 @@ class BecomeTraveller extends Component {
     let finishClass = classNames({'display-none': this.state.finishHide});      
 
     return (
+      <div>
       <div className="BecomeTraveller">
           <div className="main">
               <Header />
@@ -153,6 +155,8 @@ class BecomeTraveller extends Component {
               <FinishLine className={finishClass} 
                 onBackClick={() => this.onBackClick('FinishLine').bind(this)} />
             </div>
+        </div>
+        <Footer />        
     </div>
     );
   }

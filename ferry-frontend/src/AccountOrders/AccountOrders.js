@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import BigText from '../BigText/BigText';
 import Header from '../Header/Header';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
+import Footer from '../Footer/Footer';
 
 import OrderListView from '../OrderListView/OrderListView';
 import {CardDeck} from 'reactstrap';
@@ -26,6 +27,7 @@ class AccountOrders extends Component {
                     <OrderListView />
             </div>
           </div>
+          <Footer />
       </div>
     );
   }

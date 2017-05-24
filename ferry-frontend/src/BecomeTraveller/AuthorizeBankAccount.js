@@ -15,13 +15,42 @@ class AuthorizeBankAccount extends Component {
   constructor(props){
       super(props)
       this.state = {
-          percentageComplete: 0
+          percentageComplete: 0,
       }
   }
   handleOnSuccess(token, metadata) {
     // send token to client server
-    console.log(token)
-    console.log(metadata)
+
+    var self = this
+
+
+    fetch('http://localhost:8888/users', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: this.props.userInformation.id,
+        token: token
+      })
+    })
+    .then(function(response){
+      console.log(response)
+      if( response.status >= 400 && response.status <= 500 ){
+        response.text().then(res =>{
+          self.props.setAlert(res)
+        })
+        self.setState({ errorState: true })
+      }
+      if( response.status >= 200 && response.status < 300 ){
+        response.json().then(json =>{
+          self.props.loginUser(json)
+        })
+        self.props.router.push('/dashboard')
+      }
+    })   
+   
   }  
   render() {
     return (
@@ -36,14 +65,13 @@ class AuthorizeBankAccount extends Component {
                         background: 'white',
                         fontFamily: 'Avenir Next',
                         borderRadius: '4px',
-                        border: '1px solid darkgray'
+                        border: "1 px solid black"
                     }}
-                    className=""
                     publicKey="ecc1ae7f74f9fbd74967655f28f69f"
                     product="auth"
                     env="sandbox"
-                    clientName="59054aa74e95b85862b74c6d"
-                    onSuccess={this.handleOnSuccess}
+                    clientName="Ferry"
+                    onSuccess={this.handleOnSuccess.bind(this)}
                     />      
             </div>
             <br/>

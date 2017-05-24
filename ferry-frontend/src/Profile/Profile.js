@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import BigText from '../BigText/BigText';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import UploadImage from '../UploadImage/UploadImage';
 
@@ -181,6 +182,7 @@ class Profile extends Component {
                 </Row>
             </div>
           </div>
+          <Footer />
       </div>
     );
   }

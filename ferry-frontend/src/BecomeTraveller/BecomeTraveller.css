@@ -24,6 +24,7 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    height: 300px;
 }
 
 .MemberOfUSA {
@@ -31,10 +32,19 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    height: 300px;
 }
 
 .FinishLine{
     text-align: center;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
+
+.AuthorizeBankAccount {
+    height: 300px;
     width: 500px;
     margin-left: auto;
     margin-right: auto;

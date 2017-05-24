@@ -63,8 +63,10 @@ create table users (
 create table travellers (
     id serial primary key,
     street_address text not null,
+    public_token text not null,
     state text not null,
     zip_code text not null,
+    country text not null,
     is_verified boolean not null
 );
 

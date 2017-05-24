@@ -1,0 +1,26 @@
+.Footer {
+    margin-top: 100px;
+    background-color: #0275d8;
+    height: 100%;
+    padding-top: 20px;
+    padding-left: 6%;
+    padding-right: 6%;
+    font-family: 'Avenir Next';
+    color: white;
+}
+
+.footer-card {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: none;
+}
+
+.footer-link {
+    color: white;
+}
+
+.footer-word {
+    margin-left: 5px;
+    margin-right: 5px;
+}

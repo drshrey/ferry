@@ -5,16 +5,12 @@
     top: 36%;
     left: 50%;
     border: 1px solid black;
-    background: lightgoldenrodyellow;
+    background: white;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 50px;
     padding-bottom: 50px;
-    border-radius: 6px;
-}
-
-.main {
-    background: white;
+    box-shadow: 1px 1px 1px black;
 }
 
 .FerryInput {
@@ -24,4 +20,9 @@
 .login-btn {
     margin-top: 5px;
     width: 90%;
+}
+
+
+body.Login {
+    background: #0275d8;
 }

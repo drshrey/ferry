@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { addUserInformation } from '../actions';
 
 import { Button } from 'reactstrap';
-import './Login.css';
+
 import FerryInput from '../FerryInput/FerryInput.js';
 import Header from '../Header/Header.js';
 import SmallText from '../SmallText/SmallText.js';
 import FerrySubmit from '../FerrySubmit/FerrySubmit.js';
+import Footer from '../Footer/Footer.js';
 
 import Error from '../Error/Error.js'
+import './Login.css';
 
 class Login extends Component {
   
@@ -111,8 +113,7 @@ class Login extends Component {
 
     return (
       <div className="Login">
-        <div className="main">
-          <Header />
+        <div class="main">
           <div className="login-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
             <h4> Member Login </h4>
@@ -123,7 +124,7 @@ class Login extends Component {
               <Button className="login-btn" color="success" onClick={this.handleSubmit.bind(this) }>Login</Button>
             </form>
             <Error msg={this.state.errMsg} />
-          </div>
+          </div>          
         </div>
       </div>
     );
