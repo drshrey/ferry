@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import UploadImage from '../UploadImage/UploadImage';
-
+import { config } from '../config.json';
 import FerryInput from '../FerryInput/FerryInput';
 import FerrySubmit from '../FerrySubmit/FerrySubmit';
 import SmallText from '../SmallText/SmallText';
@@ -60,7 +60,7 @@ class Profile extends Component {
   handleUpdateAccount(e){
       if(this.state.first_name && this.state.last_name && this.state.email){
         var self = this;
-        fetch('http://localhost:8888/users', {
+        fetch(config.api_url + '/users', {
           method: 'PUT',
           headers: {
             'Accept': 'application/json',
@@ -107,6 +107,9 @@ class Profile extends Component {
   handleBecomeBuyer(){
       this.props.router.push('/become-buyer')
   }
+  handleTravellerSettings(){
+      this.props.router.push('/account/travel')
+  }
   render() {
     let color = ""
     let msg = ""
@@ -126,6 +129,21 @@ class Profile extends Component {
             {msg
         }</Alert>)
     }
+    // traveller
+    let traveller = (<Card block outline color="danger">
+        <CardTitle>Traveller</CardTitle>
+        <CardText>Not Validated.</CardText>
+        <br/>
+        <Button color="primary" onClick={this.handleBecomeTraveller.bind(this)} > Become a traveller. </Button>
+    </Card>)
+    if( this.props.userInformation.traveller){
+        traveller = (<Card block outline color="success">
+            <CardTitle>Traveller</CardTitle>
+            <CardText>Verified. You can add trips and carry items.</CardText>
+            <Button color="secondary" onClick={this.handleTravellerSettings.bind(this)} > View Settings. </Button>
+        </Card>)
+    }
+
     return (
       <div className="Profile">
           <div className="main">
@@ -134,7 +152,7 @@ class Profile extends Component {
               <AccountSidebar highlight="profile" />
              <div className="Content">
                 <Row>
-                    <Col xs="8" sm="8">
+                    <Col xs="9" sm="9">
                         <BigText text="My Account" />
                         <h5>{this.props.userInformation.first_name + ' ' + this.props.userInformation.last_name}</h5>
                         <br/>
@@ -157,14 +175,11 @@ class Profile extends Component {
                         <br/>
                         <Col>
                             <CardDeck>
-                            <Card block outline color="danger">
-                                <CardTitle>Traveller</CardTitle>
-                                <CardText>Not Validated.</CardText>
-                                <Button color="primary" onClick={this.handleBecomeTraveller.bind(this)} > Become a traveller. </Button>
-                            </Card>    
+                                { traveller }
                             <Card block outline color="danger">
                                 <CardTitle>Buyer</CardTitle>
                                 <CardText>Not Validated.</CardText>
+                                <br/>
                                 <Button color="primary" onClick={this.handleBecomeBuyer.bind(this)}> Become a buyer. </Button>
                             </Card>                       
                             </CardDeck>          

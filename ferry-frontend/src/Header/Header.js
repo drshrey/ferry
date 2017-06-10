@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
+import logo from '../../static/logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Header.css';
 
@@ -24,6 +25,7 @@ class Header extends Component {
 
   logout(){
     this.props.logoutUser()
+    window.location.href = '/'
   }
   
   toggleDropdown() {
@@ -44,21 +46,28 @@ class Header extends Component {
       if(this.props.userInformation.profile_picture_url){
           profile = <img className="HeaderImage" src={"data:image/png;base64," + this.props.userInformation.profile_picture_url}></img>
       }      
+      console.log('logo', logo)
       return (
           <div>
-
             <div>  
               <Navbar color="white" light toggleable>
+                <img style={{width: "50px", marginRight: "10px"}}src={logo}></img>
                 <BigLink href="/" text="Ferry" />
-                <NavbarToggler right onClick={this.toggle.bind(this)} />
+                <NavbarToggler   onClick={this.toggle.bind(this)} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <SmallLink href="/shop" text="Shop" />
+                      <SmallLink className="header-link" href="/shop" text="Shop" />
                     </NavItem>
                     <NavItem>
-                      <SmallLink href="/travel" text="Travel" />            
+                      <SmallLink className="header-link" href="/travel" text="Travel" />            
                     </NavItem>
+                    <NavItem>
+                      <SmallLink className="header-link" href="/travel" text="Messages" />            
+                    </NavItem>
+                    <NavItem>
+                      <SmallLink className="header-link" href="/travel" text="Help" />            
+                    </NavItem>                                        
                     <NavItem className="dropdown-nav">   
                       <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown.bind(this)}>
                         <DropdownToggle className="toggle" caret>
@@ -89,6 +98,7 @@ class Header extends Component {
 
             <div>  
               <Navbar color="white" light toggleable>
+                <img style={{width: "50px", marginRight: "10px"}}src={logo}></img>
                 <BigLink href="/" text="Ferry" />
                 <NavbarToggler right onClick={this.toggle.bind(this)} />
                 <Collapse isOpen={this.state.isOpen} navbar>

@@ -28,7 +28,7 @@ const Routes = (props) => (
     <Route path="/travel" component={RequireAuth(Travel)} />
     <Route path="/shop" component={Shop} />
     <Route path="/become-buyer" component={RequireAuth(BecomeBuyer)} />
-    <Route path="/become-traveller" component={RequireAuth(BecomeTraveller)} />
+    <Route path="/become-traveller" component={BecomeTraveller} />
     <Route path="/account" component={RequireAuth(Profile)} />
     <Route path="/account/orders" component={RequireAuth(AccountOrders)} />
     <Route path="/account/payment" component={RequireAuth(AccountPayment)} />

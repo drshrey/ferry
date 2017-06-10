@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import airplaneLogo from '../static/airplane.png';
-import houseLogo from '../static/backpack.png';
+import airplaneLogo from '../static/travel.svg';
+import houseLogo from '../static/shop.svg';
 
 import '../static/css/homepage.css';
 import './App.css';
@@ -12,6 +12,8 @@ import BigText from './BigText/BigText.js';
 import SmallText from './SmallText/SmallText.js';
 import LogoLink from './LogoLink/LogoLink.js';
 import Footer from './Footer/Footer.js';
+
+import { CardDeck } from 'reactstrap';
 
 class App extends Component {
 	
@@ -37,8 +39,10 @@ class App extends Component {
         	<br/>
         	<SmallText text="Get what you need. Where you need it." />
         	<div className="who-are-you">
-	        	<LogoLink href="/travel" source={airplaneLogo} text="I'm a traveller looking to make money on my next trip." />
-	        	<LogoLink href="/shop" source={houseLogo} text="I'm a shopper wanting to buy things I can't get locally." />
+						<CardDeck>
+							<LogoLink href="/travel" source={airplaneLogo} label="Travel" />
+							<LogoLink href="/shop" source={houseLogo} label="Shop" />
+						</CardDeck>
         	</div>
 				</div>
 				<Footer />				

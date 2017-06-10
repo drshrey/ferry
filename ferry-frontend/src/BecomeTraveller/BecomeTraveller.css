@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.progress-bar {
+    background-color: #961f47;
+}
+
 .travelForm{
     text-align: left;
     width: 700px;
@@ -12,6 +16,24 @@
 
 .member-next {
     margin-left: 2%;
+    background-color: #961f47;
+    color: white;
+    cursor: pointer;
+}
+
+.member-back {
+    background-color: #961f47;
+    color: white;
+    cursor: pointer;
+}
+
+.member-back:hover{
+   background-color: #961f47;
+}
+
+
+.member-next:hover{
+   background-color: #961f47;
 }
 
 .display-none {
@@ -39,7 +61,7 @@
     text-align: center;
     width: 500px;
     margin-left: auto;
-    margin-right: auto;
+    ymargin-right: auto;
     height: 300px;
 }
 
@@ -48,4 +70,35 @@
     width: 500px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.UserSignupt {
+    height: 300px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#country {
+    border: 2px solid #961f47;
+}
+
+.user-signup {
+    text-align: center;
+}
+
+.plaid-link {
+    font-family: 'Avenir Next';
+    border: 1px solid #2e315b;
+    background-color: #2e315b;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    border-radius: 4px;
+}
+
+.plaid-link:hover{
+    color: black;
 }

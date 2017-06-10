@@ -26,7 +26,7 @@ input, .Link, .btn, h4, h5, body {
 
 @media (min-width: 1000px) {
   .main {
-    margin-left: 70px;
-    margin-right: 70px;  
+    margin-left: 100px;
+    margin-right: 100px;  
   }
 }

@@ -12,76 +12,68 @@ import { Row, Col, Progress, Form, FormGroup, Label, Input, FormText, Button} fr
 import './BecomeTraveller.css';
 
 class AuthorizeBankAccount extends Component {
+
   constructor(props){
       super(props)
       this.state = {
           percentageComplete: 0,
       }
   }
+
   handleOnSuccess(token, metadata) {
-    // send token to client server
-
-    var self = this
-
-
-    fetch('http://localhost:8888/users', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: this.props.userInformation.id,
-        token: token
-      })
-    })
-    .then(function(response){
-      console.log(response)
-      if( response.status >= 400 && response.status <= 500 ){
-        response.text().then(res =>{
-          self.props.setAlert(res)
-        })
-        self.setState({ errorState: true })
-      }
-      if( response.status >= 200 && response.status < 300 ){
-        response.json().then(json =>{
-          self.props.loginUser(json)
-        })
-        self.props.router.push('/dashboard')
-      }
-    })   
-   
+    this.props.onPublicToken(token)
   }  
+
   render() {
-    return (
-      <div className={this.props.className}>
-          <div className="main AuthorizeBankAccount">
-              <br/>
+    let nextButton = <Button className="member-next" onClick={this.props.onNextClick} size="lg" disabled> Next </Button>
+    let token = (
+      <div>
                 <h4> How do you want to get paid?</h4>
+                <br/><br/>
                 <PlaidLink
                     buttonText="Validate Bank Account"
                     style={{
-                        color: 'black',
-                        background: 'white',
-                        fontFamily: 'Avenir Next',
-                        borderRadius: '4px',
-                        border: "1 px solid black"
+                      fontFamily: 'Avenir Next',
+                      border: "1px solid #2e315b",
+                      backgroundColor: "#2e315b",
+                      paddingLeft: "30px",
+                      paddingRight: "30px",
+                      paddingTop: "10px",
+                      paddingBottom: "10px",
+                      color: "white",
+                      borderRadius: "4px",
+                      cursor: "pointer"
                     }}
                     publicKey="ecc1ae7f74f9fbd74967655f28f69f"
                     product="auth"
                     env="sandbox"
                     clientName="Ferry"
                     onSuccess={this.handleOnSuccess.bind(this)}
-                    />      
+                    />        
+                    </div>
+    )
+    
+    
+    if(this.props.token != ""){
+      nextButton = <Button className="member-next" onClick={this.props.onNextClick} size="lg"> Next </Button>      
+      token = (
+        <div>
+          <h4> Awesome, your bank account is validated! You'll be able to receive instant payments for your trips now.</h4>
+        </div>
+      )  
+    }
+    return (
+      <div className={this.props.className}>
+          <div className="main AuthorizeBankAccount">
+              <br/>
+              { token }    
             </div>
-            <br/>
-            <br/>
             <Row>
             <Col sm={6}>
-             <Button className="member-back" onClick={this.props.onBackClick} size="lg" color="primary"> Back </Button>
+             <Button className="member-back" onClick={this.props.onBackClick} size="lg"> Back </Button>
             </Col>                
             <Col sm={6}>
-             <Button className="member-next" onClick={this.props.onNextClick} size="lg" color="primary"> Next </Button>
+             { nextButton }
             </Col>
             </Row>            
       </div>

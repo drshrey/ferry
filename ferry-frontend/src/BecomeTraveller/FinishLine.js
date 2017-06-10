@@ -49,7 +49,7 @@ class FinishLine extends Component {
              <Button className="member-back" onClick={this.props.onBackClick} size="lg" color="primary"> Back </Button>
             </Col>                
             <Col sm={6}>
-             <Button className="member-submit" onClick={this.props.onSubmitClick} size="lg" color="success"> Submit </Button>
+             <Button className="member-submit" onClick={this.props.onSubmit} size="lg" color="success"> Submit </Button>
             </Col>
             </Row>                
       </div>

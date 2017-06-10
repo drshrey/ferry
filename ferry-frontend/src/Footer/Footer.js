@@ -42,19 +42,18 @@ class Footer extends Component {
                 <Card className="footer-card" block>
                   <CardTitle>Shop</CardTitle>
                   <CardText>
-                    <Link className="footer-link" to="/">About Us</Link><br/>
-                    <Link className="footer-link" to="/">Press</Link><br/>
-                    <Link className="footer-link" to="/">Policies</Link><br/>
-                    <Link className="footer-link" to="/">Help</Link>
+                    <Link className="footer-link" to="/">Trust & Safety</Link><br/>
+                    <Link className="footer-link" to="/">Explore</Link><br/>
+                    <Link className="footer-link" to="/">FAQ</Link>
                   </CardText>
                 </Card>
                 <Card className="footer-card" block>
                   <CardTitle>Travel</CardTitle>
                   <CardText>
-                    <Link className="footer-link" to="/">About Us</Link><br/>
-                    <Link className="footer-link" to="/">Press</Link><br/>
-                    <Link className="footer-link" to="/">Policies</Link><br/>
-                    <Link className="footer-link" to="/">Help</Link>
+                    <Link className="footer-link" to="/">Why Travel</Link><br/>
+                    <Link className="footer-link" to="/">Standards</Link><br/>                    
+                    <Link className="footer-link" to="/">Responsible Travelling</Link><br/>
+                    <Link className="footer-link" to="/">Community Center</Link><br/>
                   </CardText>
                 </Card>                                                     
             </CardDeck>            

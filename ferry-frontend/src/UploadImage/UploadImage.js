@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Alert, Button, Row, Col } from 'reactstrap';
+import { config } from '../config.json';
 
 import { addUserInformation } from '../actions';
 
@@ -47,7 +48,7 @@ class UploadImage extends Component {
             dataURL = canvas.toDataURL();       
 
             var self = this
-            fetch('http://localhost:8888/users/profile_picture', {
+            fetch(config.api_url + '/users/profile_picture', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

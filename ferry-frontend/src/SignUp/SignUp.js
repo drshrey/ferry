@@ -12,6 +12,8 @@ import SmallText from '../SmallText/SmallText.js';
 import FerrySubmit from '../FerrySubmit/FerrySubmit.js';
 import { addUserInformation } from '../actions';
 
+import config from '../config.json';
+
 import Error from '../Error/Error.js'
 
 import '../index.css';
@@ -57,7 +59,8 @@ class SignUp extends Component {
   handleSubmit(e){
     // check if all fields are there
     // if not, send appropriate form errors
-    e.preventDefault()
+    if(e)
+      e.preventDefault()
     var error = false
     console.log('hello there')
     if(this.state.firstName == ''){
@@ -88,7 +91,7 @@ class SignUp extends Component {
     
     if(!error){
         var self = this;
-        fetch('http://localhost:8888/users', {
+        fetch(config.api_url + '/users', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -120,6 +123,12 @@ class SignUp extends Component {
       }
   }
 
+  onKeyPress(e){
+    if(e.key == 'Enter'){
+	this.handleSubmit()
+    }
+  }
+
   render() {
     var firstNameError = ""
     var lastNameError = ""
@@ -148,13 +157,21 @@ class SignUp extends Component {
           <div className="signup-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
               <h4>Member sign up</h4>
-              <FerryInput onChange={this.handleFirstName.bind(this) } type="text" placeholder="ENTER FIRST NAME" />
+              <FerryInput
+                onKeyPress={this.onKeyPress.bind(this)} 
+                onChange={this.handleFirstName.bind(this) } type="text" placeholder="ENTER FIRST NAME" />
               {firstNameError}              
-              <FerryInput onChange={this.handleLastName.bind(this) } type="text" placeholder="ENTER LAST NAME" />
+              <FerryInput 
+                onKeyPress={this.onKeyPress.bind(this)}
+                onChange={this.handleLastName.bind(this) } type="text" placeholder="ENTER LAST NAME" />
               {lastNameError}              
-              <FerryInput onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER EMAIL" />
+              <FerryInput 
+                onKeyPress={this.onKeyPress.bind(this)}
+                onChange={this.handleUsername.bind(this) } type="text" placeholder="ENTER EMAIL" />
               {usernameError}
-              <FerryInput onChange={this.handlePassword.bind(this) } type="password" placeholder="ENTER PASSWORD" />
+              <FerryInput 
+                onKeyPress={this.onKeyPress.bind(this)}
+                onChange={this.handlePassword.bind(this) } type="password" placeholder="ENTER PASSWORD" />
               {passwordError}              
               <Button color="success" className="signup-btn" onClick={this.handleSubmit.bind(this) }>Sign Up</Button>
             </form>

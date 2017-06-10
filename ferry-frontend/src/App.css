@@ -1,8 +1,8 @@
 
-
 .App-intro {
   font-size: large;
 }
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
@@ -12,8 +12,4 @@
 .who-are-you {
   text-align: center;
   margin-top: 100px;
-}
-
-body {
-  background-color: white;
 }

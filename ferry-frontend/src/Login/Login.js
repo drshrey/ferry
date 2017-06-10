@@ -10,6 +10,7 @@ import Header from '../Header/Header.js';
 import SmallText from '../SmallText/SmallText.js';
 import FerrySubmit from '../FerrySubmit/FerrySubmit.js';
 import Footer from '../Footer/Footer.js';
+import config from '../config.json';
 
 import Error from '../Error/Error.js'
 import './Login.css';
@@ -35,10 +36,18 @@ class Login extends Component {
     this.setState({ password: e.target.value })
   }
 
+  onKeyPress(e){
+    console.log(e.key)
+    if(e.key == 'Enter'){
+      this.handleSubmit()
+    }
+  }
+
   handleSubmit(e){
     // check if all fields are there
     // if not, send appropriate form errors
-    e.preventDefault()
+    if(e)
+      e.preventDefault()
     var self = this;    
 
     let error = false
@@ -59,7 +68,7 @@ class Login extends Component {
     }
 
     if(!this.state.hasUsernameError && !this.state.hasPasswordError){
-        fetch('http://localhost:8888/login', {
+        fetch(config.api_url + '/login', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -117,9 +126,13 @@ class Login extends Component {
           <div className="login-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
             <h4> Member Login </h4>
-              <FerryInput onChange={this.handleUsername.bind(this) } type="email" required={true} placeholder="ENTER EMAIL" />
+              <FerryInput 
+                onKeyPress={this.onKeyPress.bind(this)}
+                onChange={this.handleUsername.bind(this) } type="email" required={true} placeholder="ENTER EMAIL" />
               {usernameError}              
-              <FerryInput onChange={this.handlePassword.bind(this) } type="password" required={true} placeholder="ENTER PASSWORD" />
+              <FerryInput 
+                onKeyPress={this.onKeyPress.bind(this)}
+                onChange={this.handlePassword.bind(this) } type="password" required={true} placeholder="ENTER PASSWORD" />
               {passwordError}              
               <Button className="login-btn" color="success" onClick={this.handleSubmit.bind(this) }>Login</Button>
             </form>

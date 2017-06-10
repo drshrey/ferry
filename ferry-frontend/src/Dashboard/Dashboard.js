@@ -14,34 +14,29 @@ import '../index.css';
 class Dashboard extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      visible: true
+    }
   }
+
+  onDismiss(){
+    this.setState({ visible: !this.state.visible })
+  }
+
   render() {
+
+    let travelAlert = ''
+    if (! this.props.userInformation.traveller ) {
+        travelAlert = (<Alert color="success" className="alert" isOpen={this.state.visible} toggle={this.onDismiss.bind(this)}>We see that you're not a traveller yet. <Link to="become-traveller">Click here to become a traveller.</Link> Otherwise, dismiss this notification.
+                </Alert>);
+    }
     return (
       <div className="Dashboard">         
         <div className="main">
         <Header />        
         <br/>
-        <Alert color="success" className="alert">We see that you're not a traveller yet. <Link to="become-traveller">Click here to become a traveller.</Link> Otherwise, dismiss this notification.
-        </Alert>
-        <Alert color="warning" className="alert"><Link to="become-traveller">Click here to validate yourself as a buyer.</Link></Alert>
-        <Row>
-          <Col sm={9}>
-            <h2> Trip History: </h2>
-            <CardDeck>                                             
-            </CardDeck>
-          </Col>
-          <Col sm={3}>
-            <h2> Payout: </h2>
-            <Card block inverse color="primary">
-              <CardTitle>$5,670</CardTitle>
-              <CardText><b>2017 Year:</b> $3,182</CardText>              
-              <CardText><b>May:</b> $1,325</CardText>
-              <Button color="secondary">Learn More</Button>
-            </Card>            
-          </Col>          
-        </Row>
+        { travelAlert }
         <br/>
-        <br/><br/>
         <Row>       
           <Col sm={7}>
           <h2> Order History: </h2>   

@@ -1,3 +1,42 @@
 .Shop {
     
 }
+
+.shop {
+    font-size: 30px;
+    font-family: 'Avenir Next';
+    font-weight: 500;
+}
+
+.question { 
+    font-size: 20px;
+}
+
+#selectCountry {
+    width: 350px;
+    margin: auto;
+}
+
+.shop-col {
+    text-align: center;
+}
+
+.next {
+    background:#961f47;
+    border:2px solid #961f47;
+    border-radius:5px;
+    width:131px;
+    height:40px;
+    color: white;
+    cursor: pointer;
+}
+
+.next:hover {
+ background: #964f47;
+ border: 2px solid #964f47;
+ color: beige;
+}
+
+#selectCountry {
+    border: 2px solid #961f47;
+}

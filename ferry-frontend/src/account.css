@@ -1,4 +1,10 @@
 .Content {
     display: inline-block;
     margin-left: 240px;
+    width: 70%;
+    min-height: 400px;
+}
+
+.nav-item {
+    cursor: pointer;
 }
