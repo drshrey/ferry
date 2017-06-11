@@ -9,6 +9,7 @@ import BigText from '../BigText/BigText';
 
 import OrderListView from '../OrderListView/OrderListView';
 import config from '../config.json';
+
 import { Alert, Row, Col, Progress, Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap';
 
 import './BecomeTraveller.css';
@@ -50,6 +51,7 @@ class UserSignup extends Component {
   onSubmit(){
     var self = this
     console.log('submit')
+    console.log(config)
     if(this.state.email && this.state.password && this.state.first_name && this.state.checked){
       axios({
         method: 'post',
@@ -71,6 +73,7 @@ class UserSignup extends Component {
           window.scrollTo(0, 0);          
         })
         .catch(function(response){
+          console.log(response)
           let alert = <Alert>This email has been taken already. Try a different email.</Alert>
           self.setState({ alert: alert })
         })

@@ -34,8 +34,8 @@ class AuthorizeBankAccount extends Component {
                     buttonText="Validate Bank Account"
                     style={{
                       fontFamily: 'Avenir Next',
-                      border: "1px solid #2e315b",
-                      backgroundColor: "#2e315b",
+                      border: "1px solid #961f47",
+                      backgroundColor: "#961f47",
                       paddingLeft: "30px",
                       paddingRight: "30px",
                       paddingTop: "10px",

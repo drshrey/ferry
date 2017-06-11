@@ -26,6 +26,9 @@ class Travel extends Component {
               <br/>              
               <h3> Add a Trip </h3>
               <h3> Your Trips </h3>
+            <br/> 
+            <br/>
+            <br/>            
           </div>
           <Footer />
       </div>

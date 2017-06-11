@@ -108,3 +108,53 @@ button:hover{
 .text.title {
 	font-size: 40px;
 }
+
+.part2-app {
+	background-image: url("../../static/background.png");
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+}
+
+#introducing-ferry {
+	color: white;
+	font-family: "Roboto Mono", monospace;
+	font-size: 40px;
+}
+
+.inner-part2-app {
+	padding-left: 10%;
+	padding-top: 7%;
+	font-family: "Roboto Mono", monospace;
+	padding-right: 10%;
+	width: 100%;
+}
+
+#pitch {
+	color: white;
+	font-size: 24px;
+}
+
+.logo-pitch {
+	color: white;
+}
+
+.header-logo{
+	color: white;
+	margin-top: 40px;
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+
+#get-started {
+	text-align: center;
+	padding-left: 30%;
+	color: white;
+}
+
+.white {
+	color: white;
+	font-family: "Roboto Mono", monospace;
+	font-size: 13px;
+	width: 30px;
+}

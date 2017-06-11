@@ -28,7 +28,8 @@ class ShippingInformation extends Component {
                     <FormGroup>
                         <Col>
                             <Label for="streetAddress">Street Address</Label>
-                            <Input type="address" onChange={this.props.onStreetAddressChange} value={this.props.streetAddress} name="streetAddress" id="streetAddress" placeholder="123 Main St" />
+                            <Input 
+                            type="address" onChange={this.props.onStreetAddressChange} value={this.props.streetAddress} name="streetAddress" id="streetAddress" placeholder="123 Main St" />
                         </Col>                         
                     </FormGroup>         
                     <Form inline>

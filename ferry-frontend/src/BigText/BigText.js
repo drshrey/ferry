@@ -5,7 +5,7 @@ import './BigText.css';
 class BigText extends Component {
   render() {
     return (
-      <div className="BigText">
+      <div style={this.props.style} className="BigText">
         {this.props.text}
       </div>
     );

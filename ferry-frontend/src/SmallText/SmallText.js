@@ -5,7 +5,7 @@ import './SmallText.css';
 class SmallText extends Component {
   render() {
     return (
-      <div className="SmallText">
+      <div style={this.props.style} className="SmallText">
         {this.props.text}
       </div>
     );

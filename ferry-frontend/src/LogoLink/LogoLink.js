@@ -6,10 +6,10 @@ import './LogoLink.css';
 class LogoLink extends Component {
   render() {
     return (
-      <div className="LogoLink">
+      <div style={this.props.style} className="LogoLink">
             <a href={this.props.href}>
-            <img className="LogoImage" src={this.props.source}></img>
-            <span className="label"> {this.props.label} </span>
+            <img style={this.props.imageStyle} className={"LogoImage " + this.props.imageClassName} src={this.props.source}></img>
+            <span style={this.props.labelStyle} className={"label " + this.props.labelClassName}> {this.props.label} </span>
             </a>            
       </div>
     );

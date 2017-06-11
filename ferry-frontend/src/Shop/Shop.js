@@ -17,6 +17,10 @@ class Shop extends Component {
     }
   }
 
+  componentDidMount(){
+    window.scrollTo(0, 0);    
+  }
+
   onClick(){
     this.props.router.push('/catalog?country=' + this.state.country)
   }
@@ -47,9 +51,12 @@ class Shop extends Component {
                 </Input>
                 <br/>
                 <Button onClick={this.onClick.bind(this)} className="next">Next</Button>
-          
                 </Col>           
               </Row>              
+              <br/>
+              <br/>
+              <br/>
+              <br/>
           </div>
           <Footer />
       </div>

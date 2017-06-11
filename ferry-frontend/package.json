@@ -1,5 +1,4 @@
 {
-  "homepage": "drshrey.github.io/ferry",
   "name": "ferry-frontend",
   "version": "0.1.0",
   "private": true,
@@ -30,6 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "deploy" : "npm run build&&gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

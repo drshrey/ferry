@@ -284,7 +284,7 @@ class MemberOfUSA extends Component {
             </div>
             <Row>
             <Col>
-             <Button className="member-next" onClick={this.props.onNextClick} size="lg" color="primary"> Next </Button>
+             <Button className="member-next" onClick={this.props.onNextClick} size="lg"> Next </Button>
             </Col>
             </Row>            
       </div>

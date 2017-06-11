@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
-import logo from '../../static/logo.svg';
+import logo from '../static/logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Header.css';
 
@@ -51,7 +51,7 @@ class Header extends Component {
           <div>
             <div>  
               <Navbar color="white" light toggleable>
-                <img style={{width: "50px", marginRight: "10px"}}src={logo}></img>
+                <img style={{width: "6px", marginRight: "10px"}}src={logo}></img>
                 <BigLink href="/" text="Ferry" />
                 <NavbarToggler   onClick={this.toggle.bind(this)} />
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -89,7 +89,6 @@ class Header extends Component {
                 </Collapse>                
               </Navbar>                   
             </div>
-            <Line />        	            
           </div>
       )
     } else {
@@ -98,7 +97,7 @@ class Header extends Component {
 
             <div>  
               <Navbar color="white" light toggleable>
-                <img style={{width: "50px", marginRight: "10px"}}src={logo}></img>
+                <img style={{width: "60px", marginRight: "10px"}}src={logo}></img>
                 <BigLink href="/" text="Ferry" />
                 <NavbarToggler right onClick={this.toggle.bind(this)} />
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -107,13 +106,15 @@ class Header extends Component {
                       <SmallLink href="/login" text="Login" />
                     </NavItem>
                     <NavItem>
+                      <SmallLink href="#" text="En Espanõl" />
+                    </NavItem>                    
+                    <NavItem>
                       <SmallLink href="/signup" text="Sign Up" />            
                     </NavItem>
                   </Nav>
                 </Collapse>                
               </Navbar>                   
-            </div>
-            <Line />        	            
+            </div>            
           </div>        
       )
     }

@@ -9,7 +9,7 @@ class FerryInput extends Component {
         <div>
             <b>{this.props.label}</b>        <br/>
             <input 
-            onKeyPress={this.props.onKeyPress.bind(this)}
+            onKeyPress={this.props.onKeyPress}
             onChange={this.props.onChange} value={this.props.value} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} required={this.props.required} />
         </div>
       );
@@ -17,7 +17,7 @@ class FerryInput extends Component {
       return (
         <div>
             <input 
-            onKeyPress={this.props.onKeyPress.bind(this)}
+            onKeyPress={this.props.onKeyPress}
             onChange={this.props.onChange} value={this.props.value} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} required={this.props.required} />
         </div>
       );      

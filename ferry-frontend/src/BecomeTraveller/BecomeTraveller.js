@@ -13,7 +13,7 @@ import AuthorizeBankAccount from './AuthorizeBankAccount';
 import UserSignup from './UserSignup';
 import FinishLine from './FinishLine';
 import { addUserInformation } from '../actions';
-import { config } from '../config.json';
+import config from '../config.json';
 
 import OrderListView from '../OrderListView/OrderListView';
 import { Alert, Row, Col, Progress, Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap';
@@ -46,6 +46,10 @@ class BecomeTraveller extends Component {
           visible: false,
           publicToken: ''
       }
+  }
+
+  componentDidMount(){
+      window.scrollTo(0, 0);
   }
 
   onNextClick(component){
@@ -222,6 +226,9 @@ class BecomeTraveller extends Component {
                 incrementPercentage={this.incrementPercentage.bind(this)}
                 onNextClick={() => this.onNextClick('UserSignup').bind(this)} />
             </div>
+            <br/> 
+            <br/>
+            <br/>             
         </div>
         <Footer />        
     </div>
