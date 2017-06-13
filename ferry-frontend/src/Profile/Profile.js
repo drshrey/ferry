@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import UploadImage from '../UploadImage/UploadImage';
-import { config } from '../config.json';
+import config from '../config.json';
 import FerryInput from '../FerryInput/FerryInput';
 import FerrySubmit from '../FerrySubmit/FerrySubmit';
 import SmallText from '../SmallText/SmallText';
@@ -30,9 +30,25 @@ class Profile extends Component {
           new_password: '',
           visible: true,
           updateError: false,
-          updateSuccess: false
+          updateSuccess: false,
+          expiration_date: "",
+          cvc: "",
+          card_number: ""
       }
   }
+
+  handleCardNumber(e){
+      this.setState({ card_number: e.target.value })
+  }
+
+  handleExpirationDate(e){
+      this.setState({ expiration_date: e.target.value })
+  }
+
+  handleCvc(e){
+      this.setState({ cvc: e.target.value })
+  }
+                           
   componentDidMount(){
     document.title = "Ferry Profile"
   }
@@ -58,6 +74,7 @@ class Profile extends Component {
   }      
 
   handleUpdateAccount(e){
+      console.log(config)
       if(this.state.first_name && this.state.last_name && this.state.email){
         var self = this;
         fetch(config.api_url + '/users', {
@@ -156,45 +173,52 @@ class Profile extends Component {
                         <BigText text="My Account" />
                         <h5>{this.props.userInformation.first_name + ' ' + this.props.userInformation.last_name}</h5>
                         <br/>
-                        <h4> Basic Information </h4>
+                        <UploadImage />                        
+                        <br/>
+                        <h4 style={{fontFamily: "Roboto Mono", color: "#961f47"}}> Basic Information </h4>
                         <br/>
                         { alert }
                         <div className="name-input">
-                            <FerryInput onChange={this.handleFirstName.bind(this)} label="First Name" placeholder="Enter your first name" value={this.state.first_name} />
+                            <FerryInput style={{ width: "150px" }} onChange={this.handleFirstName.bind(this)} label="First Name" placeholder="Enter your first name" value={this.state.first_name} />
                         </div>
                         <div className="name-input">
                             <FerryInput onChange={this.handleLastName.bind(this)} label="Last Name" placeholder="Enter your last name" value={this.state.last_name} />
                         </div>                
-                        <FerryInput onChange={this.handleEmail.bind(this)} label="Email" type="email" placeholder="Enter your email address" value={this.state.email} />                
+                        <br/>
+                        <br/>
+                        <FerryInput 
+                            style={{ width: "430px" }}
+                            onChange={this.handleEmail.bind(this)} label="Email" type="email" placeholder="Enter your email address" value={this.state.email} />                
                         <div className="update-account">
-                            <Button onClick={this.handleUpdateAccount.bind(this)} color="secondary">Update account </Button>                         
+                            <Button style={{backgroundColor: "#961f47", color: "white", fontFamily: "Roboto Mono", width: "200px" }} onClick={this.handleUpdateAccount.bind(this)} color="secondary">Update account </Button>                         
                         </div>
                         <br/>
                         <br/>
-                        <h4> Account Type </h4>
+
+                        <h4 style={{fontFamily: "Roboto Mono", color: "#961f47"}}> Payment Settings </h4>
+                        <p style={{ fontFamily: "Roboto Mono", color:" #941f47"}}>
+                            Enter or update your payment information for all future orders.
+                        </p>
+                        <div className="name-input">
+                            <FerryInput style={{ width: "280px" }} onChange={this.handleCardNumber.bind(this)} label="Card Number" placeholder="Enter your debit/ credit card number." value={this.state.card_number} />
+                        </div>
+                        <div className="name-input">
+                            <FerryInput style={{ width: "140px"}} onChange={this.handleExpirationDate.bind(this)} label="Expiration Date" placeholder="05/19" value={this.state.expiration_date} />
+                        </div>    
+                        <div className="name-input">
+                            <FerryInput style={{ width: "80px"}} onChange={this.handleCvc.bind(this)} label="CVC" placeholder="CVC" value={this.state.cvc} />
+                        </div>   
+                        <div className="update-account">
+                            <Button style={{backgroundColor: "#961f47", color: "white", fontFamily: "Roboto Mono", width: "130px" }} onClick={this.handleUpdateAccount.bind(this)} color="secondary">Update </Button>                         
+                        </div>                                                     
+
                         <br/>
-                        <Col>
-                            <CardDeck>
-                                { traveller }
-                            <Card block outline color="danger">
-                                <CardTitle>Buyer</CardTitle>
-                                <CardText>Not Validated.</CardText>
-                                <br/>
-                                <Button color="primary" onClick={this.handleBecomeBuyer.bind(this)}> Become a buyer. </Button>
-                            </Card>                       
-                            </CardDeck>          
-                        </Col>
-                    </Col>
-                    <Col xs="3" sm="3">
                         <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/><br/>
-                        <UploadImage />
                     </Col>
                 </Row>
+        <br/>
+        <br/>
+        <br/>                
             </div>
           </div>
           <Footer />

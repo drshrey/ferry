@@ -4,6 +4,8 @@ import BigText from '../BigText/BigText.js';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
 import { Row, Col, Input, Button } from 'reactstrap';
+import axios from 'axios';
+import config from '../config';
 
 import '../index.css';
 import './Shop.css';
@@ -13,7 +15,7 @@ class Shop extends Component {
   constructor(props){
     super(props)
     this.state = {
-      country: 'liberia'
+      city: 'Liberia'
     }
   }
 
@@ -22,11 +24,20 @@ class Shop extends Component {
   }
 
   onClick(){
-    this.props.router.push('/catalog?country=' + this.state.country)
+    var self = this
+    // this.props.router.push('/catalog?country=' + this.state.country)
+    axios({
+      method: 'GET',
+      url: config.api_url + '/shop/' + this.state.city,
+    })
+      .then(function(response){
+        console.log(response)
+        self.props.router.push('/catalog?city=' + self.state.city)
+      })
   }
 
   onCountry(e){
-    this.setState({ country: e.target.value })
+    this.setState({ city: e.target.value })
   }
 
   render() {
@@ -42,12 +53,16 @@ class Shop extends Component {
                 <br/>
                 <div className="question">Where do you live?</div>
                 <br/>
-                <Input value={this.state.country} onSelect={this.onCountry.bind(this)} type="select" name="select" id="selectCountry">
-                  <option value="liberia">Liberia</option>
-                  <option value="tamarindo">Tamarindo</option>
-                  <option value="san jose">San Jose</option>
-                  <option value="limon">Limón</option>
-                  <option value="jaco">Jacó</option>
+                <Input 
+                  style={{ fontSize: "18px", fontFamily: "Roboto Mono"}}
+                  value={this.state.city}
+                  onChange={this.onCountry.bind(this)} 
+                  type="select" name="select" id="selectCountry">
+                  <option value="Liberia">Liberia</option>
+                  <option value="Tamarindo">Tamarindo</option>
+                  <option value="San Jose">San Jose</option>
+                  <option value="Limón">Limón</option>
+                  <option value="Jacó">Jacó</option>
                 </Input>
                 <br/>
                 <Button onClick={this.onClick.bind(this)} className="next">Next</Button>
@@ -57,6 +72,14 @@ class Shop extends Component {
               <br/>
               <br/>
               <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>                            
           </div>
           <Footer />
       </div>

@@ -51,7 +51,7 @@ class Header extends Component {
           <div>
             <div>  
               <Navbar color="white" light toggleable>
-                <img style={{width: "6px", marginRight: "10px"}}src={logo}></img>
+                <img style={{width: "60px", marginRight: "10px"}}src={logo}></img>
                 <BigLink href="/" text="Ferry" />
                 <NavbarToggler   onClick={this.toggle.bind(this)} />
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -73,14 +73,12 @@ class Header extends Component {
                         <DropdownToggle className="toggle" caret>
                           { profile }
                         </DropdownToggle>
-                        <DropdownMenu>
+                        <DropdownMenu style={{ fontFamily: "Roboto Mono"}}>
                           <DropdownItem header>Signed in as {this.props.userInformation.first_name}</DropdownItem>
                           <DropdownItem divider></DropdownItem>
                           <DropdownItem><Link to="/account">Your Account</Link></DropdownItem>
                           <DropdownItem><Link to="/account/orders">View Orders</Link></DropdownItem>
-                          <DropdownItem><Link to="/account/payment">Change Payment</Link></DropdownItem>
-                          <DropdownItem><Link to="/account/travel">Traveller Settings</Link></DropdownItem>
-                          <DropdownItem><Link to="/account/invite">Invite</Link></DropdownItem>
+                          <DropdownItem><Link to="/account/travel">Traveller Info</Link></DropdownItem>
                           <DropdownItem><a onClick={this.logout.bind(this)}>Logout</a></DropdownItem>                       
                         </DropdownMenu>
                       </Dropdown>                                         

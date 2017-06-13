@@ -1,7 +1,5 @@
 .Footer {
-    background-color: #961f47;
-    height: 100%;
-    padding-top: 20px;
+    height: 70px;
     padding-left: 6%;
     padding-right: 6%;
     font-family: 'Avenir Next';
@@ -16,7 +14,8 @@
 }
 
 .footer-link {
-    color: white;
+    color: black;
+    font-family: "Roboto Mono";
 }
 
 .footer-word {

@@ -58,7 +58,7 @@ class AuthorizeBankAccount extends Component {
       nextButton = <Button className="member-next" onClick={this.props.onNextClick} size="lg"> Next </Button>      
       token = (
         <div>
-          <h4> Awesome, your bank account is validated! You'll be able to receive instant payments for your trips now.</h4>
+          <span className="validated-message"> Awesome, your bank account is validated! You'll be able to receive instant payments for your trips now.</span>
         </div>
       )  
     }

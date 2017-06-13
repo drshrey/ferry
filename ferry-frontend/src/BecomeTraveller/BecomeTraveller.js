@@ -11,7 +11,7 @@ import MemberOfUSA from './MemberOfUSA';
 import ShippingInformation from './ShippingInformation';
 import AuthorizeBankAccount from './AuthorizeBankAccount';
 import UserSignup from './UserSignup';
-import FinishLine from './FinishLine';
+import ConfirmTerms from './ConfirmTerms';
 import { addUserInformation } from '../actions';
 import config from '../config.json';
 
@@ -25,7 +25,7 @@ const MEMBER_OF_USA_PERCENTAGE = 15
 const SHIPPING_PERCENTAGE = 30
 const AUTHORIZE_BANK_ACCOUNT_PERCENTAGE = 30
 const FINISH_PERCENTAGE = 15
-const USER_SIGN_UP_PERCENTAGE = 25
+const USER_SIGN_UP_PERCENTAGE = 0
 
 class BecomeTraveller extends Component {
   constructor(props){
@@ -45,6 +45,12 @@ class BecomeTraveller extends Component {
           alert: '',
           visible: false,
           publicToken: ''
+      }
+  }
+
+  componentWillMount(){
+      if(this.props.userInformation.traveller != null){
+          this.props.router.push('/travel')
       }
   }
 
@@ -152,7 +158,7 @@ class BecomeTraveller extends Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            user_id: response.user_id,
+            user_id: response.id,
             country: self.state.country,
             streetAddress: self.state.streetAddress,
             state: self.state.state,
@@ -185,6 +191,26 @@ class BecomeTraveller extends Component {
     if( this.props.userInformation.length > 0 ){
         signupClass = classNames({'display-none': true });
     }
+
+    let finalState = (
+        <UserSignup className={signupClass} 
+            onUser={this.onPublicToken.bind(this)}
+            createTraveller={this.onSubmit.bind(this)}
+            incrementPercentage={this.incrementPercentage.bind(this)}
+            onNextClick={() => this.onNextClick('UserSignup').bind(this)} />        
+    )
+    if(this.props.userInformation.email){
+        finalState = (
+            <ConfirmTerms className={signupClass}
+                createTraveller={this.onSubmit.bind(this)}
+                userInformation={this.props.userInformation}
+                incrementPercentage={this.incrementPercentage.bind(this)}
+                onNextClick={() => this.onNextClick('FinishLine').bind(this)}
+            />
+        )
+    }
+
+
     console.log(this.props)
     console.log(this.state)
     console.log(signupClass)
@@ -195,7 +221,7 @@ class BecomeTraveller extends Component {
               <Header />
               <br/>
               <BigText text="Become a Traveller" />
-            <div className="text-center">{this.state.percentageComplete}%</div>
+              <div className="text-center">{this.state.percentageComplete}%</div>
               <Progress value={this.state.percentageComplete} />              
               <br/>
               <Alert color="danger" isOpen={this.state.visible} toggle={this.onDismiss.bind(this)}>{this.state.alert}</Alert>
@@ -220,14 +246,14 @@ class BecomeTraveller extends Component {
                 token={this.state.publicToken}
                 onBackClick={() => this.onBackClick('AuthorizeBankAccount').bind(this)}
                 onNextClick={() => this.onNextClick('AuthorizeBankAccount').bind(this)} />                
-              <UserSignup className={signupClass} 
-                onUser={this.onPublicToken.bind(this)}
-                createTraveller={this.onSubmit.bind(this)}
-                incrementPercentage={this.incrementPercentage.bind(this)}
-                onNextClick={() => this.onNextClick('UserSignup').bind(this)} />
+                { finalState }
             </div>
             <br/> 
             <br/>
+            <br/> 
+            <br/>
+            <br/> 
+            <br/>                        
             <br/>             
         </div>
         <Footer />        

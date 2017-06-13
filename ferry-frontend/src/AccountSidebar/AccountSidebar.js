@@ -29,17 +29,13 @@ class AccountSidebar extends Component {
           <NavItem>
             <SmallLink className={profileClass} text="Account" href="/account" />
           </NavItem>
+          <br/>
           <NavItem> 
             <SmallLink className={ordersClass} text="Orders & Returns" href="/account/orders" />
           </NavItem>
+          <br/>
           <NavItem>
-            <SmallLink className={paymentClass} text="Payment Settings" href="/account/payment" />
-          </NavItem>
-          <NavItem>
-            <SmallLink className={travelClass} text="Traveller Settings" href="/account/travel" />
-          </NavItem>
-          <NavItem>
-              <SmallLink className={inviteClass} text="Invite" href="/account/invite" />
+            <SmallLink className={travelClass} text="Traveller Info" href="/account/travel" />
           </NavItem>
         </Nav>          
       </div>

@@ -16,6 +16,8 @@ import momoko
 from routes.trips_handlers import trips_handlers
 from routes.users_handlers import users_handlers
 from routes.auth_handlers import auth_handlers
+from routes.travellers_handlers import travellers_handlers
+from routes.shop_handlers import shop_handlers
 
 app_config = setup.tornado_app_config_setup()
 
@@ -33,7 +35,9 @@ if (PERSISTENT_PATH, COOKIE_SECRET, PORT, SETTINGS) is not None:
             *trips_handlers,
             *users_handlers,
             *auth_handlers,
-            
+            *travellers_handlers,
+            *shop_handlers,
+
             ## STATIC HANDLERS ##
             (r'/static/(.+)', tornado.web.StaticFileHandler, {'path': './static/'}),
             (r'/css/(.+)', tornado.web.StaticFileHandler, {'path': './static/css/'}),

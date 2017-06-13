@@ -102,3 +102,18 @@
 .plaid-link:hover{
     color: black;
 }
+
+.ConfirmTerms {
+    font-family: 'Roboto Mono';
+    color: #961f47;   
+}
+
+.confirm-terms-checkbox{
+    margin-left: 30px;
+}
+
+.validated-message {
+    font-family: "Roboto Mono";
+    color: #961f47;      
+    font-size: 25px;
+}

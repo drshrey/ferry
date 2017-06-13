@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'; 
 
+import Line from '../Line/Line';
 import { Input, Label, FormGroup, Col, Row, Button, CardTitle, CardText, Card, CardDeck } from 'reactstrap';
+
+import instagram from '../static/instagramlogo.png';
+import facebook from '../static/facebooklogo.png';
+import twitter from '../static/twitterlogo.png';
 
 import '../index.css';
 import './Footer.css';
@@ -10,68 +15,43 @@ class Footer extends Component {
   render() {
     return (
       <div className="Footer">
-        <Row>
-            <Col sm={4}>
-            <br/>
-                <Col sm={10}>
-                <FormGroup>
-                <Input type="select" name="select" id="languages">
-                    <option>English</option>
-                    <option>Spanish</option>
-                </Input>
-                </FormGroup>  
-                <FormGroup>    
-                <Input type="select" name="select" id="currency">
-                    <option>USD</option>
-                    <option>Pesos</option>
-                </Input>
-                </FormGroup>
-                </Col>                   
-            </Col>
-          <Col sm={8}>          
-        <CardDeck>            
-                <Card className="footer-card" block>
-                  <CardTitle>Ferry</CardTitle>
-                  <CardText>
-                    <Link className="footer-link" to="/">About Us</Link><br/>
-                    <Link className="footer-link" to="/">Press</Link><br/>
-                    <Link className="footer-link" to="/">Policies</Link><br/>
-                    <Link className="footer-link" to="/">Help</Link>
-                  </CardText>
-                </Card>
-                <Card className="footer-card" block>
-                  <CardTitle>Shop</CardTitle>
-                  <CardText>
-                    <Link className="footer-link" to="/">Trust & Safety</Link><br/>
-                    <Link className="footer-link" to="/">Explore</Link><br/>
-                    <Link className="footer-link" to="/">FAQ</Link>
-                  </CardText>
-                </Card>
-                <Card className="footer-card" block>
-                  <CardTitle>Travel</CardTitle>
-                  <CardText>
-                    <Link className="footer-link" to="/">Why Travel</Link><br/>
-                    <Link className="footer-link" to="/">Standards</Link><br/>                    
-                    <Link className="footer-link" to="/">Responsible Travelling</Link><br/>
-                    <Link className="footer-link" to="/">Community Center</Link><br/>
-                  </CardText>
-                </Card>                                                     
-            </CardDeck>            
-          </Col>          
-        </Row>
-        <hr/>
-        <Row>
-            <Col className="ferry-footer-header" sm={9}>
-                <h2> Ferry </h2>
-            </Col>
-            <Col sm={3}>
-                <span className="footer-word"><Link className="footer-link" href="#">Terms</Link></span>
-                <span className="footer-word"><Link className="footer-link" href="#">Privacy</Link></span>
-                <span className="footer-word"><Link className="footer-link" href="#">Site</Link></span>
-                <span className="footer-word"><Link className="footer-link" href="#">Map</Link></span>
-            </Col>
-        </Row>
+        <Line />
         <br/>
+        <Row>
+          <Col sm={2}>
+            <span className="footer-link">
+              <Link to="/about">About Us</Link>
+            </span>          
+          </Col>
+
+          <Col sm={2}>
+            <span className="footer-link">
+              <Link to="/careers">Careers</Link>
+            </span>
+          </Col>
+
+          <Col sm={5}>
+            <span className="footer-link">
+              <Link to="/trust">Trust & safety</Link>
+            </span>          
+          </Col>    
+          <Col sm={1}>
+            <span className="footer-link">
+              <img src={facebook}></img>
+            </span>          
+          </Col>    
+          <Col sm={1}>
+            <span className="footer-link">
+              <img src={twitter}></img>
+            </span>          
+          </Col>    
+          <Col sm={1}>
+            <span className="footer-link">
+              <img src={instagram}></img>
+            </span>          
+          </Col>                                                  
+        
+        </Row>
       </div>
     );
   }

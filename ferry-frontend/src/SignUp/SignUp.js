@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 /* redux related imports */
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router';
+
 /* component related imports */
 import { Button } from 'reactstrap';
 import './SignUp.css';
@@ -13,6 +15,7 @@ import FerrySubmit from '../FerrySubmit/FerrySubmit.js';
 import { addUserInformation } from '../actions';
 
 import config from '../config.json';
+import logo from '../static/logo.svg';
 
 import Error from '../Error/Error.js'
 
@@ -117,7 +120,7 @@ class SignUp extends Component {
               console.log(json)
               self.props.loginUser(json)
             })
-            self.props.router.push('/dashboard')
+            self.props.router.push('/shop')
           }
         })        
       }
@@ -153,7 +156,10 @@ class SignUp extends Component {
 
     return (
       <div className="SignUp">
-        <div className="main">
+        <div className="login-main">
+          <span className="login-header signup">
+            <img src={logo}></img>
+          </span>          
           <div className="signup-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
               <h4>Member sign up</h4>
@@ -177,6 +183,9 @@ class SignUp extends Component {
             </form>
             <Error msg={ this.state.errMsg } />          
           </div>
+          <div className="dont-have-an-account signup">
+            Already have an account? <Link to="/login">Login here.</Link>
+          </div>          
         </div>
       </div>
     );

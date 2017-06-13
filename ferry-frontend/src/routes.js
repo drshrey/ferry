@@ -18,18 +18,20 @@ import AccountInvite from './AccountInvite/AccountInvite';
 import BecomeBuyer from './BecomeBuyer/BecomeBuyer';
 import BecomeTraveller from './BecomeTraveller/BecomeTraveller';
 import Profile from './Profile/Profile';
+import Catalog from './Catalog/Catalog';
 
 const Routes = (props) => (
   <Router {...props}>
     <Route path="/" component={App} />
     <Route path="/login" component={Login} />
     <Route path="/signup" component={SignUp} />
-    <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+    {/*<Route path="/dashboard" component={RequireAuth(Dashboard)} />*/}
     <Route path="/travel" component={RequireAuth(Travel)} />
     <Route path="/shop" component={Shop} />
     <Route path="/become-buyer" component={RequireAuth(BecomeBuyer)} />
     <Route path="/become-traveller" component={BecomeTraveller} />
     <Route path="/account" component={RequireAuth(Profile)} />
+    <Route path="/catalog" component={Catalog} />
     <Route path="/account/orders" component={RequireAuth(AccountOrders)} />
     <Route path="/account/payment" component={RequireAuth(AccountPayment)} />
     <Route path="/account/travel" component={RequireAuth(AccountTravel)} />

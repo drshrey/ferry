@@ -1,0 +1,32 @@
+.shop-header {
+    color: #961f47;
+    font-size: 30px;
+}
+
+.progress-bar {
+    background-color: #961f47;
+}
+
+.match-traveller {
+    color: #961f47;
+    font-family: "Roboto Mono";
+}
+
+#selectCategory {
+    border: 2px solid #961f47;
+    width: 200px;
+}
+
+.featured-products{
+    color: #961f47;
+    font-family: "Roboto Mono";
+}
+
+.add-to-cart {
+    font-family: "Roboto Mono";
+    color: #961f47;
+    font-size: 12px;
+    border: 1px solid #961f47;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

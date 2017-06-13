@@ -1,10 +1,11 @@
-.Shop {
-    
+.Shop {  
+    font-family: "Roboto Mono";
 }
 
 .shop {
     font-size: 30px;
-    font-family: 'Avenir Next';
+    color: #961f47;
+    font-family: 'Roboto Mono';
     font-weight: 500;
 }
 
@@ -14,11 +15,6 @@
 
 #selectCountry {
     width: 350px;
-    margin: auto;
-}
-
-.shop-col {
-    text-align: center;
 }
 
 .next {

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { addUserInformation } from '../actions';
+import { Link } from 'react-router';
 
 import { Button } from 'reactstrap';
 
+import logo from '../static/logo.svg';
 import FerryInput from '../FerryInput/FerryInput.js';
 import Header from '../Header/Header.js';
 import SmallText from '../SmallText/SmallText.js';
@@ -90,8 +92,12 @@ class Login extends Component {
           if( response.status >= 200 && response.status < 300 ){
             response.json().then(json =>{
               self.props.loginUser(json)
+              if(json.traveller != null){
+                self.props.router.push('/travel')
+              } else {
+                self.props.router.push('/shop')
+              }              
             })
-            self.props.router.push('/dashboard')
           }
         })              
       }
@@ -122,7 +128,11 @@ class Login extends Component {
 
     return (
       <div className="Login">
-        <div class="main">
+        <div className="login-main">
+          <span className="login-header">
+            <img src={logo}></img> {' '}
+            <span id="login-header-label">Ferry</span>
+          </span>
           <div className="login-info">
             <form onSubmit={this.handleSubmit.bind(this)}>
             <h4> Member Login </h4>
@@ -138,6 +148,10 @@ class Login extends Component {
             </form>
             <Error msg={this.state.errMsg} />
           </div>          
+          <br/>
+          <div className="dont-have-an-account">
+            Don't have an account? <Link to="/signup">Sign up here.</Link>
+          </div>
         </div>
       </div>
     );

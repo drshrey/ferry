@@ -71,6 +71,9 @@ class Dashboard extends Component {
             </CardDeck>            
           </Col>           
         </Row>
+        <br/>
+        <br/>
+        <br/>
         </div>
         <Footer />
       </div>

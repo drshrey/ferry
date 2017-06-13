@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Alert, Button, Row, Col } from 'reactstrap';
-import { config } from '../config.json';
+import config from '../config.json';
 
 import { addUserInformation } from '../actions';
 
@@ -94,7 +94,7 @@ class UploadImage extends Component {
         alert = <Alert color={this.state.color} isOpen={this.state.visible} toggle={this.onDismiss.bind(this)}>{this.state.msg}</Alert>
     }
 
-    let btn = (<span className="btn btn-default btn-file">
+    let btn = (<span className="btn btn-default btn-file" style={{fontFamily: "Roboto Mono", color: "white", backgroundColor: "#961f47" }}>
                     Upload new picture <input onChange={this.handleImage.bind(this)} type="file" color="secondary" accept="image/*" />        
                 </span>)
     
@@ -116,8 +116,7 @@ class UploadImage extends Component {
     return (
       <div className="UploadImage">
         <Row>
-            <Col>
-                <b>Profile Picture</b>
+            <Col style={{fontFamily: "Roboto Mono"}}>
                 <div className="Image">
                     {image}
                 </div>

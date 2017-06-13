@@ -19,14 +19,16 @@ class BaseHandler(tornado.web.RequestHandler):
 
     @gen.coroutine
     def serialize_traveller(self, traveller):
-
-        return {
-            'id': traveller[0],
-            'street_address': traveller[1],
-            'state': traveller[2],
-            'zip_code': traveller[3],
-            'is_verified': traveller[4]
-        }
+        if traveller is not None:
+            return {
+                'id': traveller[0],
+                'street_address': traveller[1],
+                'state': traveller[2],
+                'zip_code': traveller[3],
+                'is_verified': traveller[4]
+            }
+        else:
+            return ''
     
     @gen.coroutine
     def serialize_user(self, user):
@@ -49,7 +51,7 @@ class BaseHandler(tornado.web.RequestHandler):
         if user[8] is not None:
             import base64
             profile_picture = base64.b64encode(open(user[8], "rb").read()).decode('utf-8')
-
+        
         return {
             'id': user[0],
             'email': user[1],
@@ -106,8 +108,11 @@ class BaseHandler(tornado.web.RequestHandler):
     
     @gen.coroutine
     def serialize_buyer(self, buyer):
-        return {
-            'id': buyer[0],
-            'stripe_customer_id': buyer[1],
-            'stripe_card_token': buyer[2]
-        }
+        if buyer:
+            return {
+                'id': buyer[0],
+                'stripe_customer_id': buyer[1],
+                'stripe_card_token': buyer[2]
+            }
+        else:
+            return ''

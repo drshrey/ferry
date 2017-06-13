@@ -13,6 +13,7 @@ class Travel extends Component {
     super(props)
   }
 
+
   render() {
     console.log(this)
     if( !this.props.userInformation.traveller){
@@ -21,7 +22,7 @@ class Travel extends Component {
 
     return (
       <div className="Travel">
-          <div className="main">
+          <div className="main TravelInner">
               <Header />            
               <br/>              
               <h3> Add a Trip </h3>

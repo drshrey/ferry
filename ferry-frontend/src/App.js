@@ -5,6 +5,10 @@ import houseLogo from './static/shop.svg';
 import airplaneLogo from './static/travel.svg';
 import background from './static/background.png';
 
+import meet from './static/meet.svg';
+import buy from './static/buy.svg';
+import fly from './static/fly.svg';
+
 import './static/css/homepage.css';
 import './App.css';
 
@@ -23,14 +27,21 @@ class App extends Component {
 		super(props)
 	}
 
+	componentWillMount(){
+		if(this.props.userInformation.email){
+			if(this.props.userInformation.traveller != null){
+				this.props.router.push('/travel')	
+			} else {
+				this.props.router.push('/shop')	
+			}
+		}
+	}
+
 	componentDidMount(){
 		document.title = "Ferry Homepage"
 	}
 	
   render() {
-		if(this.props.userInformation.email){
-			this.props.router.push('/dashboard')	
-		}
     return (
       <div className="App">
       	<div className="main">
@@ -69,19 +80,26 @@ class App extends Component {
 
 						<Row>
 							<Col sm={4}>
-									<div className="header-logo">Buy</div>
+									<div className="header-logo">
+										<img src={buy}></img>{' '}
+										Buy
+									</div>
 									<span className="logo-pitch">
 									We match you with someone headed your way to deliver select items from our shop.
 									</span>
 							</Col>
 							<Col sm={4}>
-									<div className="header-logo">Fly</div>
+									<div className="header-logo">
+										<img src={fly}></img>{' '}Fly
+									</div>
 									<span className="logo-pitch ">
 									Once you’ve made your order, we send it to your assigned traveller to bring to you.
 									</span>
 							</Col>
 							<Col sm={4}>
-									<div className="header-logo">Meet</div>
+									<div className="header-logo">
+										<img src={meet} style={{width: "30px"}}></img>{' '}Meet
+									</div>
 									<span className="logo-pitch">
 									Chat with the verified traveller to find a time to meet in your city and receive your package.
 									</span>

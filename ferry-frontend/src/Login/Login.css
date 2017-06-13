@@ -10,6 +10,7 @@
     padding-right: 30px;
     padding-top: 50px;
     padding-bottom: 50px;
+    border-radius: 4px;
     box-shadow: 1px 1px 1px black;
 }
 
@@ -23,6 +24,29 @@
 }
 
 
-body.Login {
-    background: #0275d8;
+.login-header {
+    position: absolute;
+    top: 27%;
+    left: 55%;
+    text-align: center;
+    margin: -70px 0 0 -170px;
+    font-size: 40px;
+    font-family: 'Roboto Mono';
+    color: white;
+}
+
+.login-main {
+    height: 800px;
+    background-color: lightcoral;
+}
+
+.dont-have-an-account {
+    position: absolute;
+    top: 82%;
+    left: 48%;
+    text-align: center;
+    margin: -70px 0 0 -170px;
+    font-size: 20px;
+    font-family: 'Roboto Mono';
+    color: white;   
 }
