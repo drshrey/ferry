@@ -1,0 +1,14 @@
+.About {
+    min-height: 650px;   
+}
+
+.AboutContent {
+    padding-left: 70px;
+    font-family: 'Roboto Mono';
+}
+
+
+.small-header {
+    font-size: 22px;
+    color:#2e315b;
+}

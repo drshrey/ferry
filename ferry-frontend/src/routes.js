@@ -9,6 +9,7 @@ import SignUp from './SignUp/SignUp';
 import Dashboard from './Dashboard/Dashboard';
 import Travel from './Travel/Travel';
 import Shop from './Shop/Shop';
+import About from './About/About';
 
 import RequireAuth from './require_auth';
 import AccountOrders from './AccountOrders/AccountOrders';
@@ -24,6 +25,7 @@ const Routes = (props) => (
   <Router {...props}>
     <Route path="/" component={App} />
     <Route path="/login" component={Login} />
+    <Route path="/about" component={About} />
     <Route path="/signup" component={SignUp} />
     {/*<Route path="/dashboard" component={RequireAuth(Dashboard)} />*/}
     <Route path="/travel" component={RequireAuth(Travel)} />

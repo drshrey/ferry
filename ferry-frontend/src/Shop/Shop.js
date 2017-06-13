@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import BigText from '../BigText/BigText.js';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
-import { Row, Col, Input, Button } from 'reactstrap';
+import { Alert, Row, Col, Input, Button } from 'reactstrap';
 import axios from 'axios';
 import config from '../config';
 
@@ -15,7 +16,8 @@ class Shop extends Component {
   constructor(props){
     super(props)
     this.state = {
-      city: 'Liberia'
+      city: 'Liberia',
+      alert: ''
     }
   }
 
@@ -27,12 +29,27 @@ class Shop extends Component {
     var self = this
     // this.props.router.push('/catalog?country=' + this.state.country)
     axios({
-      method: 'GET',
-      url: config.api_url + '/shop/' + this.state.city,
+      method: 'POST',
+      url: config.api_url + '/shop',
+      data: {
+        'city': self.state.city,
+        'traveller_id': self.props.userInformation.traveller.id
+      }
     })
       .then(function(response){
-        console.log(response)
-        self.props.router.push('/catalog?city=' + self.state.city)
+        let trips = response.data
+        
+        if(trips.length > 0){
+          self.props.router.push('/catalog?city=' + self.state.city)
+        } else {
+          let alert = (
+            <Alert color="danger">
+              There are currently no travellers going here.
+              We'll notify you as soon as someone is travelling here. Thanks!
+            </Alert>
+          )
+          self.setState({ alert: alert })
+        }
       })
   }
 
@@ -50,6 +67,7 @@ class Shop extends Component {
               <Row>       
                 <Col className="shop-col" sm={12}>
                 <div className="shop"> Shop </div>
+                { this.state.alert }
                 <br/>
                 <div className="question">Where do you live?</div>
                 <br/>
@@ -87,4 +105,10 @@ class Shop extends Component {
   }
 }
 
-export default Shop;
+const mapStateToProps = (state) => {
+  return {
+    userInformation: state.userInformation
+  }
+}
+
+export default connect(mapStateToProps)(Shop);
