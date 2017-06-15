@@ -1,3 +1,19 @@
 .TravelInner {
-    height: 650px;
+    min-height: 650px;
+    font-family: 'Roboto Mono';
+}
+
+#selectDestination {
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #961f47;
+    margin: 5px;
+    font-family: 'Avenir Next';
+    border-radius: 4px;
+    height: 44px;
+}
+
+.Trip {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

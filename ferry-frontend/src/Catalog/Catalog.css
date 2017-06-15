@@ -30,3 +30,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+#checkout-btn {
+    background-color: #961f47;
+    color: white;
+    font-size: 18px;
+    font-family: "Roboto Mono";
+    width: 180px;
+    height: 50px;   
+}

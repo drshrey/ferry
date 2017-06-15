@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 
-import userInformation from './reducers';
+import { userInformation, tripsInformation, cartInformation }  from './reducers';
 
 
 // Build the middleware for intercepting and dispatching navigation actions
@@ -21,6 +21,8 @@ const middleware = routerMiddleware(browserHistory, thunk)
 const store = createStore(
   combineReducers({
     userInformation,
+    tripsInformation,
+    cartInformation,
     router: routerReducer
   }),
   applyMiddleware(middleware)

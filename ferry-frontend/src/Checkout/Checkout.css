@@ -1,0 +1,47 @@
+.Checkout {
+    min-height: 650px;
+    font-family: "Roboto Mono";
+}
+
+.signup-copy {
+    color: #961f47;
+}
+
+.CheckoutUserSignup {
+    text-align: center;
+}
+
+#terms {
+    margin-right: 35px;
+}
+
+.display-none {
+    visibility: hidden;
+    display: none;
+}
+
+.FinalCheckoutStep {
+    text-align: center;
+}
+
+.Cart {
+    min-height: 500px;
+    width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #961f47;
+    border-radius: 4px;
+}
+
+.quantity-change-btn {
+    margin-left: 10px;
+    font-weight: 100;
+}
+
+#plus {
+    color: darkgreen;
+}
+
+#minus {
+    color: darkred;
+}

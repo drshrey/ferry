@@ -122,6 +122,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return { userInformation: state.userInformation }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     logoutUser: () => {

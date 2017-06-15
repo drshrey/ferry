@@ -70,6 +70,7 @@ class Login extends Component {
     }
 
     if(!this.state.hasUsernameError && !this.state.hasPasswordError){
+
         fetch(config.api_url + '/login', {
           method: 'POST',
           headers: {
@@ -144,7 +145,7 @@ class Login extends Component {
                 onKeyPress={this.onKeyPress.bind(this)}
                 onChange={this.handlePassword.bind(this) } type="password" required={true} placeholder="ENTER PASSWORD" />
               {passwordError}              
-              <Button className="login-btn" color="success" onClick={this.handleSubmit.bind(this) }>Login</Button>
+              <Button className="login-btn" dataLoadingText="Loading..." color="success" onClick={this.handleSubmit.bind(this) }>Login</Button>
             </form>
             <Error msg={this.state.errMsg} />
           </div>          

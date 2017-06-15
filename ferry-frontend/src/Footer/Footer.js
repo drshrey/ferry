@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 import Line from '../Line/Line';
 import { Input, Label, FormGroup, Col, Row, Button, CardTitle, CardText, Card, CardDeck } from 'reactstrap';
 
-import instagram from '../static/instagramlogo.png';
-import facebook from '../static/facebooklogo.png';
-import twitter from '../static/twitterlogo.png';
+import instagram from '../static/instagram.svg';
+import facebook from '../static/facebook.svg';
+import twitter from '../static/twitter.svg';
 
 import '../index.css';
 import './Footer.css';

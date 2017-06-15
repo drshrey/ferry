@@ -80,7 +80,10 @@ create table trips (
     id serial primary key,
     traveller_id integer not null,
     arrival_date date not null,
-    destination_city_id integer not null
+    destination_city_id integer not null,
+    departure_date date not null,
+    status integer not null,
+    size integer not null
 );
 
 create table orders (

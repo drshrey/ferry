@@ -102,9 +102,8 @@ class About extends Component {
                     <Col sm={11}>
                         <div className="small-header"> Drop-Off </div>
                         <br/>
-                        At least a week before your trip, you’ll receive a package 
-                        from Amazon with everything you need to pack. We’ll 
-                        also send you a reminder text to pack your bags!
+                        Coordinate a drop-off location through our 
+                        simple chat interface and once you’re confirmed, get paid!
                     </Col>                           
                 </Row>
                 

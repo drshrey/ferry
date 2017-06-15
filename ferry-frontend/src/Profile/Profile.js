@@ -169,7 +169,7 @@ class Profile extends Component {
               <AccountSidebar highlight="profile" />
              <div className="Content">
                 <Row>
-                    <Col xs="9" sm="9">
+                    <Col xs="<12></12>" sm="12">
                         <BigText text="My Account" />
                         <h5>{this.props.userInformation.first_name + ' ' + this.props.userInformation.last_name}</h5>
                         <br/>
@@ -190,7 +190,7 @@ class Profile extends Component {
                             style={{ width: "430px" }}
                             onChange={this.handleEmail.bind(this)} label="Email" type="email" placeholder="Enter your email address" value={this.state.email} />                
                         <div className="update-account">
-                            <Button style={{backgroundColor: "#961f47", color: "white", fontFamily: "Roboto Mono", width: "200px" }} onClick={this.handleUpdateAccount.bind(this)} color="secondary">Update account </Button>                         
+                            <Button style={{backgroundColor: "#961f47", color: "white", fontFamily: "Roboto Mono", width: "130px" }} onClick={this.handleUpdateAccount.bind(this)} color="secondary">Update </Button>                         
                         </div>
                         <br/>
                         <br/>

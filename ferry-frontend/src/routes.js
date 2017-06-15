@@ -20,6 +20,7 @@ import BecomeBuyer from './BecomeBuyer/BecomeBuyer';
 import BecomeTraveller from './BecomeTraveller/BecomeTraveller';
 import Profile from './Profile/Profile';
 import Catalog from './Catalog/Catalog';
+import Checkout from './Checkout/Checkout';
 
 const Routes = (props) => (
   <Router {...props}>
@@ -34,6 +35,7 @@ const Routes = (props) => (
     <Route path="/become-traveller" component={BecomeTraveller} />
     <Route path="/account" component={RequireAuth(Profile)} />
     <Route path="/catalog" component={Catalog} />
+    <Route path="/checkout" component={Checkout} />
     <Route path="/account/orders" component={RequireAuth(AccountOrders)} />
     <Route path="/account/payment" component={RequireAuth(AccountPayment)} />
     <Route path="/account/travel" component={RequireAuth(AccountTravel)} />
