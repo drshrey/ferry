@@ -1,4 +1,6 @@
-import { ADD_USER_INFORMATION, LOGOUT, ADD_TRIPS, ADD_CART, SET_CART_FILLED, SET_MAX_FILLED } from './actions'
+import { ADD_USER_INFORMATION, LOGOUT, 
+         ADD_TRIPS, ADD_CART, SET_CART_FILLED, 
+         SET_MAX_FILLED, SET_TRIP } from './actions'
 
 
 export function userInformation(state = {}, action) {
@@ -22,6 +24,10 @@ export function tripsInformation(state = initialTripsState, action) {
       return Object.assign({}, state, {
           trips: action.trips
       })      
+    case SET_TRIP:
+      return Object.assign({}, state, {
+          selected_trip: action.selected_trip
+      })
     default:
       return state
   }

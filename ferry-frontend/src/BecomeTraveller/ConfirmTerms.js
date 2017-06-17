@@ -31,7 +31,7 @@ class ConfirmTerms extends Component {
   onSubmit(){
     var self = this      
     if(this.state.checked){
-        let alert = <Alert color="success">Successfully signed up! You are now an official traveller in Ferry. <Link to="/travel/getting-started">Click here to learn how to start earning money on your trips.</Link></Alert>
+        let alert = <Alert color="success">Successfully signed up! You are now an official traveller in Ferry. <Link to="/getting-started/travel">Click here to learn how to start earning money on your trips.</Link></Alert>
         self.setState({ alert: alert, formShow: false })            
         self.props.incrementPercentage(25)            
         self.props.createTraveller(self.props.userInformation)             

@@ -62,24 +62,24 @@ class Header extends Component {
                     <NavItem>
                       <SmallLink className="header-link" href="/travel" text="Travel" />            
                     </NavItem>
-                    <NavItem>
+                    {/*<NavItem>
                       <SmallLink className="header-link" href="/travel" text="Messages" />            
-                    </NavItem>
+                    </NavItem>*/}
                     <NavItem>
                       <SmallLink className="header-link" href="/travel" text="Help" />            
                     </NavItem>                                        
                     <NavItem className="dropdown-nav">   
                       <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown.bind(this)}>
-                        <DropdownToggle className="toggle" caret>
+                        <DropdownToggle className="toggle" style={{fontFamily: "Roboto Mono"}} caret>
                           { profile }
                         </DropdownToggle>
                         <DropdownMenu style={{ fontFamily: "Roboto Mono"}}>
-                          <DropdownItem header>Signed in as {this.props.userInformation.first_name}</DropdownItem>
+                          <DropdownItem style={{fontFamily: "Roboto Mono"}} header>Signed in as {this.props.userInformation.first_name}</DropdownItem>
                           <DropdownItem divider></DropdownItem>
-                          <DropdownItem><Link to="/account">Your Account</Link></DropdownItem>
-                          <DropdownItem><Link to="/account/orders">View Orders</Link></DropdownItem>
-                          <DropdownItem><Link to="/account/travel">Traveller Info</Link></DropdownItem>
-                          <DropdownItem><a onClick={this.logout.bind(this)}>Logout</a></DropdownItem>                       
+                          <DropdownItem style={{fontFamily: "Roboto Mono"}}><Link to="/account">Your Account</Link></DropdownItem>
+                          <DropdownItem style={{fontFamily: "Roboto Mono"}}><Link to="/account/orders">View Orders</Link></DropdownItem>
+                          <DropdownItem style={{fontFamily: "Roboto Mono"}}><Link to="/account/travel">Traveller Info</Link></DropdownItem>
+                          <DropdownItem style={{fontFamily: "Roboto Mono"}}><a onClick={this.logout.bind(this)}>Logout</a></DropdownItem>                       
                         </DropdownMenu>
                       </Dropdown>                                         
                     </NavItem>

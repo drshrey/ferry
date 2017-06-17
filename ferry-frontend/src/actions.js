@@ -8,6 +8,7 @@ export const ADD_TRIPS = 'ADD_TRIPS'
 export const ADD_CART = 'ADD_CART'
 export const SET_CART_FILLED = 'SET_CART_FILLED'
 export const SET_MAX_FILLED = 'SET_MAX_FILLED'
+export const SET_TRIP = 'SET_TRIP'
 
 /*
  * action creators
@@ -37,4 +38,8 @@ export function setCartFilled(cartFilled){
 
 export function setMaxFilled(maxFilled){
   return { type: SET_MAX_FILLED, maxFilled }
+}
+
+export function setTrip(selected_trip){
+  return { type: SET_TRIP, selected_trip }
 }

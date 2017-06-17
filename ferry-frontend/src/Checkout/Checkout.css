@@ -26,12 +26,20 @@
 
 .Cart {
     min-height: 500px;
-    width: 400px;
+    min-width: 385px;
     margin: auto;
     padding: 20px;
     border: 1px solid #961f47;
     border-radius: 4px;
 }
+
+.Receipt {
+    min-height: 500px;
+    width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
 
 .quantity-change-btn {
     margin-left: 10px;

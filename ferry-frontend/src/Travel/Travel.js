@@ -153,6 +153,7 @@ class Travel extends Component {
                   know as soon as we find a match for it.
               </Alert>)
               self.setState({ alert : alert })      
+              window.location.href = '/travel'
             })
 
         }

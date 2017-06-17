@@ -14,6 +14,9 @@ from tornado import web
 import psycopg2
 import momoko
 import json
+import stripe
+import decimal  
+import requests 
 
 
 trip_statuses = {
@@ -36,6 +39,12 @@ match_statuses = {
     'completed': 2,
     'error': -1
 }
+reverse_match_statuses = {
+    0: 'confirmed',
+    1: 'in transit',
+    2: 'completed',
+    -1: 'error'
+}
 
 #####
 
@@ -57,12 +66,25 @@ reverse_sizes = {
 
 from datetime import date, datetime
 
+
+def send_simple_message(msg, buyer_name, traveller_name, buyer_email, traveller_email, domain_name="getferry.com"):
+    return requests.post(
+        "https://api.mailgun.net/v3/{domain_name}/messages".format(domain_name=domain_name),
+        auth=("api", "key-97cdbf7ad4918e992b345eb7070aff12"),
+        data={"from": "{buyer_name} <support@{domain_name}>".format(buyer_name=buyer_name, domain_name=domain_name),
+              "to": [traveller_email, buyer_email],
+              "subject": "{buyer_name} and {traveller_name} via Ferry".format(buyer_name=buyer_name, traveller_name=traveller_name),
+              "text": "Please use this email thread to figure out logistics and further ways to communicate. {buyer_name} said: {msg}".format(buyer_name=buyer_name, msg=msg)})
+
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
 
     if isinstance(obj, (datetime, date)):
         serial = obj.isoformat()
         return serial
+    if isinstance(obj, decimal.Decimal):
+        return float(obj)
+      
     raise TypeError ("Type %s not serializable" % type(obj))
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -80,6 +102,56 @@ class BaseHandler(tornado.web.RequestHandler):
     @property
     def db(self):
         return self.application.db
+
+    @gen.coroutine
+    def serialize_item(self, item):
+        if item is not None:
+
+            return {
+                'id': item[0],
+                'title': item[1],
+                'category': item[2],
+                'description': item[3],
+                'price': item[4],
+                'filepath': item[5],
+                'url': item[6],
+                'status': item[7],
+                'size': item[8]
+            }
+
+    @gen.coroutine
+    def serialize_order(self, order):
+        if order is not None:
+            cursor = yield self.db.execute(
+                '''
+                select * from items where id=%(id)s;
+                ''', { 'id': order[1] }
+            )
+            item = yield self.serialize_item(cursor.fetchone())
+
+            cursor = yield self.db.execute(
+                '''
+                select * from buyers where id=%(id)s;
+                ''', { 'id': order[2] }
+            )
+            buyer = yield self.serialize_buyer(cursor.fetchone())
+
+            cursor = yield self.db.execute(
+                '''
+                select * from matches where id=%(id)s;
+                ''', { 'id': order[3] }
+            )
+            match = yield self.serialize_match(cursor.fetchone())                        
+
+            return {
+                'id': order[0],
+                'item': item,
+                'buyer': buyer,
+                'match': match
+            }
+        else:
+            return ''
+
 
     @gen.coroutine
     def serialize_traveller(self, traveller):
@@ -146,8 +218,9 @@ class BaseHandler(tornado.web.RequestHandler):
 
         return {
             'id': match[0],
-            'traveller_id': trip,
-            'status': match[2]
+            'trip': trip,
+            'status': reverse_match_statuses.get(match[2]),
+            'first_msg': match[3]
         }   
 
     @gen.coroutine
@@ -321,6 +394,211 @@ class TripsHandler(BaseHandler):
             self.finish(json.dumps(created_trip, default=json_serial))
 
 
+class BuyersHandler(BaseHandler):
+
+    # create buyer i.e. create Stripe objects and 
+    ## store stripe_customer_id and stripe_card_token
+    @gen.coroutine
+    def post(self):
+        body = json.loads( self.request.body.decode('utf-8') )
+        user_id = body.get('user_id')
+        stripe_token = body.get('stripe_token')
+
+        if (stripe_token, user_id) is not None:
+
+            cursor = yield self.db.execute(
+                '''
+                select * from users 
+                where id=%(id)s;
+                ''', {
+                    'id': user_id
+                }
+            )
+
+            user = yield self.serialize_user(cursor.fetchone())
+
+
+            # create stripe object to 
+            ## get stripe_customer_id and stripe_card_token
+
+            stripe.api_key = "sk_test_YzSBTX1h58lDKnJ0qlQKfYQM"
+            
+            # create stripe customer object
+            stripe_customer_res = stripe.Customer.create(
+                description="Customer for {}".format(user.get('email')),
+                source=stripe_token.get('id') # obtained with Stripe.js
+            )
+
+            stripe_customer_id = stripe_customer_res.id
+
+            # insert into buyers db and return created obj
+            cursor = yield self.db.execute(
+                '''
+                insert into buyers (stripe_customer_id, stripe_card_token)
+                values (%(stripe_customer_id)s, %(stripe_card_token)s)
+                returning *;
+                ''', {
+                    'stripe_customer_id': stripe_customer_id,
+                    'stripe_card_token': stripe_token.get('id')
+                }
+            )
+
+            buyer = yield self.serialize_buyer(cursor.fetchone())
+
+            # insert into user, relating created buyer object with user
+            cursor = yield self.db.execute(
+                '''
+                update users set buyer_id=%(buyer_id)s
+                where id=%(user_id)s
+                returning *;
+                ''', {
+                    'buyer_id': buyer.get('id'),
+                    'user_id': user.get('id')
+                }
+            )
+
+            user = yield self.serialize_user(cursor.fetchone())
+            
+            self.set_status(200)
+            self.finish(json.dumps(user, default=json_serial))
+
+
+class MatchesHandler(BaseHandler):
+
+    @gen.coroutine
+    def post(self):
+        body = json.loads( self.request.body.decode('utf-8') )
+        trip_id = body.get('trip_id')
+
+
+        if trip_id is not None:
+
+            cursor = yield self.db.execute(
+                '''
+                insert into matches (trip_id, status)
+                values ( %(trip_id)s, %(status)s)
+                returning *;
+                ''', {
+                    'trip_id': trip_id,
+                    'status': match_statuses.get('confirmed')
+                }
+            )
+
+            match = yield self.serialize_match(cursor.fetchone())
+
+            # update relevant trip with status 'matched'
+            yield self.db.execute(
+                '''
+                update trips 
+                set status=%(status)s
+                where id=%(trip_id)s;
+                ''', {
+                    'status': trip_statuses.get('matched'),
+                    'trip_id': trip_id
+                }
+            )
+
+            self.set_status(200)
+            self.finish(json.dumps(match, default=json_serial))
+    
+
+class OrdersListHandler(BaseHandler):
+
+    @gen.coroutine
+    def post(self):
+        body = json.loads( self.request.body.decode('utf-8') )
+        user_id = body.get('user_id')
+
+        if ( user_id ) is not None:
+            # get user
+            cursor = yield self.db.execute(
+                '''
+                select * from users
+                where id=%(id)s;
+                ''', {
+                    'id': user_id
+                }
+            )
+
+            user = yield self.serialize_user(cursor.fetchone())
+            
+            # get buyer id
+            buyer_id = user.get('buyer').get('id')
+
+            # get all orders where buyer id matches
+            cursor = yield self.db.execute(
+                '''
+                select * from orders
+                where buyer_id=%(buyer_id)s;
+                ''', {
+                    'buyer_id': buyer_id
+                }
+            )
+
+            matches = {}
+            for order in cursor.fetchall():
+                dict_order = yield self.serialize_order(order)
+
+                # get user associated with traveller
+                traveller_id = dict_order.get('match').get('trip').get('traveller').get('id')
+                cursor = yield self.db.execute(
+                    '''
+                    select * from users
+                    where traveller_id=%(traveller_id)s;
+                    ''', {
+                        'traveller_id': traveller_id
+                    }
+                )
+                user = yield self.serialize_user(cursor.fetchone())
+                dict_order['user'] = user
+                
+                # put into matches dict to pair all orders with corresponding match
+                if dict_order.get('match').get('id') not in matches.keys():
+                    matches[dict_order.get('match').get('id')] = { 
+                        'id': dict_order.get('match').get('id'), 
+                        'status': dict_order.get('match').get('status'),
+                        'orders': [dict_order],
+                        'first_msg': dict_order.get('match').get('first_msg')
+                        }
+                else:
+                    matches[dict_order.get('match').get('id')]['orders'].append(dict_order)
+            self.set_status(200)
+            self.finish(json.dumps(matches, default=json_serial))
+
+
+
+
+class OrdersHandler(BaseHandler):
+
+    @gen.coroutine
+    def post(self):
+        body = json.loads( self.request.body.decode('utf-8') )
+        item_id = body.get('item_id')
+        buyer_id = body.get('buyer_id')
+        match_id = body.get('match_id')
+
+
+        if (item_id, buyer_id, match_id) is not None:
+            cursor = yield self.db.execute(
+                '''
+                insert into orders (item_id, buyer_id, match_id)
+                values (%(item_id)s, %(buyer_id)s, %(match_id)s)
+                returning *;
+                ''', {
+                    'item_id': item_id,
+                    'buyer_id': buyer_id,
+                    'match_id': match_id
+                }
+            )
+
+            momoko_order = cursor.fetchone()
+            order = yield self.serialize_order(momoko_order)
+            self.set_status(200)
+
+            self.finish(json.dumps(order, default=json_serial))
+
+
+
 class ShopHandler(BaseHandler):  
 
     @gen.coroutine
@@ -342,11 +620,13 @@ class ShopHandler(BaseHandler):
                 select * from trips 
                 where destination_city_id=%(city_id)s 
                     and traveller_id <> %(buyer_traveller_id)s
+                    and status <> %(matched_status)s
                     and arrival_date > now();
                 ''', 
                 {
                     'city_id': res_city.get('id'),
-                    'buyer_traveller_id': buyer_traveller_id
+                    'buyer_traveller_id': buyer_traveller_id,
+                    'matched_status': trip_statuses.get('matched')
                 })
             
 
@@ -431,7 +711,7 @@ class AllTravellersHandler(BaseHandler):
             self.finish()
         except Exception as e:
             print(e)
-            self.write("There was an error. Email support@getferry.com, we'll get back to you within the hour.".format(email))
+            self.write("There was an error. Email support@getferry.com, we'll get back to you within the hour.")
             self.set_status(400)
             self.finish()
 
@@ -625,6 +905,60 @@ class CitiesHandler(BaseHandler):
         ))
 
 
+class SendHandler(BaseHandler):
+
+    @gen.coroutine
+    def post(self):
+        body = json.loads( self.request.body.decode('utf-8') )
+
+        buyer_name = body.get('buyer_name')
+        traveller_name = body.get('traveller_name')
+        buyer_email = body.get('buyer_email')
+        traveller_email = body.get('traveller_email')
+        message = body.get('message')
+        match_id = body.get('match_id')
+
+        if (buyer_name, traveller_name, buyer_email, traveller_email, message, match_id) is not None:
+
+            # send message
+            response = send_simple_message(message, buyer_name, traveller_name, buyer_email, traveller_email)
+
+            # update message in match
+            yield self.db.execute(
+                '''
+                update matches
+                set first_msg=%(message)s
+                where id=%(match_id)s;
+                ''', {
+                    'message': message,
+                    'match_id': match_id
+                }
+            )
+
+            self.set_status(200)
+            self.finish("message sent!")
+
+
+class ItemsHandler(BaseHandler):
+
+    @gen.coroutine
+    def get(self):
+        cursor = yield self.db.execute(
+            '''
+            select * from items
+            where status='alive';
+            '''
+        )
+
+        items = []
+        for item in cursor.fetchall():
+            dict_item = yield self.serialize_item(item)
+            items.append(dict_item)
+        
+
+        self.set_status(200)
+        self.finish(json.dumps(items, default=json_serial))
+
 
 app_config = setup.tornado_app_config_setup()
 
@@ -650,6 +984,12 @@ if (PERSISTENT_PATH, COOKIE_SECRET, PORT, SETTINGS) is not None:
             (r'/login', LoginHandler),
             (r'/logout', LogoutHandler),         
             (r'/cities', CitiesHandler),
+            (r'/buyers', BuyersHandler),
+            (r'/orders', OrdersHandler),
+            (r'/matches', MatchesHandler),
+            (r'/orders/list', OrdersListHandler),
+            (r'/send', SendHandler),
+            (r'/items', ItemsHandler),
 
             ## STATIC HANDLERS ##
             (r'/static/(.+)', tornado.web.StaticFileHandler, {'path': './static/'}),

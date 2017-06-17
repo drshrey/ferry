@@ -25,7 +25,8 @@ class AccountTravel extends Component {
     }
     this.toggle = this.toggle.bind(this);
   }
-  
+
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -35,6 +36,9 @@ class AccountTravel extends Component {
   }
 
   render() {
+    if(!this.props.userInformation.traveller){
+      window.location.href = '/become-traveller'
+    }    
     return (
       <div className="AccountTravel">
           <div className="main">

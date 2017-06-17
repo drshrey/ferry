@@ -96,16 +96,20 @@ create table orders (
 create table matches (
     id serial primary key,
     trip_id integer not null,
-    status text not null
+    status integer not null,
+    first_msg text
 );
 
 create table items (
     id serial primary key,
     title text not null,
+    category text not null,
+    description text,
     price decimal not null,
     filepath text not null,
     url text not null,
-    status text
+    status text,
+    size integer not null
 );
 
 create table cities (
@@ -123,42 +127,6 @@ alter table orders owner to drshrey;
 alter table matches owner to drshrey;
 alter table items owner to drshrey;
 alter table cities owner to drshrey;
-
-
-insert into items (title, price, filepath, url, status)
-values ('Apple iPhone 6 64GB Unlocked Smartphone - Gold (Certified Refurbished)', 359.99,
-    '/items/iphone.jpg',
-    'https://www.amazon.com/Apple-iPhone-64GB-Unlocked-Smartphone/dp/B00YD548Q0/ref=sr_1_1?s=wireless&ie=UTF8&qid=1494104091&sr=1-1&keywords=iphone',
-    'alive');
-
-insert into items (title, price, filepath, url, status)
-values ('Apple iPhone 5S 16GB Silver GSM Unlocked (Certified Refurbished)', 
-    174.00,
-    '/items/iphone-5.jpg',
-    'https://www.amazon.com/Apple-iPhone-5S-Certified-Refurbished/dp/B00YD53YQU/ref=sr_1_2?s=wireless&ie=UTF8&qid=1494104091&sr=1-2&keywords=iphone',
-    'alive');
-
-insert into items (title, price, filepath, url, status)
-values ('SENSO Bluetooth Headphones, Best Wireless Sports Earphones w/ Mic IPX7 Waterproof HD Stereo Sweatproof Earbuds for Gym Running Workout 8 Hour Battery Noise Cancelling Headsets', 
-    36.97,
-    '/items/senso-headphones.jpg',
-    'https://www.amazon.com/gp/product/B01G8JO5F2/ref=s9_acsd_ri_bw_c_x_3_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-12&pf_rd_r=2V6C00ER58B3QNE1VJGC&pf_rd_r=2V6C00ER58B3QNE1VJGC&pf_rd_t=101&pf_rd_p=b2696980-2bae-4972-b6ef-046f11ecdbcf&pf_rd_p=b2696980-2bae-4972-b6ef-046f11ecdbcf&pf_rd_i=172282',
-    'alive');
-
-insert into items (title, price, filepath, url, status)
-values ('Kindle E-reader - Black, 6 inches Glare-Free Touchscreen Display, Wi-Fi - Includes Special Offers', 
-    79.99,
-    '/items/kindle.jpg',
-    'https://www.amazon.com/dp/B00ZV9PXP2/ref=fs_ods_fs_eink_eb?th=1',
-    'alive');
-
-insert into items (title, price, filepath, url, status)
-values ('G4Free 12x25 Waterproof Binoculars(BAK4,Green Lens),Large Eyepiece Super High-Powered Field Surveillance Binoculars', 
-    27.99,
-    '/items/binoculars.jpg',
-    'https://www.amazon.com/gp/product/B00UUQ1VDY/ref=s9_acsd_cdeal_hd_bw_b26h8_c_x_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-5&pf_rd_r=B1D22QKGJW2QSVVN57EV&pf_rd_t=101&pf_rd_p=eb5ac887-b1a5-5e13-9f6e-0042673042de&pf_rd_i=502394',
-    'alive');
-
 
 
 
@@ -196,3 +164,44 @@ values(
     'Guanacaste',
     'Costa Rica'
 );
+
+INSERT INTO items(title,category,price,description,url,status,filepath, size) VALUES ('Echo Dot (2nd Generation) - Black','Electronics',39.99,'Echo Dot (2nd Generation) is a hands-free, voice-controlled device that uses Alexa to play music, control smart home devices, make calls, send and receive messages, provide information, read the news, set alarms, read audiobooks from Audible, and more.','https://www.amazon.com/Amazon-Echo-Dot-Portable-Bluetooth-Speaker-with-Alexa-Black/dp/B01DFKC2SO/ref=zg_bs_electronics_1?_encoding=UTF8&psc=1&refRID=FT074Y43ZFBY853JRB7N','alive','https://images-na.ssl-images-amazon.com/images/I/61ikAJnULvL._SL1000_.jpg', 30);
+INSERT INTO items(title,category,price,description,url,status,filepath, size) VALUES ('Fire TV Stick with Alexa Voice Remote','Electronics',39.99,'Just plug Fire TV Stick into your HDTV and start streaming in minutes. Use the included Alexa Voice Remote to find the best way to watch across more than 140 channels and apps with universal search. With the fastest Wi-Fi and most accurate voice search of any streaming media stick, shows and movies start faster and stream smoother than ever.','https://www.amazon.com/Amazon-Fire-TV-Stick-With-Alexa-Voice-Remote-Streaming-Media-Player/dp/B00ZV9RDKK/ref=zg_bs_electronics_2?_encoding=UTF8&psc=1&refRID=FT074Y43ZFBY853JRB7N','alive','https://images-na.ssl-images-amazon.com/images/I/51D8NXwQfvL._SL1000_.jpg', 20);
+INSERT INTO items(title,category,price,description,url,status,filepath, size) VALUES ('GoPro HERO5 Black', 'Electronics', 349, 'Smooth stabilized video, crystal-clear audio and pro-quality photo capture combine with GPS to make HERO5 Black simply the best GoPro. And when it’s time to edit and share, HERO5 Black automatically uploads footage to your GoPro Plus cloud account to provide easy access on your phone. Then, you can create amazing videos automatically with Quik, the GoPro editing app.', 'https://www.amazon.com/GoPro-CHDHX-501-HERO5-Black/dp/B01M14ATO0/ref=zg_bs_electronics_15?_encoding=UTF8&psc=1&refRID=FT074Y43ZFBY853JRB7N', 'alive', 'https://images-na.ssl-images-amazon.com/images/I/61B3h4thkvL._SL1500_.jpg', 40);
+INSERT INTO items(title,category,price,description,url,status,filepath, size) VALUES ('Nextbit Robin Factory (Unlocked GSM)', 'Electronics', 129.99, 'With the cloud integrated into Android OS, your onboard storage is merged with the cloud, so you always have the space you need. Robin seamlessly backs up your apps and photos, intelligently archives the stuff you are not using, and easily restores items when you need them. Robin is designed to Stand out. It is simple and distinct in form and function: every port, button, and sensor is thoughtfully placed and easy to use.', 'https://www.amazon.com/Nextbit-Robin-Factory-Unlocked-Smartphone/dp/B01D9LVCAI', 'alive', 'https://images-na.ssl-images-amazon.com/images/I/81N0IgYUf5L._SL1500_.jpg', 35);
+INSERT INTO items(title,category,price,description,url,status,filepath, size) VALUES ('Samsung Galaxy J7 Prime (32GB) (Unlocked)', 'Electronics', 234.93, 'The revolutionary design of the Galaxy S8+ begins from the inside out. We rethought every part of the phone layout to break through the confines of the smartphone screen. So all you see is pure content and no bezel. It is the biggest, most immersive screen on a Galaxy smartphone of this size. And it is easy to hold in one hand.','https://www.amazon.com/Samsung-Galaxy-Prime-Factory-Unlocked/dp/B01M26XHKG', 'alive', 'https://images-na.ssl-images-amazon.com/images/I/717yO167dVL._SL1500_.jpg', 20);
+INSERT INTO items(title,category,price,description,url,status,filepath, size) VALUES ('iRobot Roomba 960 Robotic Vacuum Cleaner', 'Electronics', 599.00, 'Roomba 960 seamlessly navigates room to room to clean an entire level of your home, recharging and resuming until the job is done. Featuring the revolutionary AeroForce Cleaning System, Roomba 960 delivers up to 5x the air power and requires less maintenance. Just press clean or schedule Roomba on the go with the iRobot Home App. Roomba works on all floor types, and at just 3.6 inches tall, is specifically designed to fit under most furniture, beds and kickboards.', 'https://www.amazon.com/gp/product/B01ID8H6NO/ref=s9_acss_bw_cg_sheggFD_3c1_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-3&pf_rd_r=AHV6VZNDY1Q58YMVABDK&pf_rd_t=101&pf_rd_p=36251adf-111b-4baf-81f3-3f444cfcef53&pf_rd_i=6563140011', 'alive', 'https://images-na.ssl-images-amazon.com/images/I/51YR9jp-yjL.jpg', 50);
+
+-- insert into users( email, salt, hash, first_name, last_name, traveller_id, buyer_id, profile_picture_url)
+-- values(
+--     'test@gmail.com',
+--     'salt',
+--     'hash',
+--     'first_name',
+--     'last_name',
+--     1,
+--     null,
+--     ''
+-- );
+
+-- insert into travellers(id, street_address, public_token, state, zip_code, country, is_verified)
+-- values(
+--     1,
+--     'test address',
+--     'test_token',
+--     'state',
+--     'zip_code',
+--     'country',
+--     TRUE
+-- );
+
+-- insert into trips(id, traveller_id, arrival_date, departure_date, destination_city_id, status, size)
+-- values(
+--     1,
+--     1,
+--     '06/29/17',
+--     '07/01/17',
+--     1,
+--     0,
+--     1
+-- );

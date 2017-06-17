@@ -9,6 +9,7 @@ class FerryInput extends Component {
         <div style={{ fontFamily: "Roboto Mono"}}>
             {this.props.label}        <br/>
             <input 
+            maxLength={this.props.maxLength}
             style={this.props.style}
             onKeyPress={this.props.onKeyPress}
             onChange={this.props.onChange} value={this.props.value} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} required={this.props.required} />
@@ -19,6 +20,7 @@ class FerryInput extends Component {
         <div>
             <input 
             style={this.props.style}
+            maxLength={this.props.maxLength}
             onKeyPress={this.props.onKeyPress}
             onChange={this.props.onChange} value={this.props.value} className="FerryInput" type={this.props.type} placeholder={this.props.placeholder} required={this.props.required} />
         </div>

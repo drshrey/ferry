@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
-import { addCart, setCartFilled, setMaxFilled } from '../actions'
+import { setTrip, addCart, setCartFilled, setMaxFilled } from '../actions'
 
 import BigText from '../BigText/BigText.js';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
 import { Alert, Progress, Row, Col, Input, Button } from 'reactstrap';
+
+import config from '../config'; 
 
 import phone from '../static/phone.png';
 import phone2 from '../static/phone2.png';
@@ -22,10 +25,10 @@ class Item extends Component {
 
     render(){
         return (
-            <Col sm={4}>
-                <img src={this.props.img}></img><br/>
+            <Col sm={4} style={{display: "inline-block"}}>
+                <img style={{width: "200px"}} src={this.props.img}></img><br/>
                 <div style={{marginLeft: "15px", fontFamily: "Roboto Mono"}}>
-                    {this.props.price}<br/>
+                    ${this.props.price}<br/>
                     <span style={{ color: "#961f47"}}>{this.props.name}</span> <br/>
                     <Button className="add-to-cart" onClick={(evt) => this.props.onItemClick(evt, this.props.item_id)}>Add to Cart</Button><br/>
                     <span style={{ fontSize: "12px", color: "#961f47"}}>{this.props.description}</span>
@@ -77,6 +80,7 @@ class Catalog extends Component {
         }
     })
     
+    this.props.setTrip(selected_trip)
     this.props.setMaxFilled(maxFilled)    
 
     const search = this.props.location.search; // could be '?foo=bar'
@@ -96,32 +100,35 @@ class Catalog extends Component {
     // fill items in 
     let items = []
     let dict_items = {}
+    var self = this
 
-    let item = {
-        img: phone,
-        name: "iPhone 7",
-        description: "iPhone 7 dramatically improves the most important aspects of the iPhone experience. It introduces advanced new camera systems.",
-        id: 1,
-        size: 20,
-        price: "$699"
-    }
-    items.push(
-    <Item 
-        img={item.img}
-        name={item.name}
-        price={item.price}
-        description={item.description}
-        item_id={item.id}
-        size={item.size}
-        onItemClick={this.onItemClick.bind(this)}
-        />)
-    dict_items[item.id] = item
-
-    this.setState({ items: items, dict_items: dict_items })
+    axios({
+        method: 'get',
+        url: config.api_url + '/items'
+    })
+        .then(function(response){
+            console.log(response)
+            response.data.forEach(function(item){
+                items.push(
+                <Item 
+                    img={item.filepath}
+                    name={item.name}
+                    price={item.price}
+                    description={item.description}
+                    category={item.category}
+                    item_id={item.id}
+                    size={item.size}
+                    onItemClick={self.onItemClick.bind(self)}
+                    />)
+                dict_items[item.id] = item                    
+            })
+            self.setState({ items: items, dict_items: dict_items })
+        })
   }
 
   onItemClick(e, item_id){
       console.log(item_id)
+      console.log(this.props.cartInformation.cartFilled)
       let item = this.state.dict_items[item_id]
       if(this.props.cartInformation.cartFilled < this.props.cartInformation.maxFilled){
         let newCart = this.state.cart
@@ -134,6 +141,7 @@ class Catalog extends Component {
         
         newCart[item_id] = newItemCount
         this.props.addCart(newCart)
+        console.log(item)
         this.props.setCartFilled(this.props.cartInformation.cartFilled + item.size)
 
       }
@@ -192,11 +200,11 @@ class Catalog extends Component {
               </Row>
               <br/>
               <Row>
-                <Col sm={8}>
+                {/*<Col sm={8}>
                     <Input value={this.state.category} onChange={this.onCategory.bind(this)} type="select" name="select" id="selectCategory">
                         { this.state.categories }
                     </Input>                    
-                </Col>
+                </Col>*/}
 
                 <Col sm={3}>
                     <Button id="checkout-btn"
@@ -255,7 +263,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     setMaxFilled: (maxFill) => {
         dispatch(setMaxFilled(maxFill))
-    },    
+    },  
+    setTrip: (trip) => {
+        dispatch(setTrip(trip))
+    }
   }
 }
 

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+
 import { addCart, addUserInformation } from '../actions'
 import classNames from 'classnames';
+import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import BigText from '../BigText/BigText.js';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
 import FerryInput from '../FerryInput/FerryInput.js';
+import Cart from './Cart.js';
+
 import { Input, Table, Alert, Row, Col, Button, Card, CardDeck, CardBlock, CardText, CardSubtitle, CardTitle } from 'reactstrap';
 import axios from 'axios';
 import config from '../config';
@@ -137,131 +142,6 @@ class CheckoutUserSignup extends Component {
     }
 }
 
-class Cart extends Component {
-    constructor(props){
-        super(props)
-        this.state  = {
-            items: [],
-            dict_items: {
-                1: {
-                    name: "iPhone 7",
-                    description: "iPhone 7 dramatically improves the most important aspects of the iPhone experience. It introduces advanced new camera systems.",
-                    id: 1,
-                    size: 20,
-                    price: 700
-                } 
-            },
-            total: 0,
-            commission: 50            
-        }
-    }
-
-    componentWillReceiveProps(nextProps, nextState){
-        this.computeTotals(nextProps)
-    }
-
-    onMinusClick(e, item){
-        e.preventDefault()
-        let cart = this.props.cartInformation.cart
-        if(cart[item.id] > 1){
-            cart[item.id] -= 1
-        }
-        this.props.addCart(cart)
-    }
-
-    onPlusClick(e, item){
-        e.preventDefault()
-        let cart = this.props.cartInformation.cart
-        cart[item.id] += 1
-        this.props.addCart(cart)        
-    }
-
-    computeTotals(nextProps){
-        let items = []
-        var self = this
-        let subtotal = 0
-        let commission = 50
-
-        let props = this.props
-        if(nextProps != null){
-            props = nextProps
-        }
-
-        Object.keys(props.cartInformation.cart).forEach(function(item_key){
-        let item = self.state.dict_items[item_key]
-            items.push(    
-                    <tr>
-                        <td><b>{item.name} (x{props.cartInformation.cart[item_key]}) 
-                            <a id="plus"
-                               onClick={(evt) => self.onMinusClick(evt, item).bind(self)}
-                               className="quantity-change-btn" href="#">-</a> 
-                            <a id="minus" 
-                                onClick={(evt) => self.onPlusClick(evt, item).bind(self)}
-                                className="quantity-change-btn" href="#">+</a></b></td>
-                        <td><b>${item.price * props.cartInformation.cart[item_key]}</b></td>
-                    </tr>                       
-            )
-            subtotal += item.price * props.cartInformation.cart[item_key]
-        })
-        commission = commission + (subtotal * 0.1)
-
-        this.setState({ subtotal: subtotal, items: items, total: subtotal + commission, commission: commission })
-    }
-
-    componentWillMount(){
-        this.computeTotals()
-    }
-
-
-    render() {
-        return (
-            <div className="Cart">
-                <h3> Your Order </h3>
-                <br/>
-                <Table style={{textAlign: "left"}} >
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { this.state.items }
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>${this.state.subtotal}</td>
-                    </tr>                           
-                    <tr>
-                        <td className="commission">Traveller's Commission</td>
-                        <td>${this.state.commission}</td>
-                    </tr>
-                    <tr>
-                        <td>Total</td>
-                        <td>${this.state.total}</td>
-                    </tr>                    
-                    </tbody>
-                </Table>
-
-                Pay with your credit card via Stripe. <br/><br/>
-                <FerryInput label="Credit/ Debit Card Number" placeholder="**** **** **** ****" />
-                <div className="name-input">
-                    <FerryInput label="Expiry (MM/YY)" placeholder="08/19" style={{ width: "140px" }} />
-                </div>                
-                <div className="name-input">
-                    <FerryInput label="Security Code" placeholder="CVC" style={{ width: "120px" }} />
-                </div>                                
-
-                <br/>
-                <br/>
-                <Button style={{width: "275px"}} id="checkout-btn">Place Order</Button>
-
-
-                    
-            </div>
-        )
-    }
-}
-
 
 class FinalCheckoutStep extends Component {
 
@@ -274,7 +154,17 @@ class FinalCheckoutStep extends Component {
             <div className={"FinalCheckoutStep " + this.props.className }>
               <Row>       
                   <Col sm={12}>
-                    <Cart addCart={this.props.addCart} cartInformation={this.props.cartInformation} />
+                    <StripeProvider apiKey="pk_test_2Tt1CLpzFPZ6GBoVcOdP8rLJ">
+                        <Elements>
+                            <Cart 
+                                hideCart={this.props.hideCart}
+                                hideReceipt={this.props.hideReceipt}                            
+                                loginUser={this.props.loginUser} 
+                                setAlert={this.props.setAlert} 
+                                addCart={this.props.addCart} 
+                                cartInformation={this.props.cartInformation} />
+                        </Elements>
+                    </StripeProvider>                    
                   </Col>
               </Row>                            
             </div>
@@ -284,12 +174,34 @@ class FinalCheckoutStep extends Component {
 }
 
 
+class Receipt extends Component {
+
+    constructor(props){
+        super(props)
+
+    }
+
+    render(){
+        return (
+            <div className={"Receipt " + this.props.className}>
+                <h3> Next Steps </h3>
+
+                <Link to="/account/orders">Click here to message your traveller and figure out where you guys are going to meet to get your items.</Link>
+
+            </div>
+        )
+    }
+}
+
+
 class Checkout extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-        hideFinalCheckout: true
+        hideFinalCheckout: true,
+        alert: '',
+        hideReceipt: true
     }
   }
 
@@ -312,12 +224,25 @@ class Checkout extends Component {
   onHide(hide_bool){
       this.setState({ hideFinalCheckout: hide_bool })
   }
+
+  setAlert(alert){
+      this.setState({ alert: alert })
+  }
+
+  onHideCart(bool){
+      this.setState({ hideFinalCheckout: bool })
+  }
+
+  onHideReceipt(bool){
+      this.setState({ hideReceipt: bool })
+  }
   
   render() {
     console.log(this.state)
 
     let checkoutUserSignupClass = classNames({ 'display-none': this.props.userInformation.email != null })
     let showFinalCheckoutClass = classNames({ 'display-none': this.state.hideFinalCheckout })
+    let showReceiptClass = classNames({ 'display-none': this.state.hideReceipt })
 
     return (
       <div className="Checkout">
@@ -331,14 +256,27 @@ class Checkout extends Component {
                         Checkout
                     </span>
                   </Col>
-              </Row>                            
+              </Row>         
+              <br/>                   
+              <Row>
+                <Col sm={12}>
+                    { this.state.alert }
+                </Col>
+              </Row>
               <br/>
               <Row>       
                   <Col sm={12}>
                     <CheckoutUserSignup  loginUser={this.props.loginUser} onHide={this.onHide.bind(this)}className={checkoutUserSignupClass} />
-                    <FinalCheckoutStep  
+                    <FinalCheckoutStep 
+                        loginUser={this.props.loginUser}
+                        setAlert={this.setAlert.bind(this)} 
+                        hideCart={this.onHideCart.bind(this)}
+                        hideReceipt={this.onHideReceipt.bind(this)}
                         addCart={this.props.addCart} 
                         cartInformation={this.props.cartInformation} className={showFinalCheckoutClass} />
+                    <Receipt 
+                        className={showReceiptClass}
+                    />
                   </Col>
               </Row>                    
               <br/>

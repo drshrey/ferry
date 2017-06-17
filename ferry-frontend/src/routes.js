@@ -9,6 +9,7 @@ import SignUp from './SignUp/SignUp';
 import Dashboard from './Dashboard/Dashboard';
 import Travel from './Travel/Travel';
 import Shop from './Shop/Shop';
+import GettingStarted from './BecomeTraveller/GettingStarted.js';
 import About from './About/About';
 
 import RequireAuth from './require_auth';
@@ -32,6 +33,7 @@ const Routes = (props) => (
     <Route path="/travel" component={RequireAuth(Travel)} />
     <Route path="/shop" component={Shop} />
     <Route path="/become-buyer" component={RequireAuth(BecomeBuyer)} />
+    <Route path="/getting-started/travel" component={GettingStarted} />
     <Route path="/become-traveller" component={BecomeTraveller} />
     <Route path="/account" component={RequireAuth(Profile)} />
     <Route path="/catalog" component={Catalog} />

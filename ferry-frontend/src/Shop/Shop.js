@@ -36,7 +36,7 @@ class Shop extends Component {
         console.log(response.data)
         let cities = []
         response.data.forEach(function(city){
-          cities.push(<option value={city.id}>{city.name}, {city.country}</option>)
+          cities.push(<option value={city.id}>{city.name},{city.country}</option>)
         })
         self.setState({ cities: cities })
       })
