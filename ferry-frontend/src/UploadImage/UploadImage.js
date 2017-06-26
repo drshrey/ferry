@@ -75,7 +75,6 @@ class UploadImage extends Component {
             }
         })
         .catch(function(){
-            console.log('fucked')
             self.setState({ saveBtn: false, msg: 'Something went wrong with our server.', color: 'danger' })        
         })
         } else {
